@@ -1,0 +1,294 @@
+---
+title: "MODUL FMI survey"
+author: "Alex Abbas"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    fig_caption: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(comment = NA, message = F, warning = F)
+library(tidyverse)
+library(readxl)
+library(ComplexHeatmap)
+library(DT)
+library(knitr)
+library(ggvenn)
+library(UpSetR)
+#library(stringr) 
+#library(ggpubr)
+
+#source("/Volumes/GoogleDrive/My Drive/R/aaStuff.R")
+#truColors = read.csv("/Volumes/GoogleDrive/My Drive/R/trubetskoyColors.csv",stringsAsFactors = F)
+
+# setwd("/Volumes/GoogleDrive/Shared drives/GI Biomarkers [gRED OBD]/CRC/MODUL Cohort 1/vignettes/")
+
+theme_set(theme_bw())
+
+#  data_dir="/gne/data/obdroot/avastin/mo29112_modul/ngs/results/ctdna/data"
+ctDnaDir <- "../data/ctDNA FMI/"
+tissueDir <- "../data/FMI/"
+Aug30fmiDir <- "/Volumes/OBD/avastin/mo29112_modul/ngs/rawdata/fmi_obd_mo29112_ngs_dna_targdna_foundationoneliquidcdx_20-2047_std_20210830/"
+
+# patientData
+patientData <- read_excel("../data/MO29112_Ch1 clinical-biomarker dashboard (2).xlsx")
+patientData <- patientData %>%
+  rename(Arm = ARM, Response = BOR, SUBJECT.ID = "Subject ID") %>%
+  select(SUBJECT.ID,Arm,Response) %>% 
+  mutate(SUBJECT.ID = as.character(SUBJECT.ID))
+
+# ctDNA data
+oapl_ctdna_File <- paste0(
+  ifelse ( F & dir.exists(Aug30fmiDir), Aug30fmiDir, ctDnaDir ),
+  "mo29112_ngs_dna_targdna_foundationoneliquidcdx_20-2047_n183_one-alteration-per-line-plus_20210830.txt"
+)
+liqOapl <- read.delim(oapl_ctdna_File,sep="\t")
+ospl_ctdna_file = paste0(ctDnaDir,"mo29112_ngs_dna_targdna_foundationoneliquidcdx_20-2047_n183_one-sample-per-line_20210830.xlsx")
+liqOspl <- read_excel(ospl_ctdna_file) %>%
+  rename(FMI.SAMPLE.ID = "FMI SAMPLE ID", SAMPLE.ID = "SAMPLE ID", SUBJECT.ID = "SUBJECT ID") %>% 
+  mutate(
+    SAMPLE.ID = as.character(SAMPLE.ID),
+    Visit = gsub("\\W","",Visit),
+    Cycle = gsub("\\W","",Cycle)
+  )
+
+liqOapl <- liqOapl %>%
+  mutate(SAMPLE.ID = as.character(SAMPLE.ID),SUBJECT.ID = as.character(SUBJECT.ID)) %>% 
+  left_join(liqOspl %>% select(SAMPLE.ID, Cycle, Visit))
+# Tissue data
+oapl_tissue_file <- paste0(
+  ifelse ( F & dir.exists(Aug30fmiDir), Aug30fmiDir, tissueDir ),
+  "mo29112_ngs_dna_targdna_foundationone_20-2041_n65_one-alteration-per-line_20200615.txt"
+)
+tissueOapl = read.delim(oapl_tissue_file,sep="\t") %>% 
+  mutate(SUBJECT.ID = as.character(SUBJECT.ID))
+ospl_tissue_file <- paste0(tissueDir,"mo29112_ngs_dna_targdna_foundationone_20-2041_n65_one-sample-per-line_20200615.xlsx")
+tissueOspl <- read_excel(ospl_tissue_file) %>%
+  rename(SAMPLE.ID = "SAMPLE ID", SUBJECT.ID = "SUBJECT ID") %>% 
+  mutate(SUBJECT.ID = as.character(SUBJECT.ID))
+
+# Stack tissue and liquid data
+oapl <- bind_rows(
+  tissueOapl %>% mutate(Visit = "Tissue"),
+  liqOapl %>% mutate(SAMPLE.ID=as.character(SAMPLE.ID))
+) %>%
+  mutate(
+    variant = gsub("-","",paste0(SV.PROTEIN.CHANGE,CNA.TYPE,REARR.DESCRIPTION)),
+    baseEnd = ifelse(grepl("C1",Visit),"C1D1",
+                     ifelse(grepl("PD",Visit),"PD",NA)),
+    SUBJECT.ID = as.character(SUBJECT.ID)
+  ) %>%
+  left_join(
+    patientData
+  )
+
+ospl = bind_rows(
+  liqOspl %>% mutate( SAMPLE.ID = as.character(SAMPLE.ID) ),
+  tissueOspl %>% mutate( Visit = "Tissue", SUBJECT.ID = as.character(SUBJECT.ID) )
+  #  tissueOapl %>% select(SUBJECT.ID) %>% unique() %>% mutate(Visit = "Tissue")
+) %>% left_join(
+  patientData %>% mutate( SUBJECT.ID = as.character(SUBJECT.ID) )
+) %>% 
+  mutate(SUBJECT.ID = gsub("\\.0","",SUBJECT.ID))
+
+msiScore <- oapl %>% filter(VARIANT.TYPE=="BIOMARKER-MSI SCORE")
+msiStatus <- oapl %>% filter(VARIANT.TYPE=="BIOMARKER-MSI STATUS")
+tmb <- oapl %>% filter(VARIANT.TYPE=="BIOMARKER-TMB")
+oapl <- oapl %>% filter(!grepl("BIOMARKER",VARIANT.TYPE))
+
+#re-extract tissue and liq
+tissueOapl <- oapl %>% filter(Visit == "Tissue")
+tissueOaplAll <- tissueOapl
+tissueOapl <- tissueOapl %>% filter(SOMATIC.STATUS.FUNCTIONAL.IMPACT != "unknown")
+
+liqOapl <- oapl %>% filter(Visit != "Tissue")
+liqOaplAll <- liqOapl
+liqOapl <- liqOapl %>% filter(SOMATIC.STATUS.FUNCTIONAL.IMPACT != "unknown")
+
+oapl <- oapl %>% filter(SOMATIC.STATUS.FUNCTIONAL.IMPACT != "unknown")
+
+pathwayGenes <- c("EGFR", "KRAS", "NRAS", "BRAF", "MAP2K1", "NF1")
+
+# tracker <- ("/Volumes/GoogleDrive/Shared drives/GI Biomarkers [gRED OBD]/CRC/MODUL Cohort 1/data/ctDNA FMI/Cohort 1 - CtDNA data tracker.xlsx") # Do I need to read this? Maybe not
+```
+
+# Introduction
+
+MODUL (MO29112, NCT02291289) is an adaptable, phase 2, signal-seeking trial testing novel agents as first-line therapy for predefined subgroups of patients with metastatic colorectal cancer. It is comprised of four distinct cohorts. This analysis focuses on cohort 1, comprised of subjects with BRAF V600E mutant tumors, randomized to either the experimental arm of 5-FU/LV + cetuximab + vemurafenib or a control arm of FP + bevacizumab. Subjects' tumor tissue was tested with the FMI Foundation One CDx assay, and plasma samples from C1D1 and/or PD/EOT were tested with the FMI Foundation One Liquid CDx assay. Variants detected at these three points will be compared/contrasted to test hypotheses that treatment affected tumor genotype, specifically that cetuximab put a negative selective pressure on V600E mutations and a positive selective pressure on compensatory mutations elsewhere in the EGFR pathway. 
+
+# Results
+
+## MAPK
+
+### C1D1 vs. PD
+
+```{r, fig.width = 7, fig.height = 3}
+subjs <- unique(ospl$SUBJECT.ID)
+
+# initialize the matrix with samples tested. Call them all wildtype first.
+makeVisitMat = function(avisit) {
+  mat <- matrix("",nrow=length(pathwayGenes),ncol=length(subjs))
+  dimnames(mat) <- list(pathwayGenes,subjs)
+  for( subjectid in unique( ospl %>% filter( Visit == avisit ) %>% select( SUBJECT.ID )) ) {
+    mat[pathwayGenes,subjectid] = "wildtype"
+  }
+  
+  # change from wildtype to variant based on oapl
+  pathwayC1Oapl <- oapl %>% filter(GENE %in% pathwayGenes & Visit == avisit & variant != "V600E")
+  x <- apply(pathwayC1Oapl,1,function(oa){
+    mat[oa["GENE"],oa["SUBJECT.ID"]] <<- oa["VARIANT.TYPE"]
+  })
+  mat
+}
+matC1 = makeVisitMat("C1D1IP")
+matPD = makeVisitMat("PD")
+mat = rbind(matC1,matPD)
+c1PdRowSplit = c(
+  rep("C1",times = dim(matC1)[1]),
+  rep("PD",times = dim(matPD)[1])
+)
+splitVar <- "Arm"
+
+responseCols <- c(
+  "CR" = "#52cc62", 
+  "PR" = "#008000", 
+  "SD" = "#0000ff", 
+  "PD" = "#ff0000",
+  "NA" = "#FFFFFF"
+)
+
+tissueTmbDat = tmb %>% filter(Visit == "Tissue")
+tissueTmbDat = tissueTmbDat[match(colnames(mat),tissueTmbDat$SUBJECT.ID),]
+patientHeatDat <- patientData[match(colnames(mat),patientData$SUBJECT.ID),] %>% 
+  mutate(
+    tissueTMB = as.numeric(tissueTmbDat$TMB.SCORE),
+    Response = factor(Response,levels = names(responseCols))
+  )
+subjSplit = patientHeatDat %>% select(SUBJECT.ID,!!splitVar) %>% unique()
+splitFactor = subjSplit[match(subjs,subjSplit$SUBJECT.ID),splitVar]
+
+oncoCols <- c(
+  "short-variant" = "forestgreen",
+  "copy-number-alteration" = "darkorange",
+  rearrangement = "purple",
+  wildtype = "gray90",
+  background = "white"
+)
+
+alterFun <- lapply(names(oncoCols),function(vartype) { function(x, y, w, h) grid.rect(x, y, w, h, gp = gpar(fill = oncoCols[vartype], col = NA)) })
+names(alterFun) = names(oncoCols)
+
+annotCols = list(Response = responseCols)
+
+topAnnot = HeatmapAnnotation(
+  TMB = anno_barplot(patientHeatDat$tissueTMB,border = F),
+  Response = patientHeatDat$Response,
+  col = annotCols
+)
+
+oncoPrint(mat,
+          alter_fun = alterFun,
+          col = oncoCols,
+          show_pct = F,
+          column_split = splitFactor,
+          row_split = c1PdRowSplit,
+          top_annotation = topAnnot,
+          right_annotation = NULL,
+          left_annotation = NULL
+ )
+
+```
+
+### Tissue C1D1 PD
+
+```{r, fig.width = 7, fig.height = 3.5}
+subjs <- unique(ospl$SUBJECT.ID)
+
+# initialize the matrix with samples tested. Call them all wildtype first.
+makeVisitMat = function(avisit) {
+  mat <- matrix("",nrow=length(pathwayGenes),ncol=length(subjs))
+  dimnames(mat) <- list(pathwayGenes,subjs)
+  for( subjectid in unique( ospl %>% filter( Visit == avisit ) %>% select( SUBJECT.ID )) ) {
+    mat[pathwayGenes,subjectid] = "wildtype"
+  }
+  
+  # change from wildtype to variant based on oapl
+  pathwayC1Oaplv600e <- oapl %>% filter(GENE %in% pathwayGenes & Visit == avisit & variant == "V600E")
+  x <- apply(pathwayC1Oaplv600e,1,function(oa){
+    mat[oa["GENE"],oa["SUBJECT.ID"]] <<- "V600E"
+  })
+  pathwayC1Oapl <- oapl %>% filter(GENE %in% pathwayGenes & Visit == avisit & variant != "V600E")
+  x <- apply(pathwayC1Oapl,1,function(oa){
+    mat[oa["GENE"],oa["SUBJECT.ID"]] <<- oa["VARIANT.TYPE"]
+  })
+  mat
+}
+matTissue = makeVisitMat("Tissue")
+matC1 = makeVisitMat("C1D1IP")
+matPD = makeVisitMat("PD")
+mat = rbind(matTissue,matC1,matPD)
+c1PdRowSplit = c(
+  rep("Baseline",times = dim(matTissue)[1]),
+  rep("C1",times = dim(matC1)[1]),
+  rep("PD",times = dim(matPD)[1])
+)
+splitVar <- "Arm"
+
+responseCols <- c(
+  "CR" = "#52cc62", 
+  "PR" = "#008000", 
+  "SD" = "#0000ff", 
+  "PD" = "#ff0000",
+  "NA" = "#FFFFFF"
+)
+
+tissueTmbDat = tmb %>% filter(Visit == "Tissue")
+tissueTmbDat = tissueTmbDat[match(colnames(mat),tissueTmbDat$SUBJECT.ID),]
+patientHeatDat <- patientData[match(colnames(mat),patientData$SUBJECT.ID),] %>% 
+  mutate(
+    tissueTMB = as.numeric(tissueTmbDat$TMB.SCORE),
+    Response = factor(Response,levels = names(responseCols))
+  )
+subjSplit = patientHeatDat %>% select(SUBJECT.ID,!!splitVar) %>% unique()
+splitFactor = subjSplit[match(subjs,subjSplit$SUBJECT.ID),splitVar]
+
+oncoCols <- c(
+  "short-variant" = "forestgreen",
+  "V600E" = "#BBCCBB",
+  "copy-number-alteration" = "darkorange",
+  rearrangement = "purple",
+  wildtype = "gray90",
+  background = "white"
+)
+
+alterFun <- lapply(names(oncoCols),function(vartype) { function(x, y, w, h) grid.rect(x, y, w, h, gp = gpar(fill = oncoCols[vartype], col = NA)) })
+names(alterFun) = names(oncoCols)
+
+annotCols = list(Response = responseCols)
+
+topAnnot = HeatmapAnnotation(
+  TMB = anno_barplot(patientHeatDat$tissueTMB,border = F),
+  Response = patientHeatDat$Response,
+  col = annotCols
+)
+
+oncoPrint(mat,
+          alter_fun = alterFun,
+          col = oncoCols,
+          show_pct = F,
+          column_split = splitFactor,
+          row_split = c1PdRowSplit,
+          top_annotation = topAnnot,
+          right_annotation = NULL,
+          left_annotation = NULL
+ )
+
+```
+
+

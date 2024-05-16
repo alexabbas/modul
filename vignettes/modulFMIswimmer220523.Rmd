@@ -1,0 +1,297 @@
+---
+title: "MODUL FMI survey"
+author: "Alex Abbas"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    fig_caption: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+---
+
+```{r setup, include=FALSE}
+# 220523: now using May 19 FMI data
+knitr::opts_chunk$set(comment = NA, message = F, warning = F)
+library(tidyverse)
+library(readxl)
+library(ComplexHeatmap)
+library(DT)
+library(knitr)
+library(ggvenn)
+library(UpSetR)
+library(gridExtra)
+library(cowplot)
+#library(stringr) 
+#library(ggpubr)
+
+#source("/Volumes/GoogleDrive/My Drive/R/aaStuff.R")
+#truColors = read.csv("/Volumes/GoogleDrive/My Drive/R/trubetskoyColors.csv",stringsAsFactors = F)
+# setwd("/Volumes/GoogleDrive/Shared drives/GI Biomarkers [gRED OBD]/CRC/MODUL Cohort 1/results/")
+theme_set(theme_bw())
+
+source("../R/loadData220523.R")
+oapl = oaplv
+```
+
+# Introduction
+
+MODUL (MO29112, NCT02291289) is an adaptable, phase 2, signal-seeking trial testing novel agents as first-line therapy for predefined subgroups of patients with metastatic colorectal cancer. It is comprised of four distinct cohorts. This analysis focuses on cohort 1, comprised of subjects with BRAF V600E mutant tumors, randomized to either the experimental arm of 5-FU/LV + cetuximab + vemurafenib or a control arm of FP + bevacizumab. Subjects' tumor tissue was tested with the FMI Foundation One CDx assay, and plasma samples from C1D1 and/or PD/EOT were tested with the FMI Foundation One Liquid CDx assay. Variants detected at these three points will be compared/contrasted to test hypotheses that treatment affected tumor genotype, specifically that vem/cetux put a negative selective pressure on V600E mutations and a positive selective pressure on compensatory mutations elsewhere in the EGFR pathway. 
+
+Here I'm trying a version of swimmer plots that mark multiple MAPK pathway mutations with multiple triangles.
+
+# Analysis
+
+## Swimmer plot
+
+```{r, fig.height=11, fig.width=8}
+# make a data frame with one sample per row and presence/absence of detected MAPK pathway mutation
+#nonBrafGenes <- c("EGFR", "KRAS", "NRAS", "MAP2K1", "NF1")
+oapl = oapl %>% 
+  mutate(
+    mapkMut = GENE %in% pathwayGenes & variant != "V600E"
+  )
+osplPath = oapl %>%
+  select(SUBJECT.ID,SAMPLE.ID,mapkMut,Cycle,Visit,timepoint,Tx) %>% 
+  group_by(SUBJECT.ID,Cycle,Visit,timepoint,Tx,SAMPLE.ID) %>%
+  summarise(mutCount = length(which(mapkMut))) %>% 
+  mutate(
+    state = ifelse(mutCount>0,"Positive","Negative"),
+    timepointMonth = timepoint / 52 * 12,
+    timepointDay = timepoint / 52 * 365,
+   Event = ifelse(Visit=="Tissue","Archival Biopsy","ctDNA")
+  ) %>% 
+  ungroup()
+
+# fill in events with no mutations in oapl
+toAdd = ospl %>%
+  filter( !(SAMPLE.ID %in% osplPath$SAMPLE.ID) ) %>%
+  select( SUBJECT.ID, Cycle, Visit, Tx, timepoint) %>% 
+  dplyr::mutate(
+    timepointMonth = timepoint / 52 * 12,
+    timepointDay = timepoint / 52 * 365,
+    Event = "ctDNA",
+    state = "Negative",
+    mutCount = 0
+  )
+osplPath = osplPath %>% bind_rows(toAdd)
+
+# add clinical timecourse response data
+clinToBind = clinicalData %>%
+  select(SUBJECT.ID,ADY,AVALC,APHASE) %>% 
+  dplyr::rename(
+    state = AVALC
+  ) %>% 
+  mutate(
+    timepointMonth = as.numeric(ADY) / 365 * 12,
+    timepointDay = as.numeric(ADY),
+    Event = "Scan"
+  ) %>% 
+  filter(
+    SUBJECT.ID %in% osplPath$SUBJECT.ID
+  ) %>% 
+  left_join(osplPath %>% select(SUBJECT.ID,Tx) %>% unique()) %>% 
+  mutate(
+    PostTx = ifelse(APHASE == "Post-trt" | Event == "ctDNA", "yes", "no")
+  )
+osplClin = bind_rows(clinToBind,osplPath)
+
+# make a swimmer plot with it
+strokeColors = c(
+  "Negative" = "gray20",
+  "Positive" = "gray20",
+#  "Submitted" = "#4488FF",
+  "yes" = "gray20",
+  "no" = "#00000000",
+  "CR" = "#22CC00",
+  "PR" = "#DDDD00",
+  "SD" = "#DD8811",
+  "PD" = "#CC3366"
+)
+
+tdf = "triangle down filled"
+tf = "triangle filled"
+sq = "square filled"
+cf = "circle filled"
+
+eventPch = c(
+  "Archival Biopsy" = cf,
+  "ctDNA" = tf,
+  "Scan" = sq
+)
+
+stateFills = c(
+  "Negative" = "white",
+  "Positive" = "gray20",
+  "Submitted" = "#4488FF",
+  "Complete Response (CR)" = "#22CC00",
+  "Partial Response (PR)" = "#DDDD00",
+  "Stable Disease (SD)" = "#DD8811",
+  "Progressive Disease (PD)" = "#CC3366",
+  "Not Evaluable (NE)" = "gray50"
+)
+
+osplClin$state = factor(osplClin$state, levels = names(stateFills))
+osplClin = osplClin %>% left_join(patientData)
+
+gp <- ggplot(osplClin, aes(x = timepointDay, y = SUBJECT.ID, fill = state, alpha = state, col = PostTx, shape = Event, group = SUBJECT.ID)) +
+  geom_point(data = osplClin %>% filter(Event == "Scan"), size = 2.3, position = position_nudge( y = -.18 ) ) +
+  geom_line(aes(color = Response), size = 1.5) +
+  geom_point(data = osplClin %>% filter(Event == "ctDNA"), size = 1.9, position = position_nudge( y = .2 ) ) +
+  geom_point(data = osplClin %>% filter(Event == "ctDNA" & mutCount > 1), size = 1.9, position = position_nudge( y = .25 ) ) +
+  geom_point(data = osplClin %>% filter(Event == "ctDNA" & mutCount > 2), size = 1.9, position = position_nudge( y = .3 ) ) +
+  geom_point(data = osplClin %>% filter(Event == "ctDNA" & mutCount > 3), size = 1.9, position = position_nudge( y = .35 ) ) +
+  geom_point(data = osplClin %>% filter(Event == "ctDNA" & mutCount > 4), size = 1.9, position = position_nudge( y = .4 ) ) +
+  geom_point(data = osplClin %>% filter(Event == "Archival Biopsy"), size = 2.5 ) +
+  theme_classic() +
+  facet_grid(rows = "Tx", space = "free", scales = "free", ) +
+  xlab("Time relative to start of maintenance phase (days)") +
+  scale_color_manual(
+    values = strokeColors,
+    breaks = c("yes","no"),
+    guide = guide_legend(override.aes = list(shape = sq, linetype = 0, fill = "gray80"), title = "Post-tx")) +
+  scale_fill_manual(
+    values = stateFills,
+    name = "RECIST",
+    breaks = c(  "Complete Response (CR)", "Partial Response (PR)", "Stable Disease (SD)", "Progressive Disease (PD)", "Not Evaluable (NE)"),
+    guide = guide_legend(override.aes = list(color = "gray50", linetype = 1, shape = sq) ) ) +
+  scale_shape_manual(values = eventPch) +
+  scale_alpha_manual(
+    name = "MAPK pathway ctDNA status",
+    values = c(1, 1, 1, 1, 1, 1, 1, 1),
+    breaks = c("Positive", "Negative"),#, "Submitted"),
+    guide = guide_legend(
+      override.aes = list(
+        linetype = 0,
+        shape = tf,
+        fill = c("gray20","white"),#,"#4488FF"),
+        color = c("gray20","gray20")#,"#4488FF")
+      ))) +
+  theme(legend.position = c(0.85, 0.75)) #+ scale_x_continuous(breaks = c(1:6)*10-20, labels = c("Archival",c(1:5)*10-10))
+
+pdf("/Volumes/GoogleDrive/Shared drives/GI Biomarkers [gRED OBD]/CRC/MODUL Cohort 1/figures/swimmerplot_all_220516.pdf", width=8, height=12)
+print(gp)
+dev.off()
+gp
+
+
+```
+
+Just for selected subjects.
+
+```{r, fig.height = 5.5, fig.width = 8}
+mapkSubjectids <- c(setdiff(
+  unlist(osplClin %>% filter(Visit == "PD" & state == "Positive" & !is.na(timepointMonth)) %>% select(SUBJECT.ID)),
+  unlist(osplClin %>% filter(Visit == "C1D1IP" & state == "Positive" & !is.na(timepointMonth)) %>% select(SUBJECT.ID))
+), "E2", "E26", "E32", "E24")  #" 7001", "1364", "4731", "9008")
+
+osplClin2 <- osplClin %>% filter(SUBJECT.ID %in% mapkSubjectids & Tx == "Experimental")
+
+gp <- ggplot(osplClin2, aes(x = timepointDay, y = SUBJECT.ID, fill = state, alpha = state, col = PostTx, shape = Event, group = SUBJECT.ID)) +
+  geom_point(data = osplClin2 %>% filter(Event == "Scan"), size = 3, position = position_nudge( y = -.10 ) ) +
+  geom_line(aes(color = Response), size = 1.5) +
+  geom_point(data = osplClin2 %>% filter(Event == "ctDNA"), size = 2.5, position = position_nudge( y = .12 ) ) +
+  geom_point(data = osplClin %>% filter(Event == "ctDNA" & mutCount > 1), size = 2.5, position = position_nudge( y = .22 ) ) +
+  geom_point(data = osplClin %>% filter(Event == "ctDNA" & mutCount > 2), size = 2.5, position = position_nudge( y = .32 ) ) +
+  geom_point(data = osplClin %>% filter(Event == "ctDNA" & mutCount > 3), size = 2.5, position = position_nudge( y = .42 ) ) +
+  geom_point(data = osplClin %>% filter(Event == "ctDNA" & mutCount > 4), size = 2.5, position = position_nudge( y = .52 ) ) +
+  geom_point(data = osplClin2 %>% filter(Event == "Archival Biopsy"), size = 3 ) +
+  theme_classic() +
+  theme( axis.text = element_text( size = 13 ),
+         axis.title = element_text(size=13, face = "bold") ) +
+  facet_grid(rows = "Tx", space = "free", scales = "free", ) +
+  xlab("Time relative to start of maintenance phase (days)") +
+  scale_color_manual(
+    values = strokeColors,
+    breaks = c("yes","no"),
+    guide = guide_legend(override.aes = list(shape = sq, linetype = 0, fill = "gray80"), title = "Post-tx")) +
+  scale_fill_manual(
+    values = stateFills,
+    name = "RECIST",
+    breaks = c(  "Complete Response (CR)", "Partial Response (PR)", "Stable Disease (SD)", "Progressive Disease (PD)", "Not Evaluable (NE)"),
+    guide = guide_legend(override.aes = list(color = "gray50", linetype = 1, shape = sq) ) ) +
+  scale_shape_manual(values = eventPch) +
+  scale_alpha_manual(
+    name = "MAPK pathway ctDNA status",
+    values = c(1, 1, 1, 1, 1, 1, 1, 1),
+    breaks = c("Positive", "Negative", "Submitted"),
+    guide = guide_legend(
+      override.aes = list(
+        linetype = 0,
+        shape = tf,
+        fill = c("gray20","white"),#,"#4488FF"),
+        color = c("gray20","gray20")#,"#4488FF")
+      ) ) ) #+ scale_x_continuous(breaks = c(1:6)*10-20, labels = c("Archival",c(1:5)*10-10))
+
+
+pdf("/Volumes/GoogleDrive/Shared drives/GI Biomarkers [gRED OBD]/CRC/MODUL Cohort 1/figures/swimmerplot_selected_220516.pdf", width=8, height=5.5)
+print(gp)
+dev.off()
+gp
+```
+
+Ordered by last scan date, with genotype colors removed.
+
+```{r, fig.height=11, fig.width=8}
+subjInOrder = osplClin %>%
+  filter(!is.na(timepointMonth)) %>%
+  group_by(SUBJECT.ID) %>% summarise(timepointDay = max(timepointDay)) %>% ungroup() %>% arrange(desc(timepointDay)) %>%
+  select(SUBJECT.ID) %>% unlist()
+osplClin3 = osplClin %>% mutate(
+  SUBJECT.ID = factor(SUBJECT.ID, levels = subjInOrder)
+)
+stateFills = c(
+  "Negative" = "gray50",
+  "Positive" = "gray50",
+  "Submitted" = "#4488FF",
+  "Complete Response (CR)" = "#22CC00",
+  "Partial Response (PR)" = "#DDDD00",
+  "Stable Disease (SD)" = "#DD8811",
+  "Progressive Disease (PD)" = "#CC3366",
+  "Not Evaluable (NE)" = "gray50"
+)
+
+gp2 <- ggplot(osplClin3, aes(x = timepointDay, y = SUBJECT.ID, fill = state, alpha = state, col = PostTx, shape = Event, group = SUBJECT.ID)) +
+  geom_point(data = osplClin3 %>% filter(Event == "Scan"), size = 2, position = position_nudge( y = -.18 ) ) +
+  geom_line(aes(color = Response), size = 1.5) +
+  geom_point(data = osplClin3 %>% filter(Event == "ctDNA"), size = 2.3, position = position_nudge( y = .2 ) ) +
+  geom_point(data = osplClin %>% filter(Event == "ctDNA" & mutCount > 1), size = 2.5, position = position_nudge( y = .25 ) ) +
+  geom_point(data = osplClin %>% filter(Event == "ctDNA" & mutCount > 2), size = 2.5, position = position_nudge( y = .3 ) ) +
+  geom_point(data = osplClin %>% filter(Event == "ctDNA" & mutCount > 3), size = 2.5, position = position_nudge( y = .35 ) ) +
+  geom_point(data = osplClin %>% filter(Event == "ctDNA" & mutCount > 4), size = 2.5, position = position_nudge( y = .4 ) ) +
+  geom_point(data = osplClin3 %>% filter(Event == "Archival Biopsy"), size = 2.5 ) +
+  theme_classic() +
+  facet_grid(rows = "Tx", space = "free", scales = "free", ) +
+  xlab("Time relative to start of maintenance phase (days)") +
+  scale_color_manual(
+    values = strokeColors,
+    breaks = c("yes","no"),
+    guide = guide_legend(override.aes = list(shape = sq, linetype = 0, fill = "gray80"), title = "Post-tx")) +
+  scale_fill_manual(
+    values = stateFills,
+    name = "RECIST",
+    breaks = c(  "Complete Response (CR)", "Partial Response (PR)", "Stable Disease (SD)", "Progressive Disease (PD)", "Not Evaluable (NE)"),
+    guide = guide_legend(override.aes = list(color = "gray50", linetype = 1, shape = sq) ) ) +
+  scale_shape_manual(values = eventPch) +
+  scale_alpha_manual(
+    name = "MAPK pathway ctDNA status",
+    values = c(1, 1, 1, 1, 1, 1, 1, 1),
+    breaks = c("Positive", "Negative"),#, "Submitted"),
+    guide = guide_legend(
+      override.aes = list(
+        linetype = 0,
+        shape = tf,
+        fill = c("gray20","white"),#,"#4488FF"),
+        color = c("gray20","gray20")#,"#4488FF")
+      ))) +
+  theme(legend.position = "none") + #c(0.85, 0.75)) # + scale_x_continuous(breaks = c(1:6)*10-20, labels = c("Archival",c(1:5)*10-10))
+
+pdf("/Volumes/GoogleDrive/Shared drives/GI Biomarkers [gRED OBD]/CRC/MODUL Cohort 1/figures/swimmerplot_gray_220516.pdf", width=8, height=12)
+print(gp2)
+dev.off()
+gp2
+
+```
+

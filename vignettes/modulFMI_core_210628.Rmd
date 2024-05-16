@@ -1,0 +1,187 @@
+---
+title: "MODUL FMI Comparison to FoundationCore"
+author: "Alex Abbas"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(comment = NA, message = F, warning = F)
+library(tidyverse)
+library(ComplexHeatmap)
+library(DT)
+library(knitr)
+library(ggvenn)
+
+source("~/Google Drive/R/aaStuff.R")
+truColors = read.csv("~/Google Drive/R/trubetskoyColors.csv",stringsAsFactors = F)
+
+theme_set(theme_bw())
+
+anOncoprint = function(dat) {
+  genes = names(sort(table(dat$GENE),decreasing = T))
+  #allgenes = unique(oapl$GENE)
+  subjs = unique(dat$SUBJECT.ID)
+  mat = matrix("",nrow=length(topGenes),ncol=length(subjs))
+  dimnames(mat) = list(topGenes,subjs)
+  topOapl = dat %>% filter(GENE %in% topGenes)
+  x = apply(topOapl,1,function(oa){
+    mat[oa["GENE"],oa["SUBJECT.ID"]] <<- oa["VARIANT.TYPE"]
+  })
+  
+  oncoCols = c(
+    "short-variant" = "forestgreen",
+    "copy-number-alteration" = "darkorange",
+    rearrangement = "purple",
+    # Insertion = "gray",
+    # Complex = "firebrick3",
+    # "Splice site" = "hotpink",
+    # "Stop codon" = "gold",
+    background = "white"
+  )
+  
+  alter_fun = lapply(names(oncoCols),function(vartype) { function(x, y, w, h) grid.rect(x, y, w, h, gp = gpar(fill = oncoCols[vartype], col = NA)) })
+  names(alter_fun) = names(oncoCols)
+  
+  oncoPrint(mat,
+            alter_fun = alter_fun,
+            col = oncoCols,
+            show_pct = T,
+            right_annotation = rowAnnotation(
+              rbar = anno_oncoprint_barplot(
+                width = unit(3, "cm"),
+                axis_param = list(at = c(0, .25, .5, .75) * dim(mat)[2],
+                                  labels = c("0", "25%", "50%", "75%"),
+                                  side = "bottom",
+                                  labels_rot = 0)))
+  )
+}
+if (dir.exists("/Volumes/OBD")) {
+  ctdna_dir="/Volumes/OBD/avastin/mo29112_modul/ngs/results/ctdna/data"
+  raw_dir="/Volumes/OBD/avastin/mo29112_modul/ngs/rawdata"
+  june7_dir = "fmi_obd_mo29112_ngs_dna_targdna_foundationoneliquidcdx_20-2047_std_20210607"
+  fmi_dir_plasma=paste0(ctdna_dir,"/fmi_obd_mo29112_ngs_dna_targdna_foundationoneliquidcdx_20-2047_std_20201209")
+  fmi_dir_tissue=paste0(ctdna_dir,"/fmi_obd_mo29112_ngs_dna_targdna_foundationone_20-2041_std_20200615")
+  runSpec = list(
+    plasma_variant_level=paste(raw_dir,june7_dir,"mo29112_ngs_dna_targdna_foundationoneliquidcdx_20-2047_n116_one-alteration-per-line-plus_20210607.txt",sep="/"),
+    tissue_variant_level=paste0(fmi_dir_tissue,"/mo29112_ngs_dna_targdna_foundationone_20-2041_n65_one-alteration-per-line_20200615.txt"),    
+    clin_data=paste0(ctdna_dir,"/Clinical data cohort1.csv"),
+    sampleMatch=paste0(ctdna_dir,"/modul_FMIsamples_210608.csv")
+  )
+} else {
+  data_dir="~/Documents/crc/MODUL/data/FMI"
+  runSpec = list(
+    sampleMatch=paste0(data_dir,"/modul_FMIsamples_210608.csv"),
+    clin_data=paste0(data_dir,"/Clinical data cohort1.csv"),
+    tissue_variant_level=paste0(data_dir,"/mo29112_ngs_dna_targdna_foundationone_20-2041_n65_one-alteration-per-line_20200615.txt"),    
+    plasma_variant_level=paste(data_dir,"mo29112_ngs_dna_targdna_foundationoneliquidcdx_20-2047_n116_one-alteration-per-line-plus_20210607.txt",sep="/")
+  )
+}
+
+sampleMatch = read.csv(runSpec$sampleMatch)
+clin = read.csv(runSpec$clin_data)
+```
+
+# Introduction
+
+MODUL (MO29112, NCT02291289) is an adaptable, phase 2, signal-seeking trial testing novel agents as first-line therapy for predefined subgroups of patients with metastatic colorectal cancer. It is comprised of four distinct cohorts. This analysis focuses on cohort 1, comprised of subjects with BRAF V600E mutant tumors, randomized to either the experimental arm of 5-FU/LV + cetuximab + vemurafenib or a control arm of FP + bevacizumab. Subjects' tumor tissue was tested with the FMI Foundation One CDx assay, and plasma samples from C1D1 and/or PD/EOT were tested with the FMI Foundation One Liquid CDx assay. Here I'll compare the distribution of variants to variants in CRC samples in the FoundationOne data collection. 
+
+# Data
+
+## Foundation One CDx
+
+June 15 2020 F1CDx tissue data, from OBD-FS data file:
+
+    mo29112_ngs_dna_targdna_foundationone_20-2041_n65_one-alteration-per-line_20200615
+
+```{r}
+tissueVarLevel = read.delim(runSpec$tissue_variant_level,sep="\t")
+tissueOapl = tissueVarLevel %>% filter(!grepl("BIOMARKER",VARIANT.TYPE))
+tissueOapl2 = tissueOapl %>%
+  filter(SOMATIC.STATUS.FUNCTIONAL.IMPACT != "unknown")
+fmiGenes = tissueOapl2 %>% select(GENE) %>% unique() %>% unlist()
+tissueSubjs = unique(tissueOapl2$SUBJECT.ID)
+```
+
+Parameter | Count
+--------- | -----
+Alterations | `r nrow(tissueOapl2)` 
+Impactful alterations | `r nrow(tissueOapl2)` 
+Subjects | `r length(tissueSubjs)`
+Samples | `r length(unique(tissueOapl2$SAMPLE.ID))`
+Genes | `r length(unique(tissueOapl2$GENE))`
+
+### All patients
+
+```{r, fig.height=7, fig.width=10}
+
+topGenes = names(sort(table(tissueOapl2$GENE),decreasing = T)[1:20])
+anOncoprint(tissueOapl2 %>% filter(GENE %in% topGenes))
+```
+
+## FoundationCore CRC
+
+Feb 22 2021 FoundationCORE CRC tissue data from Quasar:
+
+    DBI_20210222_B.1.Q1.CRC.solid.xlsx
+
+```{r}
+allCoreOapl =
+  read.csv("~/Google Drive/crc/FoundationOne/DBI_20210222_B.1.Q1.CRC.solid_oapl.csv") %>% 
+  rename(
+    GENE = gene,
+    SOMATIC.STATUS.FUNCTIONAL.IMPACT = var_status
+    )
+
+varHash =
+  c("SV" = "short-variant", "CN" = "copy-number-alteration", "RE" = "rearrangement")
+allCoreOapl = allCoreOapl %>% 
+  rename(
+    SUBJECT.ID = xrn
+  ) %>% 
+  mutate(
+    VARIANT.TYPE = varHash[alteration_type]
+  )
+coreOapl = allCoreOapl %>% filter(SOMATIC.STATUS.FUNCTIONAL.IMPACT %in% c("known","likely"))
+```
+
+Parameter | Count
+--------- | -----
+Alterations | `r nrow(allCoreOapl)` 
+Impactful alterations | `r nrow(coreOapl)` 
+Samples | `r length(coreSamples)`
+Genes | `r length(unique(coreOapl$GENE))`
+
+### All FoundationCORE subjects
+
+```{r}
+sampledXrns = coreOapl %>% select(SUBJECT.ID) %>% unique() %>% slice_sample(n=500) %>% unlist()
+anOncoprint(coreOapl %>%
+     filter(GENE %in% intersect(topGenes,coreOapl$GENE) & SUBJECT.ID %in% sampledXrns))
+```
+
+### BRAF mutant CRC patients only
+
+```{r}
+brafXrns = coreOapl %>% filter(GENE=="BRAF") %>% select(SUBJECT.ID) %>% unlist()
+coreBrafOapl = coreOapl %>% filter(SUBJECT.ID %in% brafXrns)
+anOncoprint(coreBrafOapl %>% filter(GENE %in% intersect(topGenes,coreBrafOapl$GENE)))
+```
+
+## Compare MODUL variant incidence to FoundationCORE
+
+```{r}
+modulIncidence = tissueOapl2 %>% group_by(SUBJECT.ID,GENE) %>% slice(n=1) %>%
+  group_by(GENE) %>% summarise(count = n()) %>%
+  mutate(incidence = count/length(tissueSubjs))
+coreIncidence = coreBrafOapl %>% group_by(SUBJECT.ID,GENE) %>% slice(n=1) %>%
+  group_by(GENE) %>% summarise(count = n()) %>%
+  mutate(incidence = count/length(unique(coreBrafOapl$SUBJECT.ID)))
+jointIncidence = full_join(modulIncidence,coreIncidence,by="GENE")
+ggplot(jointIncidence,aes(x=incidence.x,y=incidence.y,label=GENE)) +
+  geom_point(alpha=.5,size=2) +
+  geom_abline(slope=1,intercept = 0,alpha=.1,lty="dashed") +
+  ggrepel::geom_text_repel() +
+  xlab("MODUL mutation incidence") +
+  ylab("FoundationCORE mutation incidence")
+```

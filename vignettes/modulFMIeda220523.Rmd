@@ -1,0 +1,1228 @@
+---
+title: "MODUL FMI survey"
+author: "Alex Abbas"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    fig_caption: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+---
+
+```{r setup, include=FALSE}
+# 220523: using data from May 29 FMI batch
+
+knitr::opts_chunk$set(comment = NA, message = F, warning = F)
+library(tidyverse)
+library(readxl)
+library(ComplexHeatmap)
+library(DT)
+library(knitr)
+library(ggvenn)
+library(UpSetR)
+library(gridExtra)
+library(cowplot)
+library(survival)
+library(survminer)
+#library(stringr) 
+#library(ggpubr)
+
+#source("/Volumes/GoogleDrive/My Drive/R/aaStuff.R")
+#truColors = read.csv("/Volumes/GoogleDrive/My Drive/R/trubetskoyColors.csv",stringsAsFactors = F)
+# setwd("/Volumes/GoogleDrive/Shared drives/GI Biomarkers [gRED OBD]/CRC/MODUL Cohort 1/results/")
+theme_set(theme_bw())
+
+source("../R/loadData220523.R")
+oapl = oaplv
+```
+
+# Introduction
+
+MODUL (MO29112, NCT02291289) is an adaptable, phase 2, signal-seeking trial testing novel agents as first-line therapy for predefined subgroups of patients with metastatic colorectal cancer. It is comprised of four distinct cohorts. This analysis focuses on cohort 1, comprised of subjects with BRAF V600E mutant tumors, randomized to either the experimental arm of 5-FU/LV + cetuximab + vemurafenib or a control arm of FP + bevacizumab. Subjects' tumor tissue was tested with the FMI Foundation One CDx assay, and plasma samples from C1D1 and/or PD/EOT were tested with the FMI Foundation One Liquid CDx assay. Variants detected at these three points will be compared/contrasted to test hypotheses that treatment affected tumor genotype, specifically that cetuximab put a negative selective pressure on V600E mutations and a positive selective pressure on compensatory mutations elsewhere in the EGFR pathway. 
+
+# Data
+
+Loading data with `loadData220523.R`, which uses June 15 2020 tissue biopsy FMI data and May 19 2022 FMI ctDNA data.
+
+## Samples
+
+```{r}
+ospl %>% select(Visit) %>% group_by(Visit) %>% summarise(n = n()) %>% datatable()
+```
+
+## Foundation One CDx (i.e. Tissue Assay)
+
+Survey June 15 2020 F1CDx tissue data, from OBD-FS data file:
+
+    mo29112_ngs_dna_targdna_foundationone_20-2041_n65_one-alteration-per-line_20200615
+
+```{r}
+fmiGenes <- tissueOapl %>% select(GENE) %>% unique() %>% unlist()
+tissueSubjs <- unique(tissueOapl$SUBJECT.ID)
+```
+
+Parameter | Count
+--------- | -----
+Alterations | `r nrow(tissueOaplAll)` 
+Impactful alterations | `r nrow(tissueOapl)` 
+Subjects | `r length(tissueSubjs)`
+Samples | `r length(unique(tissueOapl$SAMPLE.ID))`
+Genes | `r length(unique(tissueOapl$GENE))`
+
+Variants at baseline tissue biopsy:
+
+```{r, fig.height=6, fig.width=10}
+
+anOncoprint <- function(dat,splitVar=NA) {
+  # genes <- names(sort(table(dat$Gene),decreasing = T))
+  #allgenes <- unique(oapl$Gene)
+  subjs <- unique(dat$SUBJECT.ID)
+  mat <- matrix("",nrow=length(topGenes),ncol=length(subjs))
+  dimnames(mat) <- list(topGenes,subjs)
+  topOapl <- dat %>% filter(GENE %in% topGenes)
+  x <- apply(topOapl,1,function(oa){
+    mat[oa["GENE"],oa["SUBJECT.ID"]] <<- oa["VARIANT.TYPE"]
+  })
+  
+  splitFactor <- NA
+  if (!is.na(splitVar)) {
+    subjSplit = dat %>% select(SUBJECT.ID,!!splitVar) %>% unique()
+    splitFactor = subjSplit[match(subjs,subjSplit$SUBJECT.ID),splitVar]
+  }
+  oncoCols <- c(
+    "short-variant" = "forestgreen",
+    "copy-number-alteration" = "darkorange",
+    rearrangement = "purple",
+    # Insertion = "gray",
+    # Complex = "firebrick3",
+    # "Splice site" = "hotpink",
+    # "Stop codon" = "gold",
+    background = "white"
+  )
+  
+  alter_fun <- lapply(names(oncoCols),function(vartype) { function(x, y, w, h) grid.rect(x, y, w, h, gp = gpar(fill = oncoCols[vartype], col = NA)) })
+  names(alter_fun) = names(oncoCols)
+  
+  oncoPrint(mat,
+            alter_fun = alter_fun,
+            col = oncoCols,
+            show_pct = T,
+            column_split = splitFactor,
+            right_annotation = rowAnnotation(
+              rbar = anno_oncoprint_barplot(
+                width = unit(3, "cm"),
+                axis_param = list(at = c(0, .25, .5, .75) * dim(mat)[2],
+                                  labels = c("0", "25%", "50%", "75%"),
+                                  side = "bottom",
+                                  labels_rot = 0)))
+  )
+}
+topGenes <- names(sort(table(tissueOapl$GENE),decreasing = T)[1:20])
+
+tissueOapl = tissueOapl %>% 
+  mutate(Arm = factor(Arm,levels=c("Control","Experimental","Coh99")))
+onc1 = anOncoprint(tissueOapl %>% filter(GENE %in% topGenes),splitVar="Arm")
+onc1
+pdf("../figures/baselineOncoprint.pdf", height=4, width=8)
+print(onc1)
+dev.off()
+
+```
+
+## Foundation One Liquid CDx
+
+Survey Aug 30 2021 F1 Liquid CDx data, from OBD-FS data file:
+
+    mo29112_ngs_dna_targdna_foundationoneliquidcdx_20-2047_n214_one-alteration-per-line-plus_20211214
+
+Parameter | Count
+--------- | -----
+Alterations | `r nrow(liqOaplAll)` 
+Impactful alterations | `r nrow(liqOapl)` 
+Subjects | `r length(unique(liqOapl$SUBJECT.ID))`
+Samples | `r length(unique(liqOapl$SAMPLE.ID))`
+Genes | `r length(unique(liqOapl$GENE))`
+
+Variants at Induction Phase timepoint:
+
+```{r, fig.height=6, fig.width=10}
+# samplePatHash <- liqOapl %>% select(SAMPLE.ID,SUBJECT.ID) %>% unique()
+liqC1 <- liqOapl %>% filter(grepl("C1D1IP",Visit))
+liqC1Subjids <- unique(liqC1$SUBJECT.ID)
+liqPd <- liqOapl %>% filter(grepl("PD",Visit))
+liqPdSubjids <- unique(liqPd$SUBJECT.ID)
+anOncoprint(liqC1 %>% filter(GENE %in% topGenes),splitVar="Arm")
+```
+
+## Quantify Subjects Assayed
+
+Using clinical data "MO29112_Ch1 clinical-biomarker dashboard (2)". Examine overlap of subject identifiers for clinical data and each of the FMI datasets (tissue and plasma).
+
+```{r}
+# setTally(sampleMatch$SUBJECT.ID,clin$Subject.Identifier.for.the.Study)
+# setTally(sampleMatch$SUBJECT.ID,tissueOapl$SUBJECT.ID)
+# setTally(sampleMatch$SUBJECT.ID,liqOapl$SUBJECT.ID)
+
+Subjids <- list(
+  clinical = patientData$SUBJECT.ID,
+  tissue = unique(tissueOapl$SUBJECT.ID),
+  plasma = unique(liqOapl$SUBJECT.ID)
+)
+ggvenn(Subjids)
+```
+
+## Subject/Visit Coverage
+
+Examine the completeness of samples available at different visits for each patient.
+
+```{r}
+patVisit <- oapl %>% select(SUBJECT.ID,Visit) %>% unique()
+visits <- unique(patVisit$Visit)
+listInput <- lapply(visits,function(aVisit) {
+  patVisit %>% filter(Visit==aVisit) %>% select(SUBJECT.ID) %>% unlist()
+})
+names(listInput) <- visits
+upset(fromList(listInput))
+```
+
+# Results
+
+## Variants at Biopsy and Cycle 1 Induction Phase
+
+Compare gene-level variants for each patient between tissue and baseline (up to and including start of MP).
+
+```{r, fig.height=7, fig.width=8}
+baseOapl = liqOapl %>% filter(grepl("IP|C1D1MP",Cycle))
+genesAllTwo <- unique(unlist(
+  baseOapl %>% select(GENE),
+  tissueOapl %>% filter(Visit == "Tissue") %>% select(GENE)
+))
+topGenes <- names(sort(table(tissueOapl$GENE),decreasing = T)[1:50])
+topGenesAllTwo <- intersect(topGenes,genesAllTwo)
+
+# tissC1Subjs = as.character(unique(intersect(
+#   liqOapl %>% select(SUBJECT.ID) %>% unlist(),
+#   tissueOapl %>% select(SUBJECT.ID) %>% unlist()
+# )))
+
+tissC1Subjs = as.character(unique(tissueOapl %>% select(SUBJECT.ID) %>% unlist()))
+
+twoMat = matrix(0,ncol=length(tissC1Subjs),nrow=length(topGenesAllTwo))
+rownames(twoMat) = topGenesAllTwo
+colnames(twoMat) = tissC1Subjs
+
+tissueMut = tissueOapl %>% filter(SUBJECT.ID %in% tissC1Subjs & GENE %in% topGenesAllTwo) %>% select(SUBJECT.ID,GENE) %>% unique()
+x = apply(tissueMut,1,function(oa){ twoMat[oa["GENE"],oa["SUBJECT.ID"]] <<- twoMat[oa["GENE"],oa["SUBJECT.ID"]] + 1 })
+
+c1Mut = baseOapl %>% filter(GENE %in% topGenesAllTwo) %>% select(SUBJECT.ID,GENE) %>% filter(SUBJECT.ID %in% tissC1Subjs) %>% unique()
+x = apply(c1Mut,1,function(oa){ twoMat[oa["GENE"],oa["SUBJECT.ID"]] <<- twoMat[oa["GENE"],oa["SUBJECT.ID"]] + 2 })
+
+class(twoMat) = "character"
+mutHash = c(
+  "0" = "WT",
+  "1" = "Tissue only",
+  "2" = "Baseline liquid only",
+  "3" = "Baseline liquid & Tissue",
+  "4" = "All"
+)
+
+mutCol = c(
+  "WT" = "white",
+  "Tissue only" = "red",
+  "Baseline liquid only" = "blue",
+  "Baseline liquid & Tissue" = "purple",
+  "All" = "black"
+)
+
+mat2 = mutHash[twoMat]
+dim(mat2) = dim(twoMat)
+rownames(mat2) = rownames(twoMat)
+colnames(mat2) = colnames(twoMat)
+mat2 = mat2[,sort(colnames(mat2))]
+# baseC1heatmap = Heatmap(mat2, col = mutCol, heatmap_legend_param = list(title = ""))
+# baseC1heatmap
+# pdf("../figures/baseToC1d1Oncoprint.pdf", height=4, width=8)
+# baseC1heatmap
+# dev.off()
+
+oncoColsVs <- c(
+  "WT" = "white",
+  "Tissue only" = "red",
+  "Baseline liquid only" = "blue",
+  "Baseline liquid & Tissue" = "purple",
+  "All" = "black",
+  background = "white"
+)
+
+alter_funVs <- lapply(names(oncoColsVs),function(vartype) { function(x, y, w, h) grid.rect(x, y, w, h, gp = gpar(fill = oncoColsVs[vartype], col = NA)) })
+names(alter_funVs) = names(oncoColsVs)
+mat2[mat2=="WT"] = NA
+baseC1heatmap = oncoPrint(mat2,
+                          alter_fun = alter_funVs,
+                          col = oncoColsVs,
+                          top_annotation = NULL,
+                          right_annotation = NULL,
+                          show_pct = F,
+                          show_column_names = T
+)
+baseC1heatmap
+pdf("../figures/tissueBaselineOncoprint.pdf", height=5, width=8)
+baseC1heatmap
+dev.off()
+  
+```
+
+## MAPK Pathway Genes
+
+Focus on EGFR, KRAS, NRAS, BRAF, MAP2K1, NF1. Exclude V600E mutations here because they're present in all patients in this cohort. Plot presence/absence of each variant detected in these genes.
+
+```{r, fig.height=8, fig.width=7}
+#pathwayGenes = c("EGFR", "KRAS", "NRAS", "BRAF", "MAP2K1", "NF1")
+#eot2pd = function(x) { x[x=="EOT"] = "PD"; x }
+
+oaplPathway = oapl %>% filter(GENE %in% pathwayGenes & SV.PROTEIN.CHANGE != "V600E") %>%
+  group_by(Arm,SUBJECT.ID,Response,GENE,Visit,variant) %>% summarise(SV.PERCENT.READS = sum(as.numeric(SV.PERCENT.READS),na.rm=T)) %>% ungroup() #%>% 
+#  mutate(Visit = eot2pd(Visit)) %>% 
+#  filter(Arm != "Control")
+
+#visits = c("Tissue","C1D1IP","PD")
+visits = c("Tissue","C1D1IP","induction","C1D1MP","ontx","PD","EOT") #unique(oapl$Visit)
+#visits = c("Tissue","C1D1IP","C1D1MP","ontx","PD","EOT") #unique(oapl$Visit)
+#visits = c("Tissue","C1D1IP","C1D1MP","ontx","PD")#,"EOT") #unique(oapl$Visit)
+
+oaplPathwayWide = oaplPathway %>%
+  filter(Visit %in% visits) %>%
+  pivot_wider(names_from="Visit",values_from="SV.PERCENT.READS") %>%
+  group_by(Arm, SUBJECT.ID, variant) %>% slice(n=1) %>% ungroup() %>% 
+  arrange(GENE,Arm,SUBJECT.ID)
+
+rowAnnotDf = data.frame(oaplPathwayWide %>% select(Arm))
+
+annotCols = list(
+  GENE = setNames(rainbow(length(intersect(unique(rowAnnotDf$GENE),pathwayGenes))),unique(rowAnnotDf$GENE)),
+  Arm = setNames(c("darkslateblue","cadetblue2","lightblue"),unique(rowAnnotDf$Arm))
+#  Response = setNames(c("#55DD44","#1177AA","#CC4455","#AA55AA"),c("CR","PR","PD","SD"))
+)
+
+leftAnnot = rowAnnotation(
+  df = rowAnnotDf,
+  col = annotCols
+)
+
+toHeatmap = as.matrix(oaplPathwayWide[,visits])
+class(toHeatmap) = "character"
+rownames(toHeatmap) = paste(oaplPathwayWide$SUBJECT.ID,oaplPathwayWide$GENE,oaplPathwayWide$variant)
+heatmapPatients = oaplPathwayWide$SUBJECT.ID
+toHeatmap[!is.na(toHeatmap)] = "Mut"
+toHeatmap[is.na(toHeatmap)] = "WT"
+
+patientVisits = unlist(ospl %>% mutate(patientVisits = paste(SUBJECT.ID,Visit)) %>% select(patientVisits))
+for (visit in visits) {
+  for (i in 1:dim(toHeatmap)[1]) {
+    patient <- heatmapPatients[i]
+    rowname <- rownames(toHeatmap)[i]
+    #    print(paste(rowname,patient,visit,paste(patient,visit) %in% patientVisits))
+    if (!(paste(patient,visit) %in% patientVisits)) {
+      toHeatmap[rowname,visit] <- "no data"
+ #     print(paste(rowname,patient,visit,paste(patient,visit) %in% patientVisits))
+    }
+  }
+}
+rownames(toHeatmap) = paste(oaplPathwayWide$SUBJECT.ID,oaplPathwayWide$variant)
+
+combineCols = function(aHeatmap,col1,col2,newName = "Final plasma") {
+  newCol = aHeatmap[,col1]
+  newCol[aHeatmap[,col2]=="Mut"] = "Mut"
+  newCol[aHeatmap[,col2]=="WT" & newCol=="no data"] = "WT"
+  aHeatmap = aHeatmap[,!colnames(aHeatmap) %in% c(col1,col2)]
+  aHeatmap = cbind(aHeatmap,newCol)
+  colnames(aHeatmap)[dim(aHeatmap)[2]] = newName
+  aHeatmap
+}
+
+toHeatmap = combineCols(toHeatmap,"C1D1IP","induction",newName="Baseline plasma") # combine EOT and PD. Call Mut if it's Mut in either.
+toHeatmap = combineCols(toHeatmap,"C1D1MP","Baseline plasma",newName="Baseline plasma")
+toHeatmap = combineCols(toHeatmap,"EOT","PD") 
+toHeatmap = combineCols(toHeatmap,"ontx","Final plasma") 
+#toHeatmap = toHeatmap[,!colnames(toHeatmap) %in% c("C1D1MP")] # remove the C1D1MP timepoint
+
+genotypeColors = structure(c("brown","darkseagreen","white"), names = c("Mut", "WT", "no data")) # black, red, green, blue
+onco1 = Heatmap(toHeatmap, left_annotation=leftAnnot,
+        #top_annotation=topAnnot,
+        column_split = c("Biopsy","ctDNA","ctDNA"),
+        cluster_rows = F, cluster_columns = F, row_split = oaplPathwayWide$GENE,
+        row_title_rot = 0, col = genotypeColors,
+        name = "Genotype",
+        row_names_gp = gpar(fontsize = 9)
+)
+pdf("../figures/perVariantHeatmap.pdf")
+onco1
+dev.off()
+```
+
+## Panel-wide screen
+
+Our hypothesis focused on selected genes, but an unbiased screen of all genes on the FMI CDx panel would yield insight into whether this effect is significant because other genes could serve as a control.
+
+```{r}
+C1PdSubjs = as.character(intersect(
+  oapl %>% filter(baseEnd == "base") %>% select(SUBJECT.ID) %>% unlist(),
+  oapl %>% filter(baseEnd == "end") %>% select(SUBJECT.ID) %>% unlist()
+))
+```
+
+Screen among the `r length(C1PdSubjs)` patients assessed at both C1D1 and PD/EOT for genes that show more than two known or likely impactful mutation gain and/or loss events.
+
+```{r, fig.height=5, fig.width=5}
+coh99toexp = function(x) { x[x=="Coh99"] = "Experimental"; x }
+C1PdSubjDat = oapl %>%
+  mutate(Arm = coh99toexp(Arm)) %>% 
+  filter(SUBJECT.ID %in% C1PdSubjs) %>%
+  mutate(variant = gsub("-","",paste0(SV.PROTEIN.CHANGE,CNA.TYPE,REARR.DESCRIPTION))) %>%
+  # group_by(SUBJECT.ID,GENE,variant,baseEnd,Arm) %>% summarise(variants = toString(variant)) %>% ungroup() %>%
+  select(SUBJECT.ID,GENE,variant,baseEnd,Arm,Tx) %>% unique() %>% 
+  group_by(SUBJECT.ID,GENE,variant,Arm,Tx) %>% summarise(baseEnd = toString(baseEnd)) %>% ungroup() %>%
+  filter(!grepl(",",baseEnd)) %>% 
+  mutate(gainloss = ifelse(baseEnd == "base","loss","gain")) %>% unique() #%>% 
+#  group_by(Tx) %>% summarise(TxSubjCount = n(unique(SUBJECT.ID))) %>% ungroup()
+C1PdSubjSum = C1PdSubjDat %>%
+  group_by(GENE,gainloss,Arm,Tx) %>% group_by(GENE) %>% filter(n() > 2) %>% ungroup() %>%
+  group_by(GENE,gainloss,Arm,Tx) %>% summarise(count = n())# %>% 
+#  group_by(Tx) %>% mutate(incidence = count/n())
+
+C1PdSubjSum$count[C1PdSubjSum$gainloss == "loss"] = -C1PdSubjSum$count[C1PdSubjSum$gainloss == "loss"]
+#C1PdSubjSum$incidence[C1PdSubjSum$gainloss == "loss"] = -C1PdSubjSum$incidence[C1PdSubjSum$gainloss == "loss"]
+
+geneOrder = C1PdSubjSum %>% group_by(GENE) %>% summarise(net = sum(count)) %>% ungroup() %>% arrange(net) %>% select(GENE) %>% unlist()
+C1PdSubjSum = C1PdSubjSum %>%
+  mutate(
+    GENE = factor(GENE, levels = geneOrder)
+  ) %>% 
+  filter( !is.na(GENE) )
+ggplot(C1PdSubjSum,aes(x=GENE,y=count,fill=gainloss)) + geom_col(position="dodge") + coord_flip() +
+  ylab("Net impactful mutations appearing at PD/EOT") + xlab("") + facet_grid(cols=vars(Tx)) + theme(legend.position = "none") +
+  scale_y_continuous(breaks = c(-3:3)*5, minor_breaks = c(-15:15))
+```
+
+Now plot just the mutations that appeared and omit the ones that disappeared. Plot as columns instead of bars.
+
+```{r, fig.height=3.8, fig.width=5}
+C1PdSubjGainSum = C1PdSubjDat %>%
+  mutate(Tx = ArmToTx[Arm]) %>% 
+  filter(gainloss=="gain" & !is.na(GENE)) %>% 
+  group_by(GENE,gainloss,Tx) %>% group_by(GENE) %>% filter(n() > 0) %>% ungroup() %>%
+  group_by(GENE,gainloss,Tx) %>% summarise(count = n()) %>% 
+  group_by(Tx) %>% mutate(incidence = count/n())
+
+geneOrder = C1PdSubjGainSum %>% filter(Tx == "Experimental") %>% 
+  group_by(GENE) %>% summarise(net = sum(count)) %>% ungroup() %>% arrange(desc(net)) %>% select(GENE) %>% unlist()
+
+C1PdSubjGainSum = C1PdSubjGainSum %>%
+  mutate(
+    GENE = factor(GENE, levels = geneOrder),
+    Tx = factor(Tx, levels = c("Experimental","Control"))
+  ) %>% 
+  filter( !is.na(GENE) ) %>%
+  ungroup() %>%
+  complete(Tx,GENE,fill = list(gainloss = "gain", count = 0, incidence = 0))
+
+colPlot = ggplot(C1PdSubjGainSum,aes(x=GENE,y=count)) + geom_col(position="dodge",fill = "darkblue") +
+  ylab("Impactful mutations\nappearing at PD/EOT") + xlab("") +
+  facet_grid(cols=vars(Tx), switch="both") +
+  theme_classic() + theme(legend.position = "none") +
+  scale_y_continuous(breaks = c(-15:15)) +
+  theme(axis.text.x = element_text(angle = 90))
+
+colPlot
+pdf("../figures/acquiredMutColPlot.pdf", height=3, width=5)
+colPlot
+dev.off()
+```
+
+```{r, fig.height=3.8, fig.width=6}
+colplot2 = ggplot(C1PdSubjGainSum,aes(x=GENE,y=count,fill=Tx)) + geom_col(position="dodge") +
+  ylab("Impactful mutations appearing at PD/EOT") + xlab("") +
+  theme_classic() + 
+  scale_y_continuous(breaks = c(-15:15)) +
+  theme(axis.text.x = element_text(angle = 90)) +
+  theme(legend.position = c(0.8, 0.8))
+
+colplot2
+pdf("../figures/acquiredMutColPlot2.pdf", height=3, width=5)
+colplot2
+dev.off()
+```
+
+## Alteration Consistency
+
+Survey how similar the detection of alterations and measurements of variant allele frequencies are between paired measurements.
+
+```{r}
+oapl[oapl=="-"] = ""
+oapl$SV.PERCENT.READS[oapl$SV.PERCENT.READS==""] = "0"
+oapl$SV.PERCENT.READS = as.numeric(oapl$SV.PERCENT.READS)
+tissC1Oapl = oapl %>% filter(SUBJECT.ID %in% tissC1Subjs & Visit %in% c("Tissue","C1D1IP") & !is.na(SV.PERCENT.READS))
+tissC1Full = tissC1Oapl %>%
+  select(SUBJECT.ID,variant,Visit,SV.PERCENT.READS) %>%
+  group_by(variant,Visit) %>% dplyr::slice(n=1) %>% ungroup() %>% 
+  pivot_wider(names_from = Visit, values_from = SV.PERCENT.READS, values_fill = 0) %>% 
+  dplyr::rename(C1D1 = "C1D1IP") %>% 
+  mutate(shared = factor(
+    ifelse(Tissue==0,"C1D1 exclusive",ifelse(C1D1==0,"Tissue exclusive","Shared")),
+    levels = c("Shared","Tissue exclusive","C1D1 exclusive"))) %>% 
+  arrange(shared,desc(Tissue),desc(C1D1)) %>%
+  mutate(
+    subjVar = paste(SUBJECT.ID,variant),
+    subjVar = factor(subjVar,levels = subjVar),
+    C1D1 = -C1D1
+  ) %>% pivot_longer(c(Tissue,C1D1),names_to = "Visit",values_to = "SV.PERCENT.READS")
+
+ggplot(tissC1Full,aes(x=subjVar,y=SV.PERCENT.READS,fill=shared)) + geom_col() +
+  theme(axis.title.x=element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank())
+
+normalit<-function(m){
+   (m / max(m))
+}
+tissC1Oapl = tissC1Oapl %>%
+    group_by(SUBJECT.ID,Visit) %>%
+    mutate( SV.PERCENT.READSnorm = normalit(SV.PERCENT.READS) )
+tissC1Full2 = tissC1Oapl %>%
+  select(SUBJECT.ID,variant,Visit,SV.PERCENT.READSnorm) %>%
+  group_by(variant,Visit) %>% dplyr::slice(n=1) %>% ungroup() %>% 
+  pivot_wider(names_from = Visit, values_from = SV.PERCENT.READSnorm, values_fill = 0) %>% 
+  dplyr::rename(C1D1 = "C1D1IP") %>% 
+  mutate(shared = factor(
+    ifelse(Tissue==0,"C1D1 exclusive",ifelse(C1D1==0,"Tissue exclusive","Shared")),
+    levels = c("Shared","Tissue exclusive","C1D1 exclusive"))) %>% 
+  arrange(shared,desc(Tissue),desc(C1D1)) %>%
+  mutate(
+    subjVar = paste(SUBJECT.ID,variant),
+    subjVar = factor(subjVar,levels = subjVar),
+    C1D1 = -C1D1
+  ) %>% pivot_longer(c(Tissue,C1D1),names_to = "Visit",values_to = "SV.PERCENT.READS")
+ggplot(tissC1Full2,aes(x=subjVar,y=SV.PERCENT.READS,fill=shared)) + geom_col() +
+  theme(axis.title.x=element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank())
+
+```
+
+```{r}
+tmb = tmb %>% mutate(
+  Visit = factor(Visit,levels = c("Tissue","C1D1IP","C1D1MP","ontx","PD","EOT"))
+)
+ggplot(tmb,aes(x=Visit, y=as.numeric(TMB.SCORE), group = SUBJECT.ID, col = SUBJECT.ID)) + geom_line() + scale_y_log10() + facet_grid(~Tx) + theme(legend.position="none")
+# tmbWide = tmb %>% filter(Visit != "ontx") %>% mutate(TMB.SCORE = as.numeric(TMB.SCORE)) %>% select(SUBJECT.ID,Visit,TMB.SCORE,Tx) %>% pivot_wider(names_from = "Visit", values_from = "TMB.SCORE")
+# ggplot(tmbWide,aes(x=C1D1IP, y=PD, col = Tx)) + geom_point() + scale_y_log10() + scale_x_log10()
+```
+
+## Oncoprint
+
+```{r, fig.width = 12, fig.height = 4.5}
+subjs <- unique(ospl$SUBJECT.ID)
+subjs = subjs[order(as.numeric(gsub("\\D","",subjs)))]
+
+# initialize the matrix with samples tested. Call them all wildtype first.
+makeVisitMat = function(avisit) {
+  # Make a full data matrix with everything initialized as wildtype
+  mat <- matrix("",nrow=length(pathwayGenes),ncol=length(subjs))
+  dimnames(mat) <- list(pathwayGenes,subjs)
+  for( subjectid in unique( ospl %>% filter( Visit %in% avisit ) %>% select( SUBJECT.ID )) ) {
+    mat[pathwayGenes,subjectid] = "wildtype"
+  }
+  
+  # change from wildtype to V600E based on oapl
+  pathwayOaplv600e <- oapl %>% filter(GENE %in% pathwayGenes & Visit %in% avisit & variant == "V600E")
+  x <- apply(pathwayOaplv600e,1,function(oa){
+    mat[oa["GENE"],oa["SUBJECT.ID"]] <<- "V600E"
+  })
+  
+  # change from wildtype to other variant based on oapl
+  pathwayOapl <- oapl %>%
+    filter(GENE %in% pathwayGenes & Visit %in% avisit & variant != "V600E") %>% 
+    arrange(desc(VARIANT.TYPE))
+  x <- apply(pathwayOapl,1,function(oa){
+    mat[oa["GENE"],oa["SUBJECT.ID"]] <<- oa["VARIANT.TYPE"]
+  })
+  
+  # handle multiple variants
+  pathway_multiSamples <- unlist(oapl %>%
+    filter(GENE %in% pathwayGenes & Visit %in% avisit & variant != "V600E") %>% 
+    select(GENE,SUBJECT.ID,Visit,VARIANT.TYPE,SAMPLE.ID) %>%
+    unique() %>% 
+    group_by(GENE,SUBJECT.ID,Visit,SAMPLE.ID) %>% 
+    summarise(n = n()) %>% filter(n == 2) %>%
+    ungroup() %>% 
+    select(SAMPLE.ID))
+  pathwayOapl_multi = oapl %>% 
+    filter(GENE %in% pathwayGenes & Visit %in% avisit & variant != "V600E") %>% 
+    filter(SAMPLE.ID %in% pathway_multiSamples)
+  x <- apply(pathwayOapl_multi,1,function(oa){
+    mat[oa["GENE"],oa["SUBJECT.ID"]] <<- "multiple"
+  })
+
+  mat
+}
+matTissue = makeVisitMat("Tissue")
+matC1 = makeVisitMat(c("C1D1IP","induction","C1D1MP"))
+matPD = makeVisitMat(c("ontx","EOT","PD"))
+mat = rbind(matTissue,matC1,matPD)
+c1PdRowSplit = factor(
+  c(
+    rep("Archival\nTissue",times = dim(matTissue)[1]),
+    rep("Baseline\nPlasma",times = dim(matC1)[1]),
+    rep("On-tx/EOT/PD\nPlasma",times = dim(matPD)[1])
+  ),
+  levels = c(
+    "Archival\nTissue",
+    "Baseline\nPlasma",
+    "On-tx/EOT/PD\nPlasma"
+  )
+)
+
+responseCols <- c(
+  "CR" = "#22CC00",
+  "PR" = "#DDDD00",
+  "SD" = "#DD8811",
+  "PD" = "#CC3366"
+)
+
+tissueTmbDat = tmb %>% filter(Visit == "Tissue")
+tissueTmbDat = tissueTmbDat[match(colnames(mat),tissueTmbDat$SUBJECT.ID),]
+patientHeatDat <- patientData[match(colnames(mat),patientData$SUBJECT.ID),] %>% 
+  mutate(
+    tissueTMB = as.numeric(tissueTmbDat$TMB.SCORE),
+    Response = factor(Response,levels = names(responseCols))
+  )
+subjSplit = patientHeatDat %>% select(SUBJECT.ID,"Tx") %>% unique()
+splitFactor = factor(
+  unlist(subjSplit[match(subjs,subjSplit$SUBJECT.ID),"Tx"]),
+  levels = c("Control","Experimental")
+)
+
+oncoCols <- c(
+  "short-variant" = "forestgreen",
+  "V600E" = "#BBCCBB",
+  "copy-number-alteration" = "darkorange",
+  rearrangement = "purple",
+  multiple = "magenta",
+  wildtype = "gray90",
+  background = "white"
+)
+
+alterFun <- lapply(names(oncoCols),function(vartype) { function(x, y, w, h) grid.rect(x, y, w, h, gp = gpar(fill = oncoCols[vartype], col = NA)) })
+names(alterFun) = names(oncoCols)
+
+annotCols = list(BOR = responseCols)
+
+topAnnot = HeatmapAnnotation(
+  "TMB\n(Mut/MB)" = anno_barplot(patientHeatDat$tissueTMB,border = F),
+  BOR = patientHeatDat$Response,
+  col = annotCols
+)
+
+op1 = oncoPrint(mat,
+          alter_fun = alterFun,
+          col = oncoCols,
+          show_pct = F,
+          column_split = splitFactor,
+          row_split = c1PdRowSplit,
+          top_annotation = topAnnot,
+          right_annotation = NULL,
+          left_annotation = NULL,
+          column_order = order(patientHeatDat$Response),
+          show_column_names = T
+ )
+
+op1
+
+pdf("/Volumes/GoogleDrive/Shared drives/GI Biomarkers [gRED OBD]/CRC/MODUL Cohort 1/figures/C1_PD_oncoprint_220317tx.pdf", width=10, height=3.5)
+op1
+dev.off()
+
+```
+
+### with annotation marks for acquired variants
+
+```{r, fig.height=7, fig.width=9}
+leftAnnot = HeatmapAnnotation(
+  "TMB\n(Mut/MB)" = anno_barplot(patientHeatDat$tissueTMB, border = F, axis_param = c(direction="reverse")),
+  BOR = patientHeatDat$Response,
+  col = annotCols,
+  which = "row"
+)
+
+op2 = oncoPrint(t(mat),
+          alter_fun = alterFun,
+          col = oncoCols,
+          show_pct = F,
+          row_split = splitFactor,
+          column_split = c1PdRowSplit,
+          left_annotation = leftAnnot,
+          right_annotation = NULL,
+          top_annotation = NULL,
+          row_order = order(patientHeatDat$Response),
+          show_row_names = T,
+          show_column_names = T,
+          row_names_gp = gpar(fontsize = 9)
+ )
+
+preTimes = c("Tissue","C1D1IP","induction","C1D1MP")
+postTimes = c("ontx","EOT","PD")
+
+oapl = oapl %>% mutate(subjectGeneVariant = paste(SUBJECT.ID,GENE,variant))
+
+preSGVs = (oapl %>% filter(Visit %in% preTimes))$subjectGeneVariant
+acqPathVars = oapl %>%
+  filter(
+    GENE %in% pathwayGenes &
+      variant != "V600E" &
+      Visit %in% postTimes &
+      !( subjectGeneVariant %in% preSGVs)
+  ) %>% 
+  group_by(SUBJECT.ID,GENE) %>% summarise(variants = paste(unique(variant), collapse = " ")) %>%
+  ungroup() %>% 
+  mutate(geneVariants = paste(GENE,variants)) %>% 
+  group_by(SUBJECT.ID) %>% summarise(geneVariants = paste(geneVariants, collapse = ", ")) %>%
+  ungroup() %>% 
+  select(SUBJECT.ID,geneVariants) %>% unique()
+
+labels_list = unlist(lapply(acqPathVars$geneVariants, function(x) 
+  paste0(strwrap(paste0(x, collapse = " "), width = 45), collapse = "\n")))
+
+variantMarks = anno_mark(
+  at = match(acqPathVars$SUBJECT.ID, colnames(mat)),
+  labels = labels_list,
+  which = "row",
+  padding = unit(3, "mm"),
+  labels_gp = gpar(fontsize = 10)
+)
+
+op2mark = op2 + rowAnnotation(mark = variantMarks)
+op2mark
+pdf("/Volumes/GoogleDrive/Shared drives/GI Biomarkers [gRED OBD]/CRC/MODUL Cohort 1/figures/C1_PD_oncoprint_220426txMark.pdf", width=10, height=8)
+op2mark
+dev.off()
+```
+
+### with annotation marks for acquired variants, split by arm
+
+```{r, fig.height=7, fig.width=9}
+leftAnnot = HeatmapAnnotation(
+  "TMB\n(Mut/MB)" = anno_barplot(patientHeatDat$tissueTMB, border = F, axis_param = c(direction="reverse")),
+  BOR = patientHeatDat$Response,
+  col = annotCols,
+  which = "row"
+)
+
+subjSplit = patientHeatDat %>% select(SUBJECT.ID,"Arm") %>% unique()
+splitFactor = factor(
+  unlist(subjSplit[match(subjs,subjSplit$SUBJECT.ID),"Arm"]),
+  levels = c("Control","Experimental","Coh99")
+)
+
+op2 = oncoPrint(t(mat),
+          alter_fun = alterFun,
+          col = oncoCols,
+          show_pct = F,
+          row_split = splitFactor,
+          column_split = c1PdRowSplit,
+          left_annotation = leftAnnot,
+          right_annotation = NULL,
+          top_annotation = NULL,
+          row_order = order(patientHeatDat$Response),
+          show_row_names = T,
+          show_column_names = T,
+          row_names_gp = gpar(fontsize = 9)
+ )
+
+preTimes = c("Tissue","C1D1IP","induction","C1D1MP")
+postTimes = c("ontx","EOT","PD")
+
+oapl = oapl %>% mutate(subjectGeneVariant = paste(SUBJECT.ID,GENE,variant))
+
+preSGVs = (oapl %>% filter(Visit %in% preTimes))$subjectGeneVariant
+acqPathVars = oapl %>%
+  filter(
+    GENE %in% pathwayGenes &
+      variant != "V600E" &
+      Visit %in% postTimes &
+      !( subjectGeneVariant %in% preSGVs)
+  ) %>% 
+  group_by(SUBJECT.ID,GENE) %>% summarise(variants = paste(unique(variant), collapse = " ")) %>%
+  ungroup() %>% 
+  mutate(geneVariants = paste(GENE,variants)) %>% 
+  group_by(SUBJECT.ID) %>% summarise(geneVariants = paste(geneVariants, collapse = ", ")) %>%
+  ungroup() %>% 
+  select(SUBJECT.ID,geneVariants) %>% unique()
+
+labels_list = unlist(lapply(acqPathVars$geneVariants, function(x) 
+  paste0(strwrap(paste0(x, collapse = " "), width = 45), collapse = "\n")))
+
+variantMarks = anno_mark(
+  at = match(acqPathVars$SUBJECT.ID, colnames(mat)),
+  labels = labels_list,
+  which = "row",
+  padding = unit(3, "mm"),
+  labels_gp = gpar(fontsize = 10)
+)
+
+op2mark = op2 + rowAnnotation(mark = variantMarks)
+op2mark
+pdf("/Volumes/GoogleDrive/Shared drives/GI Biomarkers [gRED OBD]/CRC/MODUL Cohort 1/figures/C1_PD_oncoprint_220426armMark.pdf", width=10, height=8)
+op2mark
+dev.off()
+```
+
+### Plots of patient-level MAPK variant incidence
+
+```{r}
+treatMapkCounts = ospl %>%
+  select(Arm,SUBJECT.ID) %>%
+  unique() %>% 
+  mutate(
+    Treatment = ifelse(Arm=="Control","Control","Experimental"),
+    MAPKvariant = ifelse(SUBJECT.ID %in% acqPathVars$SUBJECT.ID,"Variant Acquired","No change")) %>%
+  select(Treatment,MAPKvariant) %>% 
+  table() %>% data.frame() %>% 
+  group_by(Treatment) %>%
+  mutate(
+    Freq2 = Freq,
+    pct = round(Freq / sum(Freq)*100),
+    myLabel = paste0(Freq,"\n(",pct,"%)")
+  )
+
+treatMapkCounts[treatMapkCounts$Freq==0,"Freq"] = NA
+dots = ggplot(treatMapkCounts, aes(x = Treatment, y = MAPKvariant, size = Freq, label = myLabel)) +
+  geom_point(col = "darkblue") + scale_size_area(max_size = 50) +
+  ylab("MAPK Pathway Status") +
+  theme(legend.position="none") +
+  geom_text(col="white",aes(size=sqrt(Freq2)*.15))
+dots
+# pdf("/Volumes/GoogleDrive/Shared drives/GI Biomarkers [gRED OBD]/CRC/MODUL Cohort 1/figures/MAPKdots.pdf", width=4.5, height=4)
+# dots
+# dev.off()
+
+
+# Donut plot
+treatMapkCounts = treatMapkCounts %>% group_by(Treatment) %>%   # Compute the cumulative percentages (top of each rectangle)
+  mutate(
+    ymax = cumsum(Freq2),
+    ymin = c(0, head(ymax, n=-1))
+  )
+
+ctrlDonut = ggplot(treatMapkCounts %>% filter(Treatment=="Control"), aes(ymax=ymax, ymin=ymin, xmax=3.5, xmin=3, fill=MAPKvariant)) +
+     geom_rect() +
+     coord_polar(theta="y") + # Try to remove that to understand how the chart is built initially
+     xlim(c(2, 4)) + # Try to remove that to see how to make a pie chart
+  theme(axis.line=element_blank(),axis.text.x=element_blank(),
+          axis.text.y=element_blank(),axis.ticks=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank(),legend.position="none",
+          panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
+          panel.grid.minor=element_blank(),plot.background=element_blank())
+expDonut = ggplot(treatMapkCounts %>% filter(Treatment=="Experimental"), aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=MAPKvariant)) +
+     geom_rect() +
+     coord_polar(theta="y") + # Try to remove that to understand how the chart is built initially
+     xlim(c(2, 4)) + # Try to remove that to see how to make a pie chart
+  theme(axis.line=element_blank(),axis.text.x=element_blank(),
+          axis.text.y=element_blank(),axis.ticks=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank(),legend.position="none",
+          panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
+          panel.grid.minor=element_blank(),plot.background=element_blank())
+
+# plot_grid(ctrlDonut,expDonut)
+pdf("/Volumes/GoogleDrive/Shared drives/GI Biomarkers [gRED OBD]/CRC/MODUL Cohort 1/figures/MAPKdonuts.pdf", width=8, height=4)
+plot_grid(ctrlDonut,expDonut)
+dev.off()
+# ggplot(treatMapkCounts, aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=MAPKvariant)) +
+#      geom_rect() +
+#      coord_polar(theta="y") + # Try to remove that to understand how the chart is built initially
+#      xlim(c(2, 4)) + # Try to remove that to see how to make a pie chart
+#   facet_wrap(~Treatment) +
+#   theme(axis.line=element_blank(),axis.text.x=element_blank(),
+#           axis.text.y=element_blank(),axis.ticks=element_blank(),
+#           axis.title.x=element_blank(),
+#           axis.title.y=element_blank(),legend.position="none",
+#           panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
+#           panel.grid.minor=element_blank(),plot.background=element_blank())
+```
+
+
+```{r}
+subjSplit = patientHeatDat %>% select(SUBJECT.ID,"Arm") %>% unique()
+splitFactor = factor(
+  unlist(subjSplit[match(subjs,subjSplit$SUBJECT.ID),"Arm"]),
+  levels = c("Control","Experimental","Coh99")
+)
+
+oncoCols <- c(
+  "short-variant" = "forestgreen",
+  "V600E" = "#BBCCBB",
+  "copy-number-alteration" = "darkorange",
+  rearrangement = "purple",
+  multiple = "magenta",
+  wildtype = "gray90",
+  background = "white"
+)
+
+alterFun <- lapply(names(oncoCols),function(vartype) { function(x, y, w, h) grid.rect(x, y, w, h, gp = gpar(fill = oncoCols[vartype], col = NA)) })
+names(alterFun) = names(oncoCols)
+
+annotCols = list(BOR = responseCols)
+
+topAnnot = HeatmapAnnotation(
+  "TMB\n(Mut/MB)" = anno_barplot(patientHeatDat$tissueTMB,border = F),
+  BOR = patientHeatDat$Response,
+  col = annotCols
+)
+
+op1 = oncoPrint(mat,
+          alter_fun = alterFun,
+          col = oncoCols,
+          show_pct = F,
+          column_split = splitFactor,
+          row_split = c1PdRowSplit,
+          top_annotation = topAnnot,
+          right_annotation = NULL,
+          left_annotation = NULL,
+          column_order = order(patientHeatDat$Response),
+          show_column_names = T
+ )
+
+op1
+
+pdf("/Volumes/GoogleDrive/Shared drives/GI Biomarkers [gRED OBD]/CRC/MODUL Cohort 1/figures/C1_PD_oncoprint_220317arm.pdf", width=10, height=3.5)
+op1
+dev.off()
+```
+
+## Swimmer plot
+
+```{r, fig.height=11, fig.width=8}
+# make a data frame with one sample per row and presence/absence of detected MAPK pathway mutation
+#nonBrafGenes <- c("EGFR", "KRAS", "NRAS", "MAP2K1", "NF1")
+oapl = oapl %>% 
+  mutate(
+    mapkMut = GENE %in% pathwayGenes & variant != "V600E"
+  )
+osplPath = oapl %>%
+  select(SUBJECT.ID,SAMPLE.ID,mapkMut,Cycle,Visit,timepoint,Tx) %>% 
+  group_by(SUBJECT.ID,Cycle,Visit,timepoint,Tx,SAMPLE.ID) %>%
+  summarise(state = ifelse(any(mapkMut),"Positive","Negative")) %>% 
+  mutate(
+    timepointMonth = timepoint / 52 * 12,
+    timepointDay = timepoint / 52 * 365,
+    Event = ifelse(Visit=="Tissue","Archival Biopsy","ctDNA")
+  ) %>% 
+  ungroup()
+
+# fill in events with no mutations in oapl
+toAdd = ospl %>%
+  filter( !(SAMPLE.ID %in% osplPath$SAMPLE.ID) ) %>%
+  select( SUBJECT.ID, Cycle, Visit, Tx, timepoint) %>% 
+  dplyr::mutate(
+    timepointMonth = timepoint / 52 * 12,
+    timepointDay = timepoint / 52 * 365,
+    Event = "ctDNA",
+    state = "Negative"
+  )
+osplPath = osplPath %>% bind_rows(toAdd)
+
+# add rows for submitted samples
+# submittedSamples = read_excel("/Volumes/GoogleDrive/Shared drives/GI Biomarkers [gRED OBD]/CRC/MODUL Cohort 1/data/Extra FMI samples Modul cohort 1.xlsx")
+# submittedSamples = submittedSamples %>% 
+#   filter(SUBJECT.ID != "3207") %>% 
+#   mutate(
+#     SUBJECT.ID = as.character(SUBJECT.ID),
+#     timepoint = cycleToTime(Cycle),
+#     timepoint = timepoint / 52 * 12,
+#     Event = "ctDNA",
+#     state = "Submitted"
+#   ) %>% left_join(patientData %>% select(SUBJECT.ID,Tx))
+# osplPath = osplPath %>%
+#   bind_rows(submittedSamples) %>% 
+#   mutate(PostTx = state)
+
+# add clinical timecourse response data
+clinToBind = clinicalData %>%
+  select(SUBJECT.ID,ADY,AVALC,APHASE) %>% 
+  dplyr::rename(
+    state = AVALC
+  ) %>% 
+  mutate(
+    timepointMonth = as.numeric(ADY) / 365 * 12,
+    timepointDay = as.numeric(ADY),
+    Event = "Scan"
+  ) %>% 
+  filter(
+    SUBJECT.ID %in% osplPath$SUBJECT.ID
+  ) %>% 
+  left_join(osplPath %>% select(SUBJECT.ID,Tx) %>% unique()) %>% 
+  mutate(
+    PostTx = ifelse(APHASE == "Post-trt" | Event == "ctDNA", "yes", "no")
+  )
+osplClin = bind_rows(clinToBind,osplPath)
+
+# make a swimmer plot with it
+strokeColors = c(
+  "Negative" = "gray20",
+  "Positive" = "gray20",
+#  "Submitted" = "#4488FF",
+  "yes" = "gray20",
+  "no" = "#00000000",
+  "CR" = "#22CC00",
+  "PR" = "#DDDD00",
+  "SD" = "#DD8811",
+  "PD" = "#CC3366"
+)
+
+tdf = "triangle down filled"
+tf = "triangle filled"
+sq = "square filled"
+cf = "circle filled"
+
+eventPch = c(
+  "Archival Biopsy" = cf,
+  "ctDNA" = tf,
+  "Scan" = sq
+)
+
+stateFills = c(
+  "Negative" = "white",
+  "Positive" = "gray20",
+  "Submitted" = "#4488FF",
+  "Complete Response (CR)" = "#22CC00",
+  "Partial Response (PR)" = "#DDDD00",
+  "Stable Disease (SD)" = "#DD8811",
+  "Progressive Disease (PD)" = "#CC3366",
+  "Not Evaluable (NE)" = "gray50"
+)
+
+osplClin$state = factor(osplClin$state, levels = names(stateFills))
+osplClin = osplClin %>% left_join(patientData)
+
+gp <- ggplot(osplClin, aes(x = timepointDay, y = SUBJECT.ID, fill = state, alpha = state, col = PostTx, shape = Event, group = SUBJECT.ID)) +
+  geom_point(data = osplClin %>% filter(Event == "Scan"), size = 2.3, position = position_nudge( y = -.18 ) ) +
+  geom_line(aes(color = Response), size = 1.5) +
+  geom_point(data = osplClin %>% filter(Event == "ctDNA"), size = 1.9, position = position_nudge( y = .2 ) ) +
+  geom_point(data = osplClin %>% filter(Event == "Archival Biopsy"), size = 2.5 ) +
+  theme_classic() +
+  facet_grid(rows = "Tx", space = "free", scales = "free", ) +
+  xlab("Time relative to start of maintenance phase (days)") +
+  scale_color_manual(
+    values = strokeColors,
+    breaks = c("yes","no"),
+    guide = guide_legend(override.aes = list(shape = sq, linetype = 0, fill = "gray80"), title = "Post-tx")) +
+  scale_fill_manual(
+    values = stateFills,
+    name = "RECIST",
+    breaks = c(  "Complete Response (CR)", "Partial Response (PR)", "Stable Disease (SD)", "Progressive Disease (PD)", "Not Evaluable (NE)"),
+    guide = guide_legend(override.aes = list(color = "gray50", linetype = 1, shape = sq) ) ) +
+  scale_shape_manual(values = eventPch) +
+  scale_alpha_manual(
+    name = "MAPK pathway ctDNA status",
+    values = c(1, 1, 1, 1, 1, 1, 1, 1),
+    breaks = c("Positive", "Negative"),#, "Submitted"),
+    guide = guide_legend(
+      override.aes = list(
+        linetype = 0,
+        shape = tf,
+        fill = c("gray20","white"),#,"#4488FF"),
+        color = c("gray20","gray20")#,"#4488FF")
+      ))) +
+  theme(legend.position = c(0.85, 0.75)) #+
+#  scale_x_continuous(breaks = c(1:6)*10-20, labels = c("Archival",c(1:5)*10-10))
+
+# pdf("/Volumes/GoogleDrive/Shared drives/GI Biomarkers [gRED OBD]/CRC/MODUL Cohort 1/figures/swimmerplot_all_211109.pdf", width=8, height=12)
+# print(gp)
+# dev.off()
+gp
+
+
+```
+
+Just for selected subjects.
+
+```{r, fig.height = 5.5, fig.width = 8}
+mapkSubjectids <- c(setdiff(
+  unlist(osplClin %>% filter(Visit == "PD" & state == "Positive" & !is.na(timepointMonth)) %>% select(SUBJECT.ID)),
+  unlist(osplClin %>% filter(Visit == "C1D1IP" & state == "Positive" & !is.na(timepointMonth)) %>% select(SUBJECT.ID))
+), "E2", "E26", "E5", "E32")
+osplClin2 <- osplClin %>% filter(SUBJECT.ID %in% mapkSubjectids & Tx == "Experimental")
+
+gp <- ggplot(osplClin2, aes(x = timepointDay, y = SUBJECT.ID, fill = state, alpha = state, col = PostTx, shape = Event, group = SUBJECT.ID)) +
+  geom_point(data = osplClin2 %>% filter(Event == "Scan"), size = 3, position = position_nudge( y = -.10 ) ) +
+  geom_line(aes(color = Response), size = 1.5) +
+  geom_point(data = osplClin2 %>% filter(Event == "ctDNA"), size = 2.5, position = position_nudge( y = .12 ) ) +
+  geom_point(data = osplClin2 %>% filter(Event == "Archival Biopsy"), size = 3 ) +
+  theme_classic() +
+  theme( axis.text = element_text( size = 13 ),
+         axis.title = element_text(size=13, face = "bold") ) +
+  facet_grid(rows = "Tx", space = "free", scales = "free", ) +
+  xlab("Time relative to start of maintenance phase (days)") +
+  scale_color_manual(
+    values = strokeColors,
+    breaks = c("yes","no"),
+    guide = guide_legend(override.aes = list(shape = sq, linetype = 0, fill = "gray80"), title = "Post-tx")) +
+  scale_fill_manual(
+    values = stateFills,
+    name = "RECIST",
+    breaks = c(  "Complete Response (CR)", "Partial Response (PR)", "Stable Disease (SD)", "Progressive Disease (PD)", "Not Evaluable (NE)"),
+    guide = guide_legend(override.aes = list(color = "gray50", linetype = 1, shape = sq) ) ) +
+  scale_shape_manual(values = eventPch) +
+  scale_alpha_manual(
+    name = "MAPK pathway ctDNA status",
+    values = c(1, 1, 1, 1, 1, 1, 1, 1),
+    breaks = c("Positive", "Negative", "Submitted"),
+    guide = guide_legend(
+      override.aes = list(
+        linetype = 0,
+        shape = tf,
+        fill = c("gray20","white"),#,"#4488FF"),
+        color = c("gray20","gray20")#,"#4488FF")
+      ) ) ) #+
+ # scale_x_continuous(breaks = c(1:6)*10-20, labels = c("Archival",c(1:5)*10-10))
+
+
+# pdf("/Volumes/GoogleDrive/Shared drives/GI Biomarkers [gRED OBD]/CRC/MODUL Cohort 1/figures/swimmerplot_selected_211109.pdf", width=8, height=5.5)
+# print(gp)
+# dev.off()
+gp
+```
+
+Ordered by last scan date, with genotype colors removed.
+
+```{r, fig.height=11, fig.width=8}
+subjInOrder = osplClin %>%
+  filter(!is.na(timepointMonth)) %>%
+  group_by(SUBJECT.ID) %>% summarise(timepointMonth = max(timepointMonth)) %>% ungroup() %>% arrange(desc(timepointMonth)) %>%
+  select(SUBJECT.ID) %>% unlist()
+osplClin3 = osplClin %>% mutate(
+  SUBJECT.ID = factor(SUBJECT.ID, levels = subjInOrder)
+)
+stateFills = c(
+  "Negative" = "gray50",
+  "Positive" = "gray50",
+  "Submitted" = "#4488FF",
+  "Complete Response (CR)" = "#22CC00",
+  "Partial Response (PR)" = "#DDDD00",
+  "Stable Disease (SD)" = "#DD8811",
+  "Progressive Disease (PD)" = "#CC3366",
+  "Not Evaluable (NE)" = "gray50"
+)
+
+gp2 <- ggplot(osplClin3, aes(x = timepointMonth, y = SUBJECT.ID, fill = state, alpha = state, col = PostTx, shape = Event, group = SUBJECT.ID)) +
+  geom_point(data = osplClin3 %>% filter(Event == "Scan"), size = 2, position = position_nudge( y = -.18 ) ) +
+  geom_line(aes(color = Response), size = 1.5) +
+  geom_point(data = osplClin3 %>% filter(Event == "ctDNA"), size = 2.3, position = position_nudge( y = .2 ) ) +
+  geom_point(data = osplClin3 %>% filter(Event == "Archival Biopsy"), size = 2.5 ) +
+  theme_classic() +
+  facet_grid(rows = "Tx", space = "free", scales = "free", ) +
+  xlab("Time relative to start of maintenance phase (months)") +
+  scale_color_manual(
+    values = strokeColors,
+    breaks = c("yes","no"),
+    guide = guide_legend(override.aes = list(shape = sq, linetype = 0, fill = "gray80"), title = "Post-tx")) +
+  scale_fill_manual(
+    values = stateFills,
+    name = "RECIST",
+    breaks = c(  "Complete Response (CR)", "Partial Response (PR)", "Stable Disease (SD)", "Progressive Disease (PD)", "Not Evaluable (NE)"),
+    guide = guide_legend(override.aes = list(color = "gray50", linetype = 1, shape = sq) ) ) +
+  scale_shape_manual(values = eventPch) +
+  scale_alpha_manual(
+    name = "MAPK pathway ctDNA status",
+    values = c(1, 1, 1, 1, 1, 1, 1, 1),
+    breaks = c("Positive", "Negative"),#, "Submitted"),
+    guide = guide_legend(
+      override.aes = list(
+        linetype = 0,
+        shape = tf,
+        fill = c("gray20","white"),#,"#4488FF"),
+        color = c("gray20","gray20")#,"#4488FF")
+      ))) +
+  theme(legend.position = "none") # + c(0.85, 0.75))# +
+#  scale_x_continuous(breaks = c(1:6)*10-20, labels = c("Archival",c(1:5)*10-10))
+
+#pdf("/Volumes/GoogleDrive/Shared drives/GI Biomarkers [gRED OBD]/CRC/MODUL Cohort 1/figures/swimmerplot_gray_211109.pdf", width=8, height=12)
+# print(gp2)
+# dev.off()
+gp2
+
+```
+
+## Survival Analysis
+
+Test whether patients that acquire a MAPK pathway mutation tend to have shorter survival times than those who don't. Turns out there's a trend, but it's not significant.
+
+```{r}
+osplSurv = osplClin %>%
+  mutate(ADY = pmax(ADY,timepoint * 7,na.rm=T)) %>% 
+  group_by(SUBJECT.ID) %>% summarise(tte = max(ADY,na.rm=T)) %>% mutate(mapk = SUBJECT.ID %in% mapkSubjectids, event = 1) %>% filter(tte>0)
+
+cox1 = coxph(Surv(tte,event) ~ mapk, data = osplSurv)
+summary(cox1)
+
+iformula <- as.formula("Surv(tte, event) ~ mapk")
+fit <- surv_fit(iformula, data = osplSurv)
+#  names(fit$strata) <- gsub(".+=", "", names(fit$strata))
+ggsurvplot(
+  fit,
+  #    pval = coxStatText,#, conf.int = TRUE,
+  risk.table = T, #risk.table.col = strataCols, # Add risk table
+  risk.table.y.text.col = T,
+  risk.table.y.text = F,
+  # linetype = lty, # Change line type by groups
+  surv.median.line = "hv", # Specify median survival
+  # # ggtheme = theme_bw(), # Change ggplot2 theme
+  #    ylab = ylab,
+  xlab = "Time to event (days)",
+  #    palette = strataCols,
+  #    title = main,
+  #    font.title = c(14, "bold"),
+  #    legend.title=""
+)
+
+```
+
+## Longitidinal Analysis
+
+Look at relationships between when variants appear and when disease progresses. Consider the first non-V600E MAPK mutation of known or likely consequence to be a positive variant event, as in the swimmer plots. Consider the first scan date with a RECIST status of Progressive Disease to be a positive scan event. Patients without both events are excluded here.
+
+First, a density and rug plot of the interval between positive events.
+
+```{r}
+firstEvent = osplClin %>%
+  filter(state %in% c("Positive","Progressive Disease (PD)") & Event %in% c("ctDNA","Scan")) %>% 
+  group_by(SUBJECT.ID,Event,state) %>% summarise(timepointMonth = min(timepointMonth)) %>% slice(n=1) %>% ungroup() %>%
+  select(-state) %>% 
+  pivot_wider(values_from = "timepointMonth", names_from = "Event") %>% 
+  filter(!is.na(ctDNA) & !is.na(Scan)) %>% 
+  mutate(mut2PD = Scan - ctDNA)
+ggplot(firstEvent,aes(x=mut2PD)) +
+  geom_density(adjust = 1/2) +
+  xlab("Time from MAPK mutation to PD (months)") +
+  geom_rug()
+```
+
+Second, a scatter plot of variant event vs. scan event. Dashed line is x=y reference.
+
+```{r}
+ggplot(firstEvent,aes(x=ctDNA,y=Scan)) +
+  geom_point(size=2,alpha=.5) +
+  geom_hline(yintercept=0) +
+  geom_vline(xintercept=0) +
+  geom_abline(lty = "dashed") +
+  xlab("Time of first MAPK mutation (months)") +
+  ylab("Time of first RECIST PD (months)")
+
+medianM2P = signif(quantile(firstEvent$mut2PD,c(.25,.5,.75)),digits=2)
+```
+
+The median time from variant to PD is `r medianM2P[2]` months. (quartiles `r medianM2P[1]`, `r medianM2P[3]`)
+
+```{r}
+sessionInfo()
+```

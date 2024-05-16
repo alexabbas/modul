@@ -1,0 +1,308 @@
+---
+title: "MODUL FMI survey"
+author: "Alex Abbas"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    fig_caption: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(comment = NA, message = F, warning = F)
+library(tidyverse)
+library(readxl)
+library(ComplexHeatmap)
+library(DT)
+library(knitr)
+library(ggvenn)
+library(UpSetR)
+library(stats)
+library(ggrepel)
+#library(stringr) 
+#library(ggpubr)
+
+#source("/Volumes/GoogleDrive/My Drive/R/aaStuff.R")
+#truColors = read.csv("/Volumes/GoogleDrive/My Drive/R/trubetskoyColors.csv",stringsAsFactors = F)
+
+theme_set(theme_bw())
+
+#  data_dir="/gne/data/obdroot/avastin/mo29112_modul/ngs/results/ctdna/data"
+ctDnaDir <- "../data/ctDNA FMI/"
+tissueDir <- "../data/FMI/"
+Aug30fmiDir <- "/Volumes/OBD/avastin/mo29112_modul/ngs/rawdata/fmi_obd_mo29112_ngs_dna_targdna_foundationoneliquidcdx_20-2047_std_20210830/"
+
+# patientData
+patientData <- read_excel("../data/MO29112_Ch1 clinical-biomarker dashboard (2).xlsx")
+patientData <- patientData %>%
+  dplyr::rename(Arm = ARM, Response = BOR, SUBJECT.ID = "Subject ID") %>%
+  select(SUBJECT.ID,Arm,Response) %>% 
+  mutate(SUBJECT.ID = as.character(SUBJECT.ID))
+
+# ctDNA data
+oapl_ctdna_File <- paste0(
+  ifelse ( F & dir.exists(Aug30fmiDir), Aug30fmiDir, ctDnaDir ),
+  "mo29112_ngs_dna_targdna_foundationoneliquidcdx_20-2047_n183_one-alteration-per-line-plus_20210830.txt"
+)
+liqOapl <- read.delim(oapl_ctdna_File,sep="\t")
+ospl_ctdna_file = paste0(ctDnaDir,"mo29112_ngs_dna_targdna_foundationoneliquidcdx_20-2047_n183_one-sample-per-line_20210830.xlsx")
+liqOspl <- read_excel(ospl_ctdna_file) %>%
+  dplyr::rename(FMI.SAMPLE.ID = "FMI SAMPLE ID", SAMPLE.ID = "SAMPLE ID", SUBJECT.ID = "SUBJECT ID") %>% 
+  mutate(
+    SAMPLE.ID = as.character(SAMPLE.ID),
+    Visit = gsub("\\W","",Visit),
+    Cycle = gsub("\\W","",Cycle)
+  )
+
+liqOapl <- liqOapl %>%
+  mutate(SAMPLE.ID = as.character(SAMPLE.ID),SUBJECT.ID = as.character(SUBJECT.ID)) %>% 
+  left_join(liqOspl %>% select(FMI.SAMPLE.ID, Cycle, Visit))
+# Tissue data
+oapl_tissue_file <- paste0(
+  ifelse ( F & dir.exists(Aug30fmiDir), Aug30fmiDir, tissueDir ),
+  "mo29112_ngs_dna_targdna_foundationone_20-2041_n65_one-alteration-per-line_20200615.txt"
+)
+tissueOapl = read.delim(oapl_tissue_file,sep="\t") %>% 
+  mutate(SUBJECT.ID = as.character(SUBJECT.ID))
+ospl_tissue_file <- paste0(tissueDir,"mo29112_ngs_dna_targdna_foundationone_20-2041_n65_one-sample-per-line_20200615.xlsx")
+tissueOspl <- read_excel(ospl_tissue_file) %>%
+  dplyr::rename(SAMPLE.ID = "SAMPLE ID", SUBJECT.ID = "SUBJECT ID") %>% 
+  mutate(SUBJECT.ID = as.character(SUBJECT.ID))
+
+# Stack tissue and liquid data
+oapl <- bind_rows(
+  tissueOapl %>% mutate(Visit = "Tissue"),
+  liqOapl %>% mutate(SAMPLE.ID=as.character(SAMPLE.ID))
+) %>%
+  mutate(
+    variant = gsub("-","",paste0(SV.PROTEIN.CHANGE,CNA.TYPE,REARR.DESCRIPTION)),
+    baseEnd = ifelse(grepl("C1",Visit),"C1D1",
+                     ifelse(grepl("PD",Visit),"PD",NA)),
+    SUBJECT.ID = as.character(SUBJECT.ID)
+  ) %>%
+  left_join(
+    patientData
+  )
+
+ospl = bind_rows(
+  liqOspl %>% mutate( SAMPLE.ID = as.character(SAMPLE.ID) ),
+  tissueOspl %>% mutate( Visit = "Tissue", SUBJECT.ID = as.character(SUBJECT.ID) )
+  #  tissueOapl %>% select(SUBJECT.ID) %>% unique() %>% mutate(Visit = "Tissue")
+) %>% left_join(
+  patientData %>% mutate( SUBJECT.ID = as.character(SUBJECT.ID) )
+) %>% 
+  mutate(SUBJECT.ID = gsub("\\.0","",SUBJECT.ID))
+
+msiScore <- oapl %>% filter(VARIANT.TYPE=="BIOMARKER-MSI SCORE")
+msiStatus <- oapl %>% filter(VARIANT.TYPE=="BIOMARKER-MSI STATUS")
+tmb <- oapl %>% filter(VARIANT.TYPE=="BIOMARKER-TMB")
+oapl <- oapl %>% filter(!grepl("BIOMARKER",VARIANT.TYPE))
+
+#re-extract tissue and liq
+tissueOapl <- oapl %>% filter(Visit == "Tissue")
+tissueOaplAll <- tissueOapl
+tissueOapl <- tissueOapl %>% filter(SOMATIC.STATUS.FUNCTIONAL.IMPACT != "unknown")
+
+liqOapl <- oapl %>% filter(Visit != "Tissue")
+liqOaplAll <- liqOapl
+liqOapl <- liqOapl %>% filter(SOMATIC.STATUS.FUNCTIONAL.IMPACT != "unknown")
+liqOapl[liqOapl$Visit=="EOT","Visit"] = "PD"
+
+oapl <- oapl %>% filter(SOMATIC.STATUS.FUNCTIONAL.IMPACT != "unknown")
+
+pathwayGenes <- c("EGFR", "KRAS", "NRAS", "BRAF", "MAP2K1", "NF1")
+
+```
+
+# Introduction
+
+MODUL (MO29112, NCT02291289) is an adaptable, phase 2, signal-seeking trial testing novel agents as first-line therapy for predefined subgroups of patients with metastatic colorectal cancer. It is comprised of four distinct cohorts. This analysis focuses on cohort 1, comprised of subjects with BRAF V600E mutant tumors, randomized to either the experimental arm of 5-FU/LV + cetuximab + vemurafenib or a control arm of FP + bevacizumab. Subjects' tumor tissue was tested with the FMI Foundation One CDx assay, and plasma samples from C1D1 and/or PD/EOT were tested with the FMI Foundation One Liquid CDx assay. Variants detected at these three points will be compared/contrasted to test hypotheses that treatment affected tumor genotype, specifically that cetuximab put a negative selective pressure on V600E mutations and a positive selective pressure on compensatory mutations elsewhere in the EGFR pathway. 
+
+Here variants are tested for association with the REACTOME pathway gene set collection from MSigDb.
+
+## Gene-level test of each group, correct with Benjamini-Hochberg
+
+```{r}
+reactomeGmt <- scan("/Volumes/GoogleDrive/Shared drives/GI Biomarkers [gRED OBD]/CRC/MODUL Cohort 1/data/c2.cp.reactome.v7.4.symbols.gmt.txt",what="character",sep="\n")
+reactomeSetList <- lapply(reactomeGmt,function(aline) {
+  cells <- strsplit(aline,"\t")[[1]]
+  list(
+    setname = cells[1],
+    set = cells[3:length(cells)]
+  )
+})
+reactomeSets = lapply(reactomeSetList,function(aSet) { aSet$set })
+names(reactomeSets) = lapply(reactomeSetList,function(aSet) { aSet$setname })
+
+allFmiGenes = unlist(read.csv("/Volumes/GoogleDrive/My Drive/annotation/genesets/F1Cdx genes.txt", header = F))
+pdvarGenes = liqOapl %>% filter(Visit == "PD" & Arm != "Control") %>% select(GENE) %>% unlist()
+pdvarCtrlGenes = liqOapl %>% filter(Visit == "PD" & Arm == "Control") %>% select(GENE) %>% unlist()
+
+reactomeTests = do.call(
+  rbind,
+  lapply(reactomeSetList, function(reactomeSet) {
+    reactomeGenes = reactomeSet$set
+    fisherResult = fisher.test(
+        matrix(
+          c(
+            length(which(pdvarGenes %in% reactomeGenes)),
+            length(setdiff(pdvarGenes,reactomeGenes)),
+            length(intersect(setdiff(allFmiGenes,pdvarGenes),reactomeGenes)),
+            length(setdiff(setdiff(allFmiGenes,pdvarGenes),reactomeGenes))
+          ), nrow = 2, ncol = 2
+        )
+      )
+    data.frame(
+      name = reactomeSet$setname,
+      p.value = fisherResult$p.value,
+      oddsratio =fisherResult$estimate,
+      intersection = paste(intersect(pdvarGenes,reactomeGenes),collapse=" "),
+      hits = length(which(pdvarGenes %in% reactomeGenes))
+    )
+  }))
+# reactomeTests %>% arrange(p.value) %>% head()
+# reactomeTests %>% filter(grepl("MAPK",name))
+reactomeTests = reactomeTests %>% mutate(bh = p.adjust(reactomeTests$p.value, method = "BH"))
+
+namesToLabel = gsub("_"," ",reactomeTests$name)
+namesToLabel[reactomeTests$bh > 1e-23] = ""
+firstup <- function(x) {
+  substr(x, 1, 1) <- toupper(substr(x, 1, 1))
+  x
+}
+# namesToLabel = firstup(tolower(namesToLabel))
+namesToLabel = sapply(namesToLabel,function(aName) {
+  lengthLimit = 58
+  if (nchar(aName) > lengthLimit) {
+    aName = paste0(substr(aName,1,lengthLimit),"...")
+  }
+  aName
+})
+ggplot(reactomeTests,aes(y=-log10(p.value),yend=-log10(p.value),x=2,xend=1,label = namesToLabel)) +
+  geom_segment(alpha=.7) +
+  xlim(c(1,17)) +
+  ylim( c(0, max(-log10(reactomeTests$p.value))+0.5 ) ) +
+  geom_text_repel( nudge_x = 1, nudge_y = -5, direction = "y", hjust = "left", min.segment.length = 0 ) +
+  theme_classic() +
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
+```
+
+```{r, fig.height = 3, fig.width = 8}
+acquiredVars = liqOapl %>%
+  filter( SUBJECT.ID %in% intersect(
+    ( liqOapl %>% filter(Visit == "PD") )$SUBJECT.ID,
+    ( liqOapl %>% filter(Visit == "C1D1MP") )$SUBJECT.ID
+  )) %>% 
+  group_by(SUBJECT.ID,variant,GENE,Arm) %>% summarise( acquired = "PD" %in% Visit & !("C1D1MP" %in% Visit) ) %>% 
+  filter(acquired) %>% select(-acquired) %>% 
+  mutate( vemTx = Arm != "Control")
+
+fmiCount = length(allFmiGenes)
+vemPatCount = length(unique(( liqOapl %>% filter(Arm != "Control" & Visit == "PD") )$SUBJECT.ID ))
+ctrlPatCount = length(unique(( liqOapl %>% filter(Arm == "Control" & Visit == "PD") )$SUBJECT.ID ))
+
+reactomeTests = lapply(names(reactomeSets),function(reactomeSetName) {
+  reactomeSet = reactomeSets[[reactomeSetName]]
+  setGenes = unlist(reactomeSet)
+  fullsetsize = length(setGenes)
+#  setGenes = setGenes[setGenes != "BRAF"]
+  setGenes = intersect(setGenes,allFmiGenes)
+  vemSetAcq = (acquiredVars %>% filter(vemTx & GENE %in% setGenes))$GENE
+  ctrlSetAcq = (acquiredVars %>% filter(!vemTx & GENE %in% setGenes))$GENE
+  vemInCount = length( vemSetAcq )
+  ctrlInCount = length( ctrlSetAcq )
+  # vemOutCount = length( (acquiredVars %>% filter(vemTx & !(GENE %in% setGenes) ))$GENE )
+  # ctrlOutCount = length( (acquiredVars %>% filter(!vemTx & !(GENE %in% setGenes) ))$GENE )
+  vemOutCount = length( setdiff(setGenes, vemSetAcq) )
+  ctrlOutCount = length( setdiff(setGenes, ctrlSetAcq) )
+  # vemOutCount = length( setdiff(setGenes, (acquiredVars %>% filter(vemTx))$GENE ) )
+  # ctrlOutCount = length( setdiff(setGenes, (acquiredVars %>% filter(!vemTx))$GENE ) )
+  conting = matrix(
+      c(
+        vemInCount,
+        vemOutCount,
+        ctrlInCount,
+        ctrlOutCount
+      ), nrow = 2, ncol = 2
+    )
+  res = fisher.test(conting)
+  data.frame(
+    name = reactomeSetName,
+    setsize = length(setGenes),
+    fullsetsize = fullsetsize,
+    p.value = as.numeric(res$p.value),
+    stat = as.numeric(res$estimate)
+  )
+})
+
+# setGenes = reactomeSets[["ONCOGENIC_MAPK_SIGNALING"]]
+
+reactomeTests = bind_rows(reactomeTests)
+reactomeTests = reactomeTests %>% mutate(bh = p.adjust(reactomeTests$p.value, method = "BH"))
+
+reactomeTests1 = reactomeTests
+reactomeTests = reactomeTests %>% filter(fullsetsize < 550)
+
+# namesToLabel = gsub("_"," ",reactomeTests$name)
+# namesToLabel[reactomeTests$p.value > 1e-8] = ""
+# firstup <- function(x) {
+#   substr(x, 1, 1) <- toupper(substr(x, 1, 1))
+#   x
+# }
+# # namesToLabel = firstup(tolower(namesToLabel))
+# namesToLabel = sapply(namesToLabel,function(aName) {
+#   lengthLimit = 58
+#   if (nchar(aName) > lengthLimit) {
+#     aName = paste0(substr(aName,1,lengthLimit),"...")
+#   }
+#   aName
+# })
+# ggplot(reactomeTests,aes(y=-log10(p.value),yend=-log10(p.value),x=2,xend=1,label = namesToLabel)) +
+#   geom_segment(alpha=.7) +
+#   xlim(c(1,17)) +
+#   ylim( c(0, max(-log10(reactomeTests$p.value))+0.5 ) ) +
+#   geom_text_repel( nudge_x = 1, nudge_y = -5, direction = "y", hjust = "left", min.segment.length = 0 ) +
+#   theme_classic() +
+#   theme(axis.title.x=element_blank(),
+#         axis.text.x=element_blank(),
+#         axis.ticks.x=element_blank())
+
+reactomeTestsToPlot = reactomeTests %>% filter(bh < .1) %>% arrange(p.value) %>% 
+  mutate( name = gsub("_"," ",name) )
+reactomeTestsToPlot[reactomeTestsToPlot[,"name"]=="DISEASES OF SIGNAL TRANSDUCTION BY GROWTH FACTOR RECEPTORS AND SECOND MESSENGERS","name"] = "DISEASES OF GROWTH FACTOR RECEPTORS AND 2ND MESSENGERS"
+reactomeTestsToPlot = reactomeTestsToPlot %>% mutate(name = factor(name,levels = rev(name)))
+
+ggplot(reactomeTestsToPlot,aes(x = -log10(bh), y = name)) +
+  geom_col(alpha=.7) +
+#  coord_flip() +
+  theme_classic() +
+  xlab("-log10 BH-adjusted p-value") +
+  ylab("")
+
+reactomeTestsToPlotTall = reactomeTestsToPlot %>% 
+  pivot_longer(c(p.value, bh), names_to = "Adjustment", values_to = "pvalue")
+pHash = c( "bh" = "Benjamini-Hochberg", "p.value" = "Nominal")
+reactomeTestsToPlotTall = reactomeTestsToPlotTall %>% mutate(Adjustment = pHash[Adjustment])
+
+reactomePlot1 = ggplot(reactomeTestsToPlotTall,aes(x = -log10(pvalue), y = name, fill = Adjustment)) +
+  geom_col(alpha=.7, position = "dodge2") +
+#  coord_flip() +
+  theme_classic() +
+  xlab("-log10 p-value") +
+  ylab("")
+
+reactomePlot1
+pdf("../figures/reactome1.pdf", height=3, width=8.5)
+reactomePlot1
+dev.off()
+```
+
+```{r}
+sessionInfo()
+```

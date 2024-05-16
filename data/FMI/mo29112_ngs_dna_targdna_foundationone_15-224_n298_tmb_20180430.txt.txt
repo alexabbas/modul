@@ -1,0 +1,300 @@
+Specimen Name	QC Status	Disease	Gender	CLIA TMB (mutations per megabase)	CLIA TMB Level
+TRF234834.01	PASS	colon adenocarcinoma (crc)	F	6.14	intermediate
+TRF234835.01	PASS	colon adenocarcinoma (crc)	M	7.02	intermediate
+TRF234837.01	PASS	colon adenocarcinoma (crc)	F	3.51	low
+TRF234838.01	PASS	colon adenocarcinoma (crc)	M	7.9	intermediate
+TRF234839.01	PASS	colon adenocarcinoma (crc)	M	7.9	intermediate
+TRF234840.01	PASS	colon adenocarcinoma (crc)	M	3.51	low
+TRF234841.01	PASS	colon adenocarcinoma (crc)	F	7.02	intermediate
+TRF234842.01	PASS	colon adenocarcinoma (crc)	F	3.51	low
+TRF234843.01	PASS	colon adenocarcinoma (crc)	M	7.02	intermediate
+TRF242411.01	QUALIFIED	unknown primary malignant neoplasm (nos)	M	unknown	unknown
+TRF242413.01	QUALIFIED	unknown primary malignant neoplasm (nos)	M	unknown	unknown
+TRF242414.01	PASS	unknown primary malignant neoplasm (nos)	M	9.65	intermediate
+TRF242415.01	QUALIFIED	unknown primary malignant neoplasm (nos)	M	3.51	low
+TRF242416.01	PASS	unknown primary malignant neoplasm (nos)	M	1.75	low
+TRF242417.01	PASS	unknown primary malignant neoplasm (nos)	M	2.63	low
+TRF242418.01	PASS	unknown primary malignant neoplasm (nos)	F	3.51	low
+TRF242419.01	QUALIFIED	unknown primary malignant neoplasm (nos)	M	unknown	unknown
+TRF242420.01	PASS	unknown primary malignant neoplasm (nos)	F	6.14	intermediate
+TRF242421.01	PASS	unknown primary malignant neoplasm (nos)	F	3.51	low
+TRF242422.01	QUALIFIED	unknown primary malignant neoplasm (nos)	M	5.26	low
+TRF242423.01	PASS	unknown primary malignant neoplasm (nos)	F	4.39	low
+TRF242424.01	PASS	unknown primary malignant neoplasm (nos)	F	2.63	low
+TRF242425.01	PASS	unknown primary malignant neoplasm (nos)	M	5.26	low
+TRF242427.01	PASS	unknown primary malignant neoplasm (nos)	M	42.12	high
+TRF242428.01	PASS	unknown primary malignant neoplasm (nos)	M	14.04	intermediate
+TRF242429.01	PASS	unknown primary malignant neoplasm (nos)	M	3.51	low
+TRF242430.01	PASS	unknown primary malignant neoplasm (nos)	F	7.02	intermediate
+TRF234836.01	QUALIFIED	colon adenocarcinoma (crc)	M	unknown	unknown
+TRF250868.01	PASS	colon adenocarcinoma (crc)	F	10.53	intermediate
+TRF250869.01	PASS	colon adenocarcinoma (crc)	M	8.77	intermediate
+TRF250872.01	PASS	colon adenocarcinoma (crc)	M	3.51	low
+TRF250873.01	PASS	colon adenocarcinoma (crc)	M	6.14	intermediate
+TRF250877.01	PASS	colon adenocarcinoma (crc)	F	3.51	low
+TRF250878.01	PASS	colon adenocarcinoma (crc)	M	4.39	low
+TRF250879.01	PASS	colon adenocarcinoma (crc)	M	2.63	low
+TRF250880.01	PASS	colon adenocarcinoma (crc)	F	2.63	low
+TRF250881.01	PASS	colon adenocarcinoma (crc)	F	2.63	low
+TRF250882.01	PASS	unknown primary malignant neoplasm (nos)	M	6.14	intermediate
+TRF250884.01	PASS	colon adenocarcinoma (crc)	F	4.39	low
+TRF250886.01	PASS	colon adenocarcinoma (crc)	M	7.02	intermediate
+TRF250887.01	PASS	colon adenocarcinoma (crc)	M	15.79	intermediate
+TRF250888.01	PASS	colon adenocarcinoma (crc)	M	5.26	low
+TRF250889.01	PASS	unknown primary malignant neoplasm (nos)	M	3.51	low
+TRF250891.01	PASS	colon adenocarcinoma (crc)	M	7.02	intermediate
+TRF250892.01	PASS	colon adenocarcinoma (crc)	F	8.77	intermediate
+TRF250894.01	QUALIFIED	colon adenocarcinoma (crc)	F	unknown	unknown
+TRF250895.01	PASS	unknown primary malignant neoplasm (nos)	M	3.51	low
+TRF250896.01	PASS	colon adenocarcinoma (crc)	F	1.75	low
+TRF250897.01	PASS	colon adenocarcinoma (crc)	M	14.04	intermediate
+TRF250898.01	PASS	colon adenocarcinoma (crc)	F	4.39	low
+TRF250899.01	PASS	colon adenocarcinoma (crc)	M	4.39	low
+TRF250902.01	PASS	colon adenocarcinoma (crc)	M	7.90	intermediate
+TRF250903.01	PASS	colon adenocarcinoma (crc)	M	7.02	intermediate
+TRF250904.01	PASS	colon adenocarcinoma (crc)	M	4.39	low
+TRF250905.01	PASS	colon adenocarcinoma (crc)	M	9.65	intermediate
+TRF250906.01	PASS	colon adenocarcinoma (crc)	M	4.39	low
+TRF258378.01	QUALIFIED	colon adenocarcinoma (crc)	F	49.14	high
+TRF258379.01	PASS	colon adenocarcinoma (crc)	F	7.90	intermediate
+TRF258380.01	PASS	colon adenocarcinoma (crc)	M	0.00	low
+TRF258381.01	PASS	colon adenocarcinoma (crc)	F	6.14	intermediate
+TRF258382.01	PASS	colon adenocarcinoma (crc)	F	2.63	low
+TRF258383.01	PASS	colon adenocarcinoma (crc)	F	6.14	intermediate
+TRF258384.01	PASS	colon adenocarcinoma (crc)	M	10.53	intermediate
+TRF258385.01	PASS	colon adenocarcinoma (crc)	F	4.39	low
+TRF258386.01	PASS	colon adenocarcinoma (crc)	F	3.51	low
+TRF258387.01	PASS	colon adenocarcinoma (crc)	M	7.02	intermediate
+TRF258388.01	PASS	colon adenocarcinoma (crc)	F	12.28	intermediate
+TRF258390.01	PASS	colon adenocarcinoma (crc)	M	2.63	low
+TRF258391.01	PASS	colon adenocarcinoma (crc)	F	10.53	intermediate
+TRF258392.01	PASS	colon adenocarcinoma (crc)	F	3.51	low
+TRF258393.01	QUALIFIED	colon adenocarcinoma (crc)	F	unknown	unknown
+TRF269236.01	PASS	unknown primary malignant neoplasm (nos)	F	7.90	intermediate
+TRF273360.01	PASS	unknown primary adenocarcinoma	F	7.02	intermediate
+TRF273361.01	PASS	unknown primary adenocarcinoma	M	7.02	intermediate
+TRF273363.01	PASS	unknown primary malignant neoplasm (nos)	M	1.75	low
+TRF273364.01	PASS	unknown primary malignant neoplasm (nos)	F	2.63	low
+TRF273366.01	PASS	unknown primary malignant neoplasm (nos)	F	4.39	low
+TRF273369.01	PASS	unknown primary malignant neoplasm (nos)	M	7.02	intermediate
+TRF273370.01	PASS	unknown primary malignant neoplasm (nos)	F	2.63	low
+TRF273371.01	PASS	unknown primary malignant neoplasm (nos)	M	5.26	low
+TRF273372.01	PASS	unknown primary malignant neoplasm (nos)	M	5.26	low
+TRF273373.01	PASS	unknown primary malignant neoplasm (nos)	M	13.16	intermediate
+TRF273375.01	PASS	unknown primary adenocarcinoma	F	7.02	intermediate
+TRF273376.01	PASS	unknown primary malignant neoplasm (nos)	F	6.14	intermediate
+TRF273377.01	PASS	unknown primary malignant neoplasm (nos)	M	6.14	intermediate
+TRF273379.01	PASS	unknown primary malignant neoplasm (nos)	M	4.39	low
+TRF273380.01	QUALIFIED	unknown primary adenocarcinoma	M	unknown	unknown
+TRF273381.01	QUALIFIED	unknown primary malignant neoplasm (nos)	M	unknown	unknown
+TRF273384.01	PASS	unknown primary malignant neoplasm (nos)	M	6.14	intermediate
+TRF273386.01	PASS	unknown primary malignant neoplasm (nos)	F	5.26	low
+TRF273387.01	PASS	unknown primary malignant neoplasm (nos)	F	6.14	intermediate
+TRF273388.01	QUALIFIED	unknown primary malignant neoplasm (nos)	M	unknown	unknown
+TRF273389.01	PASS	unknown primary adenocarcinoma	M	6.14	intermediate
+TRF273390.01	PASS	unknown primary malignant neoplasm (nos)	M	6.14	intermediate
+TRF273391.01	PASS	unknown primary malignant neoplasm (nos)	M	6.14	intermediate
+TRF273392.01	PASS	unknown primary malignant neoplasm (nos)	F	54.40	high
+TRF273394.01	PASS	unknown primary malignant neoplasm (nos)	M	3.51	low
+TRF273395.01	QUALIFIED	unknown primary malignant neoplasm (nos)	M	10.53	intermediate
+TRF273396.01	PASS	unknown primary malignant neoplasm (nos)	F	1.75	low
+TRF273397.01	PASS	unknown primary malignant neoplasm (nos)	F	3.51	low
+TRF273399.01	PASS	unknown primary malignant neoplasm (nos)	M	5.26	low
+TRF273400.01	QUALIFIED	unknown primary malignant neoplasm (nos)	M	unknown	unknown
+TRF273401.01	PASS	unknown primary malignant neoplasm (nos)	F	5.26	low
+TRF273402.01	PASS	unknown primary malignant neoplasm (nos)	M	7.02	intermediate
+TRF273403.01	PASS	unknown primary malignant neoplasm (nos)	F	4.39	low
+TRF275797.01	PASS	unknown primary malignant neoplasm (nos)	F	7.90	intermediate
+TRF278506.01	PASS	colon adenocarcinoma (crc)	M	6.14	intermediate
+TRF278507.01	PASS	colon adenocarcinoma (crc)	F	2.63	low
+TRF278508.01	PASS	colon adenocarcinoma (crc)	M	2.63	low
+TRF278509.01	PASS	colon adenocarcinoma (crc)	M	1.75	low
+TRF278510.01	PASS	colon adenocarcinoma (crc)	F	7.02	intermediate
+TRF278511.01	PASS	colon adenocarcinoma (crc)	M	7.02	intermediate
+TRF278512.01	PASS	colon adenocarcinoma (crc)	M	11.41	intermediate
+TRF278513.01	PASS	colon adenocarcinoma (crc)	M	1.75	low
+TRF278514.01	PASS	colon adenocarcinoma (crc)	F	6.14	intermediate
+TRF278515.01	PASS	colon adenocarcinoma (crc)	F	4.39	low
+TRF278517.01	PASS	colon adenocarcinoma (crc)	M	9.65	intermediate
+TRF278518.01	PASS	colon adenocarcinoma (crc)	F	3.51	low
+TRF278519.01	PASS	colon adenocarcinoma (crc)	F	7.90	intermediate
+TRF278520.01	QUALIFIED	colon adenocarcinoma (crc)	M	unknown	unknown
+TRF278521.01	PASS	colon adenocarcinoma (crc)	M	7.02	intermediate
+TRF278522.01	PASS	colon adenocarcinoma (crc)	F	9.65	intermediate
+TRF278523.01	PASS	colon adenocarcinoma (crc)	M	14.92	intermediate
+TRF278524.01	PASS	colon adenocarcinoma (crc)	M	7.02	intermediate
+TRF278525.01	PASS	colon adenocarcinoma (crc)	M	51.77	high
+TRF278527.01	PASS	colon adenocarcinoma (crc)	F	3.51	low
+TRF278528.01	PASS	colon adenocarcinoma (crc)	M	3.51	low
+TRF278529.01	PASS	colon adenocarcinoma (crc)	F	11.41	intermediate
+TRF278530.01	PASS	colon adenocarcinoma (crc)	M	4.39	low
+TRF278531.01	PASS	rectum adenocarcinoma (crc)	F	4.39	low
+TRF278533.01	QUALIFIED	colon adenocarcinoma (crc)	M	7.90	intermediate
+TRF278534.01	QUALIFIED	colon adenocarcinoma (crc)	F	6.14	intermediate
+TRF293306.01	PASS	colon adenocarcinoma (crc)	M	6.14	intermediate
+TRF293307.01	PASS	unknown primary adenocarcinoma	M	4.39	low
+TRF293308.01	PASS	unknown primary adenocarcinoma	M	6.14	intermediate
+TRF293309.01	PASS	unknown primary adenocarcinoma	M	7.02	intermediate
+TRF293311.01	PASS	unknown primary adenocarcinoma	F	7.90	intermediate
+TRF293312.01	PASS	unknown primary adenocarcinoma	M	7.02	intermediate
+TRF293313.01	PASS	unknown primary adenocarcinoma	M	5.26	low
+TRF293314.01	PASS	rectum adenocarcinoma (crc)	M	11.41	intermediate
+TRF293315.01	PASS	unknown primary adenocarcinoma	F	4.39	low
+TRF293317.01	PASS	unknown primary adenocarcinoma	F	7.02	intermediate
+TRF293318.01	PASS	colon adenocarcinoma (crc)	F	1.75	low
+TRF293319.01	QUALIFIED	unknown primary malignant neoplasm (nos)	F	5.26	low
+TRF293320.01	PASS	unknown primary adenocarcinoma	F	3.51	low
+TRF293321.01	PASS	unknown primary malignant neoplasm (nos)	M	8.77	intermediate
+TRF293322.01	PASS	unknown primary adenocarcinoma	M	2.63	low
+TRF293323.01	PASS	unknown primary adenocarcinoma	F	1.75	low
+TRF293324.01	PASS	rectum adenocarcinoma (crc)	M	6.14	intermediate
+TRF293326.01	PASS	unknown primary adenocarcinoma	M	5.26	low
+TRF293327.01	PASS	unknown primary adenocarcinoma	F	4.39	low
+TRF293328.01	PASS	unknown primary malignant neoplasm (nos)	M	4.39	low
+TRF293329.01	PASS	colon adenocarcinoma (crc)	M	7.90	intermediate
+TRF293330.01	PASS	colon adenocarcinoma (crc)	M	1.75	low
+TRF293331.01	PASS	unknown primary adenocarcinoma	F	10.53	intermediate
+TRF293334.01	PASS	unknown primary adenocarcinoma	F	8.77	intermediate
+TRF293335.01	PASS	unknown primary adenocarcinoma	M	8.77	intermediate
+TRF293336.01	PASS	colon adenocarcinoma (crc)	M	1.75	low
+TRF293337.01	PASS	unknown primary malignant neoplasm (nos)	F	3.51	low
+TRF293338.01	PASS	colon adenocarcinoma (crc)	M	4.39	low
+TRF293339.01	PASS	unknown primary adenocarcinoma	M	1.75	low
+TRF293340.01	PASS	colon adenocarcinoma (crc)	F	7.02	intermediate
+TRF293341.01	PASS	unknown primary malignant neoplasm (nos)	F	3.51	low
+TRF293342.01	PASS	unknown primary adenocarcinoma	M	7.02	intermediate
+TRF293343.01	PASS	colon adenocarcinoma (crc)	M	6.14	intermediate
+TRF293344.01	QUALIFIED	unknown primary adenocarcinoma	M	11.41	intermediate
+TRF293345.01	PASS	colon adenocarcinoma (crc)	M	3.51	low
+TRF293346.01	PASS	rectum adenocarcinoma (crc)	M	6.14	intermediate
+TRF293347.01	PASS	unknown primary malignant neoplasm (nos)	M	2.63	low
+TRF293348.01	PASS	colon adenocarcinoma (crc)	M	3.51	low
+TRF293349.01	PASS	unknown primary adenocarcinoma	M	1.75	low
+TRF293350.01	PASS	colon adenocarcinoma (crc)	F	4.39	low
+TRF293351.01	PASS	colon adenocarcinoma (crc)	M	3.51	low
+TRF293353.01	PASS	unknown primary adenocarcinoma	M	4.39	low
+TRF293354.01	PASS	colon adenocarcinoma (crc)	M	4.39	low
+TRF293355.01	QUALIFIED	unknown primary adenocarcinoma	M	2.63	low
+TRF293356.01	PASS	unknown primary adenocarcinoma	F	6.14	intermediate
+TRF293357.01	QUALIFIED	unknown primary adenocarcinoma	M	unknown	unknown
+TRF293358.01	PASS	unknown primary adenocarcinoma	F	4.39	low
+TRF293359.01	PASS	unknown primary adenocarcinoma	M	6.14	intermediate
+TRF293360.01	PASS	unknown primary adenocarcinoma	M	2.63	low
+TRF301623.01	PASS	unknown primary malignant neoplasm (nos)	F	5.26	low
+TRF301624.01	PASS	unknown primary malignant neoplasm (nos)	F	2.63	low
+TRF301625.01	PASS	unknown primary malignant neoplasm (nos)	F	6.14	intermediate
+TRF301626.01	PASS	unknown primary malignant neoplasm (nos)	F	3.51	low
+TRF301627.01	PASS	unknown primary malignant neoplasm (nos)	M	7.90	intermediate
+TRF301628.01	PASS	unknown primary malignant neoplasm (nos)	F	6.14	intermediate
+TRF301629.01	PASS	unknown primary malignant neoplasm (nos)	F	3.51	low
+TRF301630.01	PASS	unknown primary malignant neoplasm (nos)	F	6.14	intermediate
+TRF301631.01	PASS	unknown primary malignant neoplasm (nos)	F	3.51	low
+TRF301632.01	PASS	unknown primary malignant neoplasm (nos)	F	3.51	low
+TRF301633.01	PASS	unknown primary malignant neoplasm (nos)	F	85.99	high
+TRF301634.01	PASS	unknown primary malignant neoplasm (nos)	F	5.26	low
+TRF301635.01	PASS	unknown primary malignant neoplasm (nos)	F	4.39	low
+TRF301637.01	PASS	unknown primary malignant neoplasm (nos)	F	7.02	intermediate
+TRF301638.01	PASS	unknown primary malignant neoplasm (nos)	M	2.63	low
+TRF301639.01	PASS	unknown primary malignant neoplasm (nos)	M	3.51	low
+TRF301640.01	PASS	unknown primary malignant neoplasm (nos)	M	20.18	high
+TRF301641.01	PASS	unknown primary malignant neoplasm (nos)	M	4.39	low
+TRF301642.01	PASS	unknown primary malignant neoplasm (nos)	M	7.02	intermediate
+TRF301643.01	PASS	unknown primary malignant neoplasm (nos)	M	3.51	low
+TRF301644.01	PASS	unknown primary malignant neoplasm (nos)	M	4.39	low
+TRF301645.01	PASS	unknown primary malignant neoplasm (nos)	M	12.28	intermediate
+TRF301646.01	PASS	unknown primary malignant neoplasm (nos)	M	6.14	intermediate
+TRF301647.01	PASS	unknown primary malignant neoplasm (nos)	M	7.02	intermediate
+TRF301648.01	PASS	unknown primary malignant neoplasm (nos)	M	7.90	intermediate
+TRF301649.01	PASS	unknown primary malignant neoplasm (nos)	M	0.00	low
+TRF301650.01	PASS	unknown primary malignant neoplasm (nos)	M	2.63	low
+TRF301651.01	PASS	unknown primary malignant neoplasm (nos)	M	7.02	intermediate
+TRF301652.01	PASS	unknown primary malignant neoplasm (nos)	M	6.14	intermediate
+TRF301653.01	QUALIFIED	unknown primary malignant neoplasm (nos)	M	6.14	intermediate
+TRF301654.01	PASS	unknown primary malignant neoplasm (nos)	M	31.59	high
+TRF301655.01	PASS	unknown primary malignant neoplasm (nos)	M	8.77	intermediate
+TRF301656.01	PASS	unknown primary malignant neoplasm (nos)	M	8.77	intermediate
+TRF301657.01	PASS	unknown primary malignant neoplasm (nos)	M	5.26	low
+TRF301658.01	PASS	unknown primary malignant neoplasm (nos)	M	3.51	low
+TRF301659.01	PASS	unknown primary malignant neoplasm (nos)	M	4.39	low
+TRF301660.01	PASS	unknown primary malignant neoplasm (nos)	M	1.75	low
+TRF301661.01	PASS	unknown primary malignant neoplasm (nos)	M	7.02	intermediate
+TRF301662.01	PASS	unknown primary malignant neoplasm (nos)	M	9.65	intermediate
+TRF301663.01	PASS	unknown primary malignant neoplasm (nos)	M	4.39	low
+TRF301665.01	QUALIFIED	unknown primary malignant neoplasm (nos)	F	5.26	low
+TRF301666.01	PASS	unknown primary malignant neoplasm (nos)	F	7.02	intermediate
+TRF301667.01	PASS	unknown primary malignant neoplasm (nos)	F	5.26	low
+TRF301668.01	PASS	unknown primary malignant neoplasm (nos)	F	8.77	intermediate
+TRF301669.01	PASS	unknown primary malignant neoplasm (nos)	F	7.90	intermediate
+TRF301670.01	PASS	unknown primary malignant neoplasm (nos)	F	6.14	intermediate
+TRF301671.01	PASS	unknown primary malignant neoplasm (nos)	M	4.39	low
+TRF301672.01	PASS	unknown primary malignant neoplasm (nos)	M	2.63	low
+TRF301673.01	PASS	unknown primary malignant neoplasm (nos)	M	7.02	intermediate
+TRF301675.01	PASS	unknown primary malignant neoplasm (nos)	M	7.90	intermediate
+TRF301676.01	PASS	unknown primary malignant neoplasm (nos)	M	5.26	low
+TRF301677.01	PASS	unknown primary malignant neoplasm (nos)	M	3.51	low
+TRF310811.01	PASS	colon adenocarcinoma (crc)	M	10.53	intermediate
+TRF310812.01	PASS	colon adenocarcinoma (crc)	M	8.77	intermediate
+TRF310813.01	PASS	rectum adenocarcinoma (crc)	M	7.90	intermediate
+TRF310815.01	PASS	colon adenocarcinoma (crc)	F	3.51	low
+TRF310816.01	QUALIFIED	colon adenocarcinoma (crc)	F	unknown	unknown
+TRF310817.01	PASS	colon adenocarcinoma (crc)	M	4.39	low
+TRF310818.01	PASS	colon adenocarcinoma (crc)	F	6.14	intermediate
+TRF310819.01	PASS	colon adenocarcinoma (crc)	F	7.02	intermediate
+TRF310820.01	PASS	colon adenocarcinoma (crc)	M	7.90	intermediate
+TRF310821.01	PASS	colon adenocarcinoma (crc)	M	3.51	low
+TRF310822.01	PASS	colon adenocarcinoma (crc)	M	7.90	intermediate
+TRF310823.01	PASS	colon adenocarcinoma (crc)	F	4.39	low
+TRF310824.01	PASS	colon adenocarcinoma (crc)	F	6.14	intermediate
+TRF310825.01	PASS	colon adenocarcinoma (crc)	M	9.65	intermediate
+TRF310826.01	PASS	colon adenocarcinoma (crc)	M	6.14	intermediate
+TRF310827.01	PASS	rectum adenocarcinoma (crc)	M	5.26	low
+TRF310828.01	PASS	colon adenocarcinoma (crc)	M	2.63	low
+TRF310829.01	PASS	colon adenocarcinoma (crc)	F	5.26	low
+TRF310830.01	PASS	colon adenocarcinoma (crc)	M	12.28	intermediate
+TRF310831.01	PASS	colon adenocarcinoma (crc)	M	4.39	low
+TRF310832.01	PASS	colon adenocarcinoma (crc)	F	26.32	high
+TRF310833.01	PASS	colon adenocarcinoma (crc)	F	4.39	low
+TRF310835.01	PASS	colon adenocarcinoma (crc)	M	2.63	low
+TRF310836.01	PASS	colon adenocarcinoma (crc)	M	5.26	low
+TRF321351.01	PASS	colon adenocarcinoma (crc)	M	3.51	low
+TRF321352.01	QUALIFIED	colon adenocarcinoma (crc)	F	unknown	unknown
+TRF321353.01	PASS	colon adenocarcinoma (crc)	F	6.14	intermediate
+TRF321354.01	PASS	colon adenocarcinoma (crc)	M	1.75	low
+TRF321355.01	PASS	colon adenocarcinoma (crc)	F	9.65	intermediate
+TRF321357.01	PASS	colon adenocarcinoma (crc)	F	12.28	intermediate
+TRF321358.01	PASS	colon adenocarcinoma (crc)	F	3.51	low
+TRF321359.01	PASS	colon adenocarcinoma (crc)	M	5.26	low
+TRF321360.01	PASS	colon adenocarcinoma (crc)	F	4.39	low
+TRF321361.01	PASS	colon adenocarcinoma (crc)	M	3.51	low
+TRF321362.01	PASS	colon adenocarcinoma (crc)	F	4.39	low
+TRF321363.01	PASS	colon adenocarcinoma (crc)	M	1.75	low
+TRF321364.01	PASS	colon adenocarcinoma (crc)	M	4.39	low
+TRF321365.01	PASS	colon adenocarcinoma (crc)	F	7.02	intermediate
+TRF321366.01	PASS	colon adenocarcinoma (crc)	M	6.14	intermediate
+TRF321367.01	PASS	colon adenocarcinoma (crc)	F	6.14	intermediate
+TRF321368.01	PASS	colon adenocarcinoma (crc)	M	13.16	intermediate
+TRF321369.01	PASS	colon adenocarcinoma (crc)	M	3.51	low
+TRF321370.01	PASS	colon adenocarcinoma (crc)	F	1.75	low
+TRF321371.01	PASS	colon adenocarcinoma (crc)	F	6.14	intermediate
+TRF321372.01	PASS	colon adenocarcinoma (crc)	M	2.63	low
+TRF321373.01	PASS	colon adenocarcinoma (crc)	M	7.90	intermediate
+TRF321374.01	QUALIFIED	colon adenocarcinoma (crc)	F	6.14	intermediate
+TRF321375.01	PASS	colon adenocarcinoma (crc)	M	7.02	intermediate
+TRF321376.01	PASS	colon adenocarcinoma (crc)	M	4.39	low
+TRF321377.01	PASS	colon adenocarcinoma (crc)	M	7.02	intermediate
+TRF321378.01	PASS	colon adenocarcinoma (crc)	F	5.26	low
+TRF321379.01	PASS	colon adenocarcinoma (crc)	M	6.14	intermediate
+TRF321381.01	PASS	colon adenocarcinoma (crc)	F	2.63	low
+TRF321382.01	PASS	colon adenocarcinoma (crc)	F	2.63	low
+TRF321383.01	PASS	colon adenocarcinoma (crc)	F	7.90	intermediate
+TRF330022.01	QUALIFIED	colon adenocarcinoma (crc)	F	unknown	unknown
+TRF330023.01	QUALIFIED	colon adenocarcinoma (crc)	F	unknown	unknown
+TRF330025.01	PASS	colon adenocarcinoma (crc)	F	1.75	low
+TRF330026.01	PASS	colon adenocarcinoma (crc)	M	7.02	intermediate
+TRF330027.01	PASS	colon adenocarcinoma (crc)	M	3.51	low
+TRF330028.01	PASS	colon adenocarcinoma (crc)	M	7.02	intermediate
+TRF330029.01	PASS	colon adenocarcinoma (crc)	M	7.02	intermediate
+TRF330030.01	PASS	colon adenocarcinoma (crc)	M	290.45	high
+TRF330031.01	PASS	colon adenocarcinoma (crc)	M	6.14	intermediate
+TRF330032.01	QUALIFIED	colon adenocarcinoma (crc)	M	7.02	intermediate
+######FOR RESEARCH USE ONLY######					

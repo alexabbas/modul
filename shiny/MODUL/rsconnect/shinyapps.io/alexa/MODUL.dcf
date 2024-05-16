@@ -1,0 +1,12 @@
+name: MODUL
+title: MODUL
+username: alexa
+account: alexa
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11893690
+bundleId: 8556410
+url: https://alexa.shinyapps.io/MODUL/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

@@ -1,0 +1,171 @@
+---
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+# 220524: using May 19 FMI data
+
+knitr::opts_chunk$set(comment = NA, message = F, warning = F)
+library(tidyverse)
+library(readxl)
+library(knitr)
+library(cowplot)
+library(ggnewscale)
+
+#library(ComplexHeatmap)
+#library(DT)
+#library(ggvenn)
+#library(UpSetR)
+#library(gridExtra)
+#library(stringr) 
+#library(ggpubr)
+
+source("/Volumes/GoogleDrive/My Drive/R/aaStuff.R")
+truColors = read.csv("/Volumes/GoogleDrive/My Drive/R/trubetskoyColors.csv",stringsAsFactors = F)
+
+theme_set(theme_bw())
+
+source("../R/loadData220523.R")
+```
+
+```{r, results = "asis", echo = F, fig.height = 6, fig.width = 6}
+subjids = sort(intersect(
+  unique(ospl$SUBJECT.ID),
+  unique(clinicalData$SUBJECT.ID)
+))
+
+for (subjid in subjids) {
+  cat(
+    paste(
+      "  \n# Patient", subjid, " \n",
+      patientData[match(subjid,patientData$SUBJECT.ID),"Arm"], "Arm  \n",
+      "BOR:", patientData[match(subjid,patientData$SUBJECT.ID),"Response"], " \n"
+    )
+  )
+  oapl1 = oaplv %>% filter(SUBJECT.ID == subjid)
+  les1 = lesionData %>% filter(SUBJECT.ID == subjid & !is.na(LESDIAM))
+  tmb1 = tmb %>% filter(SUBJECT.ID == subjid) %>% mutate(ADY = timepoint * 7)
+  clin1 = clinicalData %>% filter(SUBJECT.ID == subjid & !is.na(AVALC))
+  
+  # pull out amps and dels for plotting
+  ##  (here)
+  
+  oapl1 = oapl1 %>%
+    filter(!is.na(SV.PERCENT.READS)) %>% 
+    bind_rows(
+    data.frame(
+      GENE = "TMB",
+      timepoint = tmb1$timepoint
+    )
+  )
+  
+  oapl1 = oapl1 %>%
+    mutate(
+      ADY = timepoint * 7,
+      Event = ifelse(Visit=="Tissue","Archival Biopsy","ctDNA"),
+      geneVariant = paste(GENE,variant)
+    ) %>% 
+    complete(geneVariant,ADY,fill=list(SV.PERCENT.READS=0)) %>% 
+    filter( geneVariant != "TMB NA" ) %>% 
+    mutate(
+      GENE = gsub("^(\\w+) .+$","\\1",geneVariant),
+      SV.PERCENT.READS = SV.PERCENT.READS + 0.05
+    )
+  
+  oaplPath = oapl1 %>% filter(geneVariant != "BRAF V600E" & GENE %in% pathwayGenes)
+
+  oaplTopGenes = oapl1 %>% filter(!is.na(GENE)) %>% group_by(GENE) %>% summarize(maxVaf = max(SV.PERCENT.READS)) %>% ungroup() %>% select(GENE) %>% head( n = 5 - length(unique(oaplPath$GENE ))) %>% unlist()
+  oaplTop = oaplPath %>% bind_rows(oapl1 %>% filter(GENE %in% oaplTopGenes) )
+  
+  adyRange = c(
+    min(c(les1$ADY,oapl1$ADY),na.rm=T), max(c(les1$ADY,oapl1$ADY),na.rm=T)
+  )
+  
+  rectData = data.frame(
+    xmin = c(-160, -122, 0),
+    ymin = rep(-Inf, times = 3),
+    xmax = c(-148, -10, Inf),
+    ymax = rep(Inf, times = 3),
+    phase = c("archival","induction","maintenance")
+  )
+  rectFills = c(
+    "archival" = "red", "induction" = "green", "maintenance" = "blue"
+  )
+  
+  stateFills = c(
+    "Complete Response (CR)" = "#22CC00",
+    "Partial Response (PR)" = "#DDDD00",
+    "Stable Disease (SD)" = "#DD8811",
+    "Progressive Disease (PD)" = "#CC3366",
+    "Not Evaluable (NE)" = "gray50"
+  )
+  
+  lesPlot = ggplot(les1) +
+    geom_rect( data = rectData, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = phase), col = NA, alpha = 0.1) +
+    scale_fill_manual( values = rectFills, breaks = names(rectFills) ) +
+    geom_line(aes( x = ADY, y = LESDIAM, col = LESID, group = LESID), show.legend = FALSE) +
+    geom_point(aes( x = ADY, y = LESDIAM, col = LESID, group = LESID), show.legend = FALSE) +
+    coord_cartesian(xlim = adyRange) +
+    theme(axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        legend.position = "none"
+    ) +
+    ylab("Lesion Diameter (mm)") +
+    new_scale_color() +
+    geom_point(aes( x = ADY, y = max(les1$LESDIAM,na.rm=T) * -0.08, col = AVALC), data = clin1, pch = 15, size = 4) +
+    scale_color_manual(values = stateFills, breaks = names(stateFills))
+
+  tmbPlot = ggplot(tmb1) +
+    geom_rect( data = rectData, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = phase), col = NA, alpha = 0.1, show.legend = FALSE) +
+    scale_fill_manual( values = rectFills, breaks = names(rectFills) ) +
+    geom_line( aes( x = ADY, y = TMB.SCORE), lty = "dashed", data = tmb1 %>% filter(ADY %in% sort(unique(tmb1$ADY))[1:2])) +
+    geom_line( aes( x = ADY, y = TMB.SCORE), data = tmb1 %>% filter(ADY != -154)) +
+    geom_point( aes( x = ADY, y = TMB.SCORE)) +
+    #   scale_y_log10(minor_breaks = logbreaks) +
+    coord_cartesian(xlim = adyRange, ylim = c( 0, max( c(tmb1$TMB.SCORE, 0) ) )) +
+    theme( legend.position = "none" ) +
+    ylab("TMB (mut/MB)")
+  
+  rectData = data.frame(
+    xmin = c(-160, -122, 0),
+    ymin = rep(.05, times = 3),
+    xmax = c(-148, -10, Inf),
+    ymax = rep(max(oaplTop$SV.PERCENT.READS)*1.1, times = 3),
+    phase = c("archival","induction","maintenance")
+  )
+  varTopPlot = ggplot(oaplTop) +
+    geom_rect( data = rectData, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = phase), col = NA, alpha = 0.1, show.legend = FALSE) +
+    scale_fill_manual( values = rectFills, breaks = names(rectFills) ) +
+    geom_line( aes( x = ADY, y = SV.PERCENT.READS, col = geneVariant, group = geneVariant), lty = "dashed", data = oaplTop %>% filter(ADY %in% sort(unique(oaplTop$ADY))[1:2])) +
+    geom_line( aes( x = ADY, y = SV.PERCENT.READS, col = geneVariant, group = geneVariant), data = oaplTop %>% filter(ADY != -154)) +
+    geom_point(aes( x = ADY, y = SV.PERCENT.READS, col = geneVariant, group = geneVariant), show.legend = FALSE) +
+    coord_cartesian(xlim = adyRange) +
+    scale_y_log10( limits = c(.05,max(oaplTop$SV.PERCENT.READS)*1.1), minor_breaks = logbreaks, breaks = c(0.01,0.1,1,10,100), labels = function(x) format(x, digits=1, scientific=F) ) +
+    scale_color_manual(values = c(truColors$Hex,rainbow( length(unique(oaplTop$geneVariant)) - 22 )) ) +
+    theme(
+      axis.title.x = element_blank(),
+      legend.position = "bottom",
+      legend.title = element_blank(),
+      axis.text.x = element_blank(),
+      axis.ticks.x = element_blank()
+    ) +
+    guides(color = guide_legend(nrow = ceiling(length(unique(oaplTop$geneVariant))/4), ncol = 4)) +
+    ylab("VAF (%)")
+
+  varTopLegend <- cowplot::get_legend(varTopPlot)
+  varTopPlot = varTopPlot + theme( legend.position = "none" )
+
+  myHeights = c(1.9, 2.1, 1.1, 1)
+
+  print(plot_grid(lesPlot, varTopPlot, tmbPlot, varTopLegend, ncol = 1, align = "hv", axis = "l", rel_heights = myHeights))
+  cat("\\newpage  \n")
+}
+
+
+
+```
+
+
+
+

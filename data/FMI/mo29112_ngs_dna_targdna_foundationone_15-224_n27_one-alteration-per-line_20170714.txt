@@ -1,0 +1,567 @@
+SAMPLE ID	SUBJECT ID	SAMPLE ID	ANALYSIS FILE LOCATION	VARIANT-TYPE	GENE	SOMATIC STATUS/FUNCTIONAL IMPACT	SV-PROTEIN-CHANGE	SV-CDS-CHANGE	SV-GENOME-POSITION	SV-COVERAGE	SV-PERCENT-READS	CNA-COPY-NUMBER	CNA-EXONS	CNA-RATIO	CNA-TYPE	REARR-GENE1	REARR-GENE2	REARR-DESCRIPTION	REARR-IN-FRAME?	REARR-POS1	REARR-POS2	REARR-NUMBER-OF-READS
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	BRAF	known	V600E	1799T>A	chr7:140453136	607	24.05	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	FANCI	known	P307S	919C>T	chr15:89816644	631	18.07	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	RNF43	known	R132*	394C>T	chr17:56440943	759	26.48	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	TP53	known	P278S	832C>T	chr17:7577106	928	34.91	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	LRP1B	likely	R1999*	5995A>T	chr2:141473570	665	6.47	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	RNF43	likely	I164fs*7	490_496delATCTGGG	chr17:56440721	827	23.46	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	AR	unknown	L54S	161T>C	chrX:66765149	757	28.67	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	BRCA1	unknown	T236I	707C>T	chr17:41246841	695	21.87	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	FGFR1	unknown	R209C	625C>T	chr8:38283760	839	45.41	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	HGF	unknown	H482Y	1444C>T	chr7:81340797	493	53.35	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	IGF2R	unknown	V2054I	6160G>A	chr6:160506118	812	26.48	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	INSR	unknown	G1048D	3143G>A	chr19:7125409	1088	48.44	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	KIT	unknown	T304A	910A>G	chr4:55570043	773	51.36	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	LTK	unknown	R569H	1706G>A	chr15:41797720	930	80.22	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	MAP3K1	unknown	A241T	721G>A	chr5:56155629	849	43.93	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	MLL	unknown	P3837L	11510C>T	chr11:118392008	920	51.3	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	MLL2	unknown	D4861N	14581G>A	chr12:49421648	805	46.58	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	NTRK1	unknown	R593W	1777C>T	chr1:156846336	761	51.51	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	PTCH1	unknown	G37R	109G>C	chr9:98270535	625	79.84	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	SMAD3	unknown	P403L	1208C>T	chr15:67482804	1163	63.11	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	WISP3	unknown	R5Q	14G>A	chr6:112375520	864	47.22	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	short-variant	ZNRF3	unknown	E250fs*14	747_748insTG	chr22:29445216	841	43.28	-	-	-	-	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	copy-number-alteration	CCND1	known	-	-	-	-	-	12	5 of 5	3.97	amplification	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	copy-number-alteration	FGF19	known	-	-	-	-	-	13	3 of 3	4.06	amplification	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	copy-number-alteration	FGF3	known	-	-	-	-	-	12	3 of 3	3.97	amplification	-	-	-	-	-	-	-
+TRF234834	286953011	06110884C	TRF234834.01.vars.final.vr1.xml	copy-number-alteration	FGF4	known	-	-	-	-	-	14	3 of 3	4.23	amplification	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	short-variant	TP53	known	R175H	524G>A	chr17:7578406	921	42.56	-	-	-	-	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	short-variant	APC	likely	splice site 1312+1G>A	1312+1G>A	chr5:112155042	602	20.27	-	-	-	-	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	short-variant	APC	likely	I606fs*27	1818_1819delAT	chr5:112170721	760	20.26	-	-	-	-	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	short-variant	SMAD4	likely	K340*	1018A>T	chr18:48591855	788	28.81	-	-	-	-	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	short-variant	AR	unknown	Y572N	1714T>A	chrX:66863195	800	9.5	-	-	-	-	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	short-variant	ARID1B	unknown	G333_G337del	993_1007delAGGAGGAGCAGGAGC	chr6:157100055	494	57.89	-	-	-	-	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	short-variant	FGFR1	unknown	G698S	2092G>A	chr8:38271764	1094	26.78	-	-	-	-	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	short-variant	FGFR4	unknown	N584T	1751A>C	chr5:176523107	1423	39.85	-	-	-	-	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	short-variant	FLT1	unknown	S1190F	3569C>T	chr13:28885793	1461	45.11	-	-	-	-	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	short-variant	GATA3	unknown	A396T	1186G>A	chr10:8115837	1545	42.59	-	-	-	-	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	short-variant	KDM5A	unknown	M766L	2296A>T	chr12:431713	648	27.93	-	-	-	-	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	short-variant	NCOR1	unknown	D168N	502G>A	chr17:16068409	254	20.87	-	-	-	-	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	short-variant	PARP3	unknown	H434Y	1300C>T	chr3:51981779	676	21.89	-	-	-	-	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	short-variant	RANBP2	unknown	N1556fs*3	4664_4665insTGCG	chr2:109381659	1434	13.6	-	-	-	-	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	short-variant	SPTA1	unknown	L309V	925C>G	chr1:158647512	810	18.77	-	-	-	-	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	short-variant	TP53BP1	unknown	D317G	950A>G	chr15:43767883	917	48.2	-	-	-	-	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	copy-number-alteration	FGF14	ambiguous	-	-	-	-	-	6	6 of 6	1.95	amplification	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	copy-number-alteration	IRS2	ambiguous	-	-	-	-	-	6	5 of 5	2	amplification	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	copy-number-alteration	CDK8	ambiguous	-	-	-	-	-	6	13 of 13	1.83	amplification	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	copy-number-alteration	FLT3	ambiguous	-	-	-	-	-	6	24 of 24	1.74	amplification	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	copy-number-alteration	CUL4A	unknown	-	-	-	-	-	6	20 of 20	2	amplification	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	copy-number-alteration	PARP4	unknown	-	-	-	-	-	6	33 of 33	1.57	amplification	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	copy-number-alteration	FLT1	unknown	-	-	-	-	-	6	31 of 31	1.75	amplification	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	copy-number-alteration	BRCA2	unknown	-	-	-	-	-	6	26 of 26	1.36	amplification	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	copy-number-alteration	RB1	unknown	-	-	-	-	-	6	27 of 27	1.62	amplification	-	-	-	-	-	-	-
+TRF234835	286953012	06110885C	TRF234835.01.vars.final.vr1.xml	copy-number-alteration	DIS3	unknown	-	-	-	-	-	6	22 of 22	1.85	amplification	-	-	-	-	-	-	-
+TRF234837	286427002	06110887C	TRF234837.01.vars.final.vr1.xml	short-variant	APC	known	Q1367*	4099C>T	chr5:112175390	967	12.31	-	-	-	-	-	-	-	-	-	-	-
+TRF234837	286427002	06110887C	TRF234837.01.vars.final.vr1.xml	short-variant	BRAF	known	F595L	1783T>C	chr7:140453152	730	5.75	-	-	-	-	-	-	-	-	-	-	-
+TRF234837	286427002	06110887C	TRF234837.01.vars.final.vr1.xml	short-variant	ERBB2	known	V777L	2329G>T	chr17:37881000	1230	11.14	-	-	-	-	-	-	-	-	-	-	-
+TRF234837	286427002	06110887C	TRF234837.01.vars.final.vr1.xml	short-variant	FBXW7	known	R505C	1513C>T	chr4:153247289	1279	7.9	-	-	-	-	-	-	-	-	-	-	-
+TRF234837	286427002	06110887C	TRF234837.01.vars.final.vr1.xml	short-variant	TP53	known	Y220C	659A>G	chr17:7578190	1031	8.92	-	-	-	-	-	-	-	-	-	-	-
+TRF234837	286427002	06110887C	TRF234837.01.vars.final.vr1.xml	short-variant	ALK	unknown	G875R	2623G>A	chr2:29455179	839	7.87	-	-	-	-	-	-	-	-	-	-	-
+TRF234837	286427002	06110887C	TRF234837.01.vars.final.vr1.xml	short-variant	ARID1B	unknown	A350_G351insA	1043_1044insGGC	chr6:157100106	532	34.77	-	-	-	-	-	-	-	-	-	-	-
+TRF234837	286427002	06110887C	TRF234837.01.vars.final.vr1.xml	short-variant	BCL2L1	unknown	R209C	625C>T	chr20:30253829	1301	19.45	-	-	-	-	-	-	-	-	-	-	-
+TRF234837	286427002	06110887C	TRF234837.01.vars.final.vr1.xml	short-variant	CDK4	unknown	S259L	776C>T	chr12:58143008	1132	50.18	-	-	-	-	-	-	-	-	-	-	-
+TRF234837	286427002	06110887C	TRF234837.01.vars.final.vr1.xml	short-variant	FANCA	unknown	T126M	377C>T	chr16:89877386	826	7.14	-	-	-	-	-	-	-	-	-	-	-
+TRF234837	286427002	06110887C	TRF234837.01.vars.final.vr1.xml	short-variant	LRP1B	unknown	R4573Q	13718G>A	chr2:140990837	855	48.65	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	APC	known	R302*	904C>T	chr5:112151261	779	20.8	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	APC	known	S1346*	4037C>A	chr5:112175328	1086	19.8	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	KRAS	known	G12D	35G>A	chr12:25398284	1035	27.44	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	PTEN	known	R173C	517C>T	chr10:89711899	1196	28.01	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	TP53	known	L201*	602T>A	chr17:7578247	1068	31.55	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	CREBBP	unknown	Q2213_Q2216del	6624_6635delACAGCAGCAACA	chr16:3778412	1010	14.16	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	EPHA5	unknown	R877S	2631A>T	chr4:66213799	753	8.9	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	EPHA5	unknown	G741C	2221G>T	chr4:66230750	820	9.02	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	FANCD2	unknown	L1325M	3973C>A	chr3:10136893	660	55	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	FAT1	unknown	T2997M	8990C>T	chr4:187538244	1165	44.55	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	GATA6	unknown	E68V	203A>T	chr18:19751308	516	69.77	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	LTK	unknown	R569H	1706G>A	chr15:41797720	1043	48.71	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	MET	unknown	V1070M	3208G>A	chr7:116415114	1614	53.47	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	MKNK2	unknown	V82I	244G>A	chr19:2046280	1192	49.33	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	MTOR	unknown	A432V	1295C>T	chr1:11303288	865	54.57	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	NOTCH4	unknown	G545S	1633G>A	chr6:32185035	1052	55.8	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	SNCAIP	unknown	A363T	1087G>A	chr5:121761131	1129	48.8	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	SOX10	unknown	A361T	1081G>A	chr22:38369822	928	40.3	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	SPTA1	unknown	F160L	480C>G	chr1:158651368	843	41.52	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	short-variant	TSHR	unknown	K700E	2098A>G	chr14:81610500	1091	36.02	-	-	-	-	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	copy-number-alteration	FGF14	known	-	-	-	-	-	9	6 of 6	1.6	amplification	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	copy-number-alteration	IRS2	known	-	-	-	-	-	9	5 of 5	1.79	amplification	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	copy-number-alteration	CUL4A	unknown	-	-	-	-	-	9	20 of 20	1.73	amplification	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	copy-number-alteration	DIS3	unknown	-	-	-	-	-	9	22 of 22	1.59	amplification	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	copy-number-alteration	CYLD	unknown	-	-	-	-	-	14	16 of 16	2.13	amplification	-	-	-	-	-	-	-
+TRF234838	286953013	06110889C	TRF234838.01.vars.final.vr1.xml	rearrangement	KDM5A	unknown	-	-	-	-	-	-	-	-	-	KDM5A	N/A	rearrangement	unknown	chr12:406175-406424	chr3:80585619-80585748	100
+TRF234839	286429004	06110890C	TRF234839.01.vars.final.vr1.xml	short-variant	BRAF	known	V600E	1799T>A	chr7:140453136	801	16.6	-	-	-	-	-	-	-	-	-	-	-
+TRF234839	286429004	06110890C	TRF234839.01.vars.final.vr1.xml	short-variant	PRSS1	known	A121T	361G>A	chr7:142459785	1057	19.3	-	-	-	-	-	-	-	-	-	-	-
+TRF234839	286429004	06110890C	TRF234839.01.vars.final.vr1.xml	short-variant	TP53	known	R175H	524G>A	chr17:7578406	1000	29	-	-	-	-	-	-	-	-	-	-	-
+TRF234839	286429004	06110890C	TRF234839.01.vars.final.vr1.xml	short-variant	RNF43	likely	H183fs*5	547_548insC	chr17:56440670	858	25.87	-	-	-	-	-	-	-	-	-	-	-
+TRF234839	286429004	06110890C	TRF234839.01.vars.final.vr1.xml	short-variant	ATRX	unknown	E1464del	4359_4361delGGA	chrX:76907799	334	85.03	-	-	-	-	-	-	-	-	-	-	-
+TRF234839	286429004	06110890C	TRF234839.01.vars.final.vr1.xml	short-variant	BRD4	unknown	V1110del	3328_3330delGTG	chr19:15350584	939	31.74	-	-	-	-	-	-	-	-	-	-	-
+TRF234839	286429004	06110890C	TRF234839.01.vars.final.vr1.xml	short-variant	CDK12	unknown	S601C	1802C>G	chr17:37627887	1142	49.47	-	-	-	-	-	-	-	-	-	-	-
+TRF234839	286429004	06110890C	TRF234839.01.vars.final.vr1.xml	short-variant	ERBB4	unknown	G730E	2189G>A	chr2:212488660	899	15.24	-	-	-	-	-	-	-	-	-	-	-
+TRF234839	286429004	06110890C	TRF234839.01.vars.final.vr1.xml	short-variant	FANCG	unknown	G34C	100G>T	chr9:35079223	866	54.5	-	-	-	-	-	-	-	-	-	-	-
+TRF234839	286429004	06110890C	TRF234839.01.vars.final.vr1.xml	short-variant	FGFR3	unknown	Q29H	87G>C	chr4:1795748	563	60.39	-	-	-	-	-	-	-	-	-	-	-
+TRF234839	286429004	06110890C	TRF234839.01.vars.final.vr1.xml	short-variant	GATA6	unknown	S184N	551G>A	chr18:19751656	428	60.75	-	-	-	-	-	-	-	-	-	-	-
+TRF234839	286429004	06110890C	TRF234839.01.vars.final.vr1.xml	short-variant	NOTCH1	unknown	D1808N	5422G>A	chr9:139396503	853	54.98	-	-	-	-	-	-	-	-	-	-	-
+TRF234839	286429004	06110890C	TRF234839.01.vars.final.vr1.xml	short-variant	PARP4	unknown	A703T	2107G>A	chr13:25043188	737	49.12	-	-	-	-	-	-	-	-	-	-	-
+TRF234839	286429004	06110890C	TRF234839.01.vars.final.vr1.xml	short-variant	PHLPP2	unknown	D519G	1556A>G	chr16:71703250	802	9.35	-	-	-	-	-	-	-	-	-	-	-
+TRF234839	286429004	06110890C	TRF234839.01.vars.final.vr1.xml	short-variant	PRKDC	unknown	N3605fs*3	10814_10815insA	chr8:48701554	981	23.85	-	-	-	-	-	-	-	-	-	-	-
+TRF234839	286429004	06110890C	TRF234839.01.vars.final.vr1.xml	short-variant	PTCH1	unknown	R1303C	3907C>T	chr9:98209631	740	55.81	-	-	-	-	-	-	-	-	-	-	-
+TRF234839	286429004	06110890C	TRF234839.01.vars.final.vr1.xml	short-variant	SMAD4	unknown	P356_G359>R	1067_1075delCTTCTGGAG	chr18:48591903	1008	18.75	-	-	-	-	-	-	-	-	-	-	-
+TRF234839	286429004	06110890C	TRF234839.01.vars.final.vr1.xml	short-variant	SOX10	unknown	V310M	928G>A	chr22:38369975	732	33.88	-	-	-	-	-	-	-	-	-	-	-
+TRF234839	286429004	06110890C	TRF234839.01.vars.final.vr1.xml	rearrangement	PRKDC	unknown	-	-	-	-	-	-	-	-	-	PRKDC	PRKDC	rearrangement	unknown	chr8:48792190-48792348	chr8:48779629-48779780	19
+TRF234840	286973005	06110891C	TRF234840.01.vars.final.vr1.xml	short-variant	TP53	known	T155N	464C>A	chr17:7578466	1101	25.79	-	-	-	-	-	-	-	-	-	-	-
+TRF234840	286973005	06110891C	TRF234840.01.vars.final.vr1.xml	short-variant	FAT1	likely	R937*	2809C>T	chr4:187628173	1398	7.65	-	-	-	-	-	-	-	-	-	-	-
+TRF234840	286973005	06110891C	TRF234840.01.vars.final.vr1.xml	short-variant	ALK	unknown	P158T	472C>A	chr2:30143054	1248	48.16	-	-	-	-	-	-	-	-	-	-	-
+TRF234840	286973005	06110891C	TRF234840.01.vars.final.vr1.xml	short-variant	ARID1B	unknown	G328_A329insG	985_986insGAG	chr6:157100048	840	16.19	-	-	-	-	-	-	-	-	-	-	-
+TRF234840	286973005	06110891C	TRF234840.01.vars.final.vr1.xml	short-variant	GATA3	unknown	A396T	1186G>A	chr10:8115837	1375	54.33	-	-	-	-	-	-	-	-	-	-	-
+TRF234840	286973005	06110891C	TRF234840.01.vars.final.vr1.xml	short-variant	HOXB13	unknown	T41M	122C>T	chr17:46805834	1035	50.24	-	-	-	-	-	-	-	-	-	-	-
+TRF234840	286973005	06110891C	TRF234840.01.vars.final.vr1.xml	short-variant	IGF1R	unknown	P329L	986C>T	chr15:99440018	770	51.3	-	-	-	-	-	-	-	-	-	-	-
+TRF234840	286973005	06110891C	TRF234840.01.vars.final.vr1.xml	short-variant	IGF1R	unknown	V579I	1735G>A	chr15:99456418	894	52.46	-	-	-	-	-	-	-	-	-	-	-
+TRF234840	286973005	06110891C	TRF234840.01.vars.final.vr1.xml	short-variant	NOTCH3	unknown	G165S	493G>A	chr19:15302957	1074	10.34	-	-	-	-	-	-	-	-	-	-	-
+TRF234840	286973005	06110891C	TRF234840.01.vars.final.vr1.xml	short-variant	SLIT2	unknown	P749L	2246C>T	chr4:20544219	1063	51.46	-	-	-	-	-	-	-	-	-	-	-
+TRF234840	286973005	06110891C	TRF234840.01.vars.final.vr1.xml	short-variant	TP53BP1	unknown	S380R	1140T>G	chr15:43766896	937	9.61	-	-	-	-	-	-	-	-	-	-	-
+TRF234840	286973005	06110891C	TRF234840.01.vars.final.vr1.xml	rearrangement	APC	likely	-	-	-	-	-	-	-	-	-	APC	MCC	truncation	Yes	chr5:112146764-112146949	chr5:112649444-112649703	50
+TRF234840	286973005	06110891C	TRF234840.01.vars.final.vr1.xml	rearrangement	PRKDC	unknown	-	-	-	-	-	-	-	-	-	PRKDC	N/A	rearrangement	unknown	chr8:48848441-48848597	chr12:17377841-17378011	15
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	MAP2K1	known	P124L	371C>T	chr15:66729163	1695	21.36	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	PIK3CA	known	E545K	1633G>A	chr3:178936091	614	40.07	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	TERT	known	promoter -124C>T	-124C>T	chr5:1295228	123	16.26	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	APC	likely	Y863fs*53	2586delC	chr5:112173876	977	20.68	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	APC	likely	S1411fs*5	4232_4233insAG	chr5:112175523	923	36.51	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	ATM	likely	K215fs*39	642_643insC	chr11:108114825	1008	25.99	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	BRCA2	likely	E2420*	7258G>T	chr13:32929248	1895	29.82	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	MAP2K1	likely	F53Y	158T>A	chr15:66727442	1671	21.13	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	NOTCH4	likely	C771*	2313T>A	chr6:32181472	600	23.33	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	BCOR	unknown	R79W	235C>T	chrX:39934364	960	19.58	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	CARD11	unknown	A687V	2060C>T	chr7:2962848	1006	68.99	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	CREBBP	unknown	M1021V	3061A>G	chr16:3817910	588	24.15	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	FGFR3	unknown	Q29H	87G>C	chr4:1795748	632	50.79	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	GABRA6	unknown	N128S	383A>G	chr5:161116112	987	38.5	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	NCOR1	unknown	P1910L	5729C>T	chr17:15964867	876	71.58	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	NOTCH4	unknown	P919L	2756C>T	chr6:32178638	1121	78.5	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	PIK3CG	unknown	A30G	89C>G	chr7:106508095	963	29.18	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	PPARG	unknown	V52I	154G>A	chr3:12421274	1121	38.72	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	RAD50	unknown	I118T	353T>C	chr5:131911608	531	38.23	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	SNCAIP	unknown	G186S	556G>A	chr5:121758988	1084	37.92	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	TAF1	unknown	S1114R	3342C>G	chrX:70614034	960	23.23	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	TRRAP	unknown	K533R	1598A>G	chr7:98507926	1170	63.42	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	TRRAP	unknown	E2732D	8196G>C	chr7:98574585	825	68	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	short-variant	TSC1	unknown	S829R	2485A>C	chr9:135776993	840	48.81	-	-	-	-	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	copy-number-alteration	FGF14	ambiguous	-	-	-	-	-	8	6 of 6	1.95	amplification	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	copy-number-alteration	IRS2	ambiguous	-	-	-	-	-	8	5 of 5	2.28	amplification	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	copy-number-alteration	LYN	ambiguous	-	-	-	-	-	8	12 of 12	1.87	amplification	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	copy-number-alteration	CDK8	known	-	-	-	-	-	8	13 of 13	2.03	amplification	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	copy-number-alteration	FLT3	known	-	-	-	-	-	8	24 of 24	1.93	amplification	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	copy-number-alteration	MYC	known	-	-	-	-	-	8	5 of 5	1.56	amplification	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	copy-number-alteration	MYST3	known	-	-	-	-	-	13	16 of 16	2.79	amplification	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	copy-number-alteration	CUL4A	unknown	-	-	-	-	-	8	20 of 20	2	amplification	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	copy-number-alteration	PARP4	unknown	-	-	-	-	-	8	33 of 33	1.84	amplification	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	copy-number-alteration	FLT1	unknown	-	-	-	-	-	8	31 of 31	1.96	amplification	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	copy-number-alteration	BRCA2	unknown	-	-	-	-	-	7	26 of 26	1.53	amplification	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	copy-number-alteration	RB1	unknown	-	-	-	-	-	7	23 of 27	1.74	amplification	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	copy-number-alteration	DIS3	unknown	-	-	-	-	-	8	22 of 22	1.85	amplification	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	copy-number-alteration	PRKDC	unknown	-	-	-	-	-	7	77 of 86	1.85	amplification	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	copy-number-alteration	PREX2	unknown	-	-	-	-	-	8	41 of 41	2.03	amplification	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	copy-number-alteration	NBN	unknown	-	-	-	-	-	8	16 of 16	1.78	amplification	-	-	-	-	-	-	-
+TRF234841	286973004	06110892C	TRF234841.01.vars.final.vr1.xml	copy-number-alteration	RUNX1T1	unknown	-	-	-	-	-	8	15 of 15	2.1	amplification	-	-	-	-	-	-	-
+TRF234842	275365002	06110893C	TRF234842.01.vars.final.vr1.xml	short-variant	KRAS	known	G12V	35G>T	chr12:25398284	734	43.73	-	-	-	-	-	-	-	-	-	-	-
+TRF234842	275365002	06110893C	TRF234842.01.vars.final.vr1.xml	short-variant	TP53	known	C275G	823T>G	chr17:7577115	732	31.69	-	-	-	-	-	-	-	-	-	-	-
+TRF234842	275365002	06110893C	TRF234842.01.vars.final.vr1.xml	short-variant	CDH1	unknown	P30T	88C>A	chr16:68772239	1012	41.01	-	-	-	-	-	-	-	-	-	-	-
+TRF234842	275365002	06110893C	TRF234842.01.vars.final.vr1.xml	short-variant	IGF1R	unknown	R1353H	4058G>A	chr15:99500625	568	49.47	-	-	-	-	-	-	-	-	-	-	-
+TRF234842	275365002	06110893C	TRF234842.01.vars.final.vr1.xml	short-variant	MLL2	unknown	A3144V	9431C>T	chr12:49431708	780	6.67	-	-	-	-	-	-	-	-	-	-	-
+TRF234842	275365002	06110893C	TRF234842.01.vars.final.vr1.xml	short-variant	MSH6	unknown	S1329L	3986C>T	chr2:48033775	750	72	-	-	-	-	-	-	-	-	-	-	-
+TRF234842	275365002	06110893C	TRF234842.01.vars.final.vr1.xml	short-variant	NTRK1	unknown	E492K	1474G>A	chr1:156845431	725	51.45	-	-	-	-	-	-	-	-	-	-	-
+TRF234842	275365002	06110893C	TRF234842.01.vars.final.vr1.xml	short-variant	ZBTB2	unknown	Y75C	224A>G	chr6:151687977	875	66.29	-	-	-	-	-	-	-	-	-	-	-
+TRF234842	275365002	06110893C	TRF234842.01.vars.final.vr1.xml	copy-number-alteration	PTEN	known	-	-	-	-	-	0	9 of 9	0.56	loss	-	-	-	-	-	-	-
+TRF234843	286427004	06110894C	TRF234843.01.vars.final.vr1.xml	short-variant	APC	known	R564*	1690C>T	chr5:112164616	839	10.37	-	-	-	-	-	-	-	-	-	-	-
+TRF234843	286427004	06110894C	TRF234843.01.vars.final.vr1.xml	short-variant	APC	known	E1309fs*4	3927_3931delAAAGA	chr5:112175217	1060	8.68	-	-	-	-	-	-	-	-	-	-	-
+TRF234843	286427004	06110894C	TRF234843.01.vars.final.vr1.xml	short-variant	TP53	known	E294*	880G>T	chr17:7577058	1387	15.57	-	-	-	-	-	-	-	-	-	-	-
+TRF234843	286427004	06110894C	TRF234843.01.vars.final.vr1.xml	short-variant	NF1	likely	L581fs*6	1742_1743insT	chr17:29548968	414	45.17	-	-	-	-	-	-	-	-	-	-	-
+TRF234843	286427004	06110894C	TRF234843.01.vars.final.vr1.xml	short-variant	SMAD4	likely	Q446*	1336C>T	chr18:48603035	719	16.83	-	-	-	-	-	-	-	-	-	-	-
+TRF234843	286427004	06110894C	TRF234843.01.vars.final.vr1.xml	short-variant	FANCA	unknown	I1396V	4186A>G	chr16:89805364	1241	25.95	-	-	-	-	-	-	-	-	-	-	-
+TRF234843	286427004	06110894C	TRF234843.01.vars.final.vr1.xml	short-variant	FANCA	unknown	P799S	2395C>T	chr16:89836354	1192	36.83	-	-	-	-	-	-	-	-	-	-	-
+TRF234843	286427004	06110894C	TRF234843.01.vars.final.vr1.xml	short-variant	FANCM	unknown	E309K	925G>A	chr14:45620606	667	55.62	-	-	-	-	-	-	-	-	-	-	-
+TRF234843	286427004	06110894C	TRF234843.01.vars.final.vr1.xml	short-variant	GLI1	unknown	R497H	1490G>A	chr12:57863395	1014	13.81	-	-	-	-	-	-	-	-	-	-	-
+TRF234843	286427004	06110894C	TRF234843.01.vars.final.vr1.xml	short-variant	GPR124	unknown	K1288del	3862_3864delAAG	chr8:37699717	434	32.49	-	-	-	-	-	-	-	-	-	-	-
+TRF234843	286427004	06110894C	TRF234843.01.vars.final.vr1.xml	short-variant	LRP6	unknown	R1523Q	4568G>A	chr12:12274334	1133	48.01	-	-	-	-	-	-	-	-	-	-	-
+TRF234843	286427004	06110894C	TRF234843.01.vars.final.vr1.xml	short-variant	MTOR	unknown	T1837_A1838insTAAT	5501_5502insTGCCGCCACCAC	chr1:11190697	1465	29.15	-	-	-	-	-	-	-	-	-	-	-
+TRF234843	286427004	06110894C	TRF234843.01.vars.final.vr1.xml	short-variant	PIK3C2G	unknown	L1267fs*28	3798_3805CCTACCTT>TTGTAAAAGGTA	chr12:18719901	452	27.43	-	-	-	-	-	-	-	-	-	-	-
+TRF234843	286427004	06110894C	TRF234843.01.vars.final.vr1.xml	short-variant	PRDM1	unknown	Q817H	2451A>C	chr6:106555334	900	50	-	-	-	-	-	-	-	-	-	-	-
+TRF234843	286427004	06110894C	TRF234843.01.vars.final.vr1.xml	short-variant	RANBP2	unknown	W1610C	4830G>C	chr2:109381825	253	49.01	-	-	-	-	-	-	-	-	-	-	-
+TRF234843	286427004	06110894C	TRF234843.01.vars.final.vr1.xml	short-variant	RARA	unknown	K190R	569A>G	chr17:38508261	840	48.93	-	-	-	-	-	-	-	-	-	-	-
+TRF234843	286427004	06110894C	TRF234843.01.vars.final.vr1.xml	short-variant	SMARCB1	unknown	A180T	538G>A	chr22:24145519	1135	12.95	-	-	-	-	-	-	-	-	-	-	-
+TRF234843	286427004	06110894C	TRF234843.01.vars.final.vr1.xml	short-variant	SUFU	unknown	R343L	1028G>T	chr10:104375030	702	50.85	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	FLT4	unknown	P922L	2765C>T	chr5:180046106	629	55.64	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	DNMT3A	unknown	R96W	286C>T	chr2:25505472	352	28.41	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	PTPRD	unknown	M1679K	5036T>A	chr9:8341180	80	41.25	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	KRAS	known	G12V	35G>T	chr12:25398284	370	30.81	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	RPTOR	unknown	A912T	2734G>A	chr17:78897399	701	45.51	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	RAD54L	unknown	N228S	683A>G	chr1:46726604	334	75.45	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	FLT4	unknown	S1163L	3488C>T	chr5:180039555	462	28.35	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	SNCAIP	unknown	V243L	727G>C	chr5:121759159	333	51.05	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	NCOR1	unknown	G5V	14G>T	chr17:16097870	293	67.92	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	NSD1	unknown	A520T	1558G>A	chr5:176636958	279	48.75	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	APC	likely	splice site 1409-2A>G	1409-2A>G	chr5:112162803	162	34.57	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	PBRM1	unknown	E1293K	3877G>A	chr3:52597433	205	44.39	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	SETD2	unknown	S2452L	7355C>T	chr3:47061326	400	38	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	ROS1	unknown	Y1021F	3062A>T	chr6:117686279	173	5.2	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	KDM6A	unknown	C79Y	236G>A	chrX:44820539	54	100	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	PIK3CA	known	Q546K	1636C>A	chr3:178936094	161	32.92	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	APC	known	R213*	637C>T	chr5:112116592	154	22.08	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	NOTCH2	unknown	M1588K	4763T>A	chr1:120466356	161	75.16	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	SOX9	likely	A472fs*1	1413_1414insTGAACCCC	chr17:70120411	794	19.9	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	MSH6	unknown	E220G	659A>G	chr2:48025781	123	45.53	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	APCDD1	unknown	*515Kext*4	1543T>A	chr18:10488033	153	5.23	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	PTPN11	known	Y197*	591T>G	chr12:112892433	204	31.37	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	RPTOR	unknown	P896L	2687C>T	chr17:78897352	699	15.31	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	ABL1	known	K609del	1826_1828delAGA	chr9:133759502	722	9.14	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	MYD88	unknown	I130T	389T>C	chr3:38181376	237	44.73	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	HLA-A	known	Q78R	233A>G	chr6:29910693	372	38.17	-	-	-	-	-	-	-	-	-	-	-
+TRF242411	270941005	06110896B	TRF242411.01.vars.final.vr1.xml	short-variant	POLD1	unknown	C139S	415T>A	chr19:50905133	637	27.79	-	-	-	-	-	-	-	-	-	-	-
+TRF242413	269989006	06110898B	TRF242413.01.vars.final.vr1.xml	short-variant	FAT3	unknown	A855S	2563G>T	chr11:92087841	595	9.75	-	-	-	-	-	-	-	-	-	-	-
+TRF242413	269989006	06110898B	TRF242413.01.vars.final.vr1.xml	short-variant	SMAD4	known	R361C	1081C>T	chr18:48591918	781	11.27	-	-	-	-	-	-	-	-	-	-	-
+TRF242413	269989006	06110898B	TRF242413.01.vars.final.vr1.xml	short-variant	KRAS	known	G12V	35G>T	chr12:25398284	864	11.11	-	-	-	-	-	-	-	-	-	-	-
+TRF242413	269989006	06110898B	TRF242413.01.vars.final.vr1.xml	short-variant	TNKS	unknown	F259S	776T>C	chr8:9437771	775	11.23	-	-	-	-	-	-	-	-	-	-	-
+TRF242413	269989006	06110898B	TRF242413.01.vars.final.vr1.xml	short-variant	GLI1	unknown	A670S	2008G>T	chr12:57864531	654	54.13	-	-	-	-	-	-	-	-	-	-	-
+TRF242413	269989006	06110898B	TRF242413.01.vars.final.vr1.xml	short-variant	TET2	unknown	A1272T	3814G>A	chr4:106180786	538	44.24	-	-	-	-	-	-	-	-	-	-	-
+TRF242413	269989006	06110898B	TRF242413.01.vars.final.vr1.xml	short-variant	TP53	known	R248W	742C>T	chr17:7577539	555	8.83	-	-	-	-	-	-	-	-	-	-	-
+TRF242413	269989006	06110898B	TRF242413.01.vars.final.vr1.xml	short-variant	CARD11	unknown	E258K	772G>A	chr7:2979475	769	6.63	-	-	-	-	-	-	-	-	-	-	-
+TRF242413	269989006	06110898B	TRF242413.01.vars.final.vr1.xml	short-variant	APC	known	R232*	694C>T	chr5:112128191	769	6.37	-	-	-	-	-	-	-	-	-	-	-
+TRF242413	269989006	06110898B	TRF242413.01.vars.final.vr1.xml	short-variant	APC	known	E1286*	3856G>T	chr5:112175147	648	8.64	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	CDKN2B	unknown	R73G	217C>G	chr9:22008736	650	53.54	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	MAP2K4	unknown	D229G	686A>G	chr17:12016550	520	5.19	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	CBL	unknown	G413R	1237G>C	chr11:119149229	831	47.17	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	CCNE1	unknown	R385K	1154G>A	chr19:30314605	918	17.43	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	LRP1B	unknown	V4500I	13498G>A	chr2:140995783	764	60.47	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	ASXL1	unknown	R235W	703C>T	chr20:31017841	1011	39.66	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	FANCM	unknown	E1157K	3469G>A	chr14:45645426	1359	14.35	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	EPHA3	unknown	L556del	1666_1668delCTC	chr3:89456489	1054	44.78	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	MEF2B	unknown	K89R	266A>G	chr19:19258634	645	50.23	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	TP53	likely	splice site 920-1_928delGCACTGCCCA	920-1_928delGCACTGCCCA	chr17:7576917	1242	18.52	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	TSHR	unknown	G132R	394G>C	chr14:81557414	723	46.47	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	NUP93	unknown	K633Q	1897A>C	chr16:56870627	1012	60.08	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	RUNX1T1	unknown	A497V	1490C>T	chr8:92982935	970	10.1	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	TAF1	unknown	R443S	1329G>T	chrX:70598853	613	42.58	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	ATM	unknown	N1223S	3668A>G	chr11:108153528	913	9.09	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	BRAF	unknown	D594A	1781A>C	chr7:140453154	783	25.16	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	FAS	unknown	R250Q	749G>A	chr10:90773948	1144	5.16	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	APC	known	R216*	646C>T	chr5:112128143	709	15.23	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	APC	likely	T1493fs*15	4475_4476insGC	chr5:112175766	1093	15.55	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	MLL2	unknown	S2488L	7463C>T	chr12:49434090	1026	5.07	-	-	-	-	-	-	-	-	-	-	-
+TRF242414	286973006	06110899C	TRF242414.01.vars.final.vr1.xml	short-variant	GRIN2A	unknown	S1216I	3647G>T	chr16:9857754	1501	9.86	-	-	-	-	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	short-variant	FLT3	unknown	G400R	1198G>A	chr13:28622419	746	58.85	-	-	-	-	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	short-variant	FANCC	unknown	Q465R	1394A>G	chr9:97869487	645	47.29	-	-	-	-	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	short-variant	NCOR1	unknown	G5V	14G>T	chr17:16097870	410	57.8	-	-	-	-	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	short-variant	FANCD2	unknown	N405S	1214A>G	chr3:10088343	261	47.51	-	-	-	-	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	short-variant	MAP2K1	known	K57N	171G>T	chr15:66727455	701	21.83	-	-	-	-	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	short-variant	ROS1	unknown	splice site 3446-63_3478del96	3446-63_3478del96	chr6:117681141	143	25.17	-	-	-	-	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	short-variant	NOTCH3	likely	C43fs*32	125_126insC	chr19:15308382	861	18.47	-	-	-	-	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	short-variant	APC	known	L1489fs*18	4466delT	chr5:112175756	407	15.97	-	-	-	-	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	short-variant	FAM175A	unknown	R103C	307C>T	chr4:84391525	274	27.01	-	-	-	-	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	short-variant	PTPN11	known	Y197*	591T>G	chr12:112892433	315	27.3	-	-	-	-	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	short-variant	PBRM1	unknown	R760H	2279G>A	chr3:52643617	684	20.18	-	-	-	-	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	short-variant	DDR2	unknown	I488M	1464A>G	chr1:162740262	793	64.44	-	-	-	-	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	short-variant	APC	known	R876*	2626C>T	chr5:112173917	715	18.18	-	-	-	-	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	short-variant	ZNF217	unknown	M410V	1228A>G	chr20:52198138	1615	60.99	-	-	-	-	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	short-variant	NTRK1	unknown	P311L	932C>T	chr1:156843506	770	58.05	-	-	-	-	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	short-variant	MLL	unknown	A53V	158C>T	chr11:118307385	293	53.58	-	-	-	-	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	copy-number-alteration	FLT3	ambiguous	-	-	-	-	-	6	24 of 24	2	amplification	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	copy-number-alteration	TOP1	ambiguous	-	-	-	-	-	6	21 of 21	1.89	amplification	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	copy-number-alteration	ASXL1	unknown	-	-	-	-	-	6	13 of 13	1.72	amplification	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	copy-number-alteration	FGF14	ambiguous	-	-	-	-	-	6	5 of 6	1.92	amplification	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	copy-number-alteration	BCL2L1	ambiguous	-	-	-	-	-	6	4 of 4	1.77	amplification	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	copy-number-alteration	ARFRP1	ambiguous	-	-	-	-	-	6	6 of 6	2.04	amplification	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	copy-number-alteration	FLT1	unknown	-	-	-	-	-	6	31 of 31	1.92	amplification	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	copy-number-alteration	CUL4A	unknown	-	-	-	-	-	6	20 of 20	1.77	amplification	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	copy-number-alteration	PARP4	unknown	-	-	-	-	-	6	27 of 33	1.78	amplification	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	copy-number-alteration	AURKA	ambiguous	-	-	-	-	-	6	8 of 8	1.8	amplification	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	copy-number-alteration	CDK8	ambiguous	-	-	-	-	-	6	13 of 13	2.03	amplification	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	copy-number-alteration	DIS3	unknown	-	-	-	-	-	6	21 of 22	1.67	amplification	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	copy-number-alteration	RB1	unknown	-	-	-	-	-	6	27 of 27	1.68	amplification	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	copy-number-alteration	GNAS	ambiguous	-	-	-	-	-	6	13 of 15	1.97	amplification	-	-	-	-	-	-	-
+TRF242415	270941006	06110900B	TRF242415.01.vars.final.vr1.xml	copy-number-alteration	SRC	ambiguous	-	-	-	-	-	6	11 of 11	1.93	amplification	-	-	-	-	-	-	-
+TRF242416	270941007	06110901B	TRF242416.01.vars.final.vr1.xml	short-variant	FAT1	unknown	I3032T	9095T>C	chr4:187535479	814	27.89	-	-	-	-	-	-	-	-	-	-	-
+TRF242416	270941007	06110901B	TRF242416.01.vars.final.vr1.xml	short-variant	MYST3	unknown	E791D	2373A>C	chr8:41800374	968	37.71	-	-	-	-	-	-	-	-	-	-	-
+TRF242416	270941007	06110901B	TRF242416.01.vars.final.vr1.xml	short-variant	STAG2	unknown	L526H	1577T>A	chrX:123195663	527	57.69	-	-	-	-	-	-	-	-	-	-	-
+TRF242416	270941007	06110901B	TRF242416.01.vars.final.vr1.xml	short-variant	MTOR	known	E1799K	5395G>A	chr1:11190804	889	23.96	-	-	-	-	-	-	-	-	-	-	-
+TRF242416	270941007	06110901B	TRF242416.01.vars.final.vr1.xml	short-variant	EPHA6	unknown	N564D	1690A>G	chr3:97124077	649	39.75	-	-	-	-	-	-	-	-	-	-	-
+TRF242416	270941007	06110901B	TRF242416.01.vars.final.vr1.xml	short-variant	PTCH1	unknown	E44G	131A>G	chr9:98278972	1064	71.8	-	-	-	-	-	-	-	-	-	-	-
+TRF242416	270941007	06110901B	TRF242416.01.vars.final.vr1.xml	short-variant	KDR	unknown	A505S	1513G>T	chr4:55972877	421	22.57	-	-	-	-	-	-	-	-	-	-	-
+TRF242416	270941007	06110901B	TRF242416.01.vars.final.vr1.xml	short-variant	ATM	unknown	S1691R	5071A>C	chr11:108170506	767	44.2	-	-	-	-	-	-	-	-	-	-	-
+TRF242416	270941007	06110901B	TRF242416.01.vars.final.vr1.xml	short-variant	FAS	unknown	Q196E	586C>G	chr10:90771773	970	41.34	-	-	-	-	-	-	-	-	-	-	-
+TRF242416	270941007	06110901B	TRF242416.01.vars.final.vr1.xml	short-variant	TP53	likely	V73fs*76	216_217insC	chr17:7579470	1054	40.13	-	-	-	-	-	-	-	-	-	-	-
+TRF242416	270941007	06110901B	TRF242416.01.vars.final.vr1.xml	copy-number-alteration	TOP1	ambiguous	-	-	-	-	-	7	21 of 21	1.77	amplification	-	-	-	-	-	-	-
+TRF242416	270941007	06110901B	TRF242416.01.vars.final.vr1.xml	copy-number-alteration	BCL2L1	ambiguous	-	-	-	-	-	7	4 of 4	1.59	amplification	-	-	-	-	-	-	-
+TRF242416	270941007	06110901B	TRF242416.01.vars.final.vr1.xml	copy-number-alteration	ARFRP1	ambiguous	-	-	-	-	-	7	6 of 6	1.69	amplification	-	-	-	-	-	-	-
+TRF242416	270941007	06110901B	TRF242416.01.vars.final.vr1.xml	copy-number-alteration	AURKA	ambiguous	-	-	-	-	-	7	8 of 8	1.67	amplification	-	-	-	-	-	-	-
+TRF242416	270941007	06110901B	TRF242416.01.vars.final.vr1.xml	copy-number-alteration	ZNF217	ambiguous	-	-	-	-	-	7	4 of 4	1.42	amplification	-	-	-	-	-	-	-
+TRF242416	270941007	06110901B	TRF242416.01.vars.final.vr1.xml	copy-number-alteration	SRC	ambiguous	-	-	-	-	-	7	11 of 11	1.74	amplification	-	-	-	-	-	-	-
+TRF242416	270941007	06110901B	TRF242416.01.vars.final.vr1.xml	copy-number-alteration	ASXL1	unknown	-	-	-	-	-	7	12 of 13	1.58	amplification	-	-	-	-	-	-	-
+TRF242416	270941007	06110901B	TRF242416.01.vars.final.vr1.xml	copy-number-alteration	GNAS	ambiguous	-	-	-	-	-	7	15 of 15	1.48	amplification	-	-	-	-	-	-	-
+TRF242417	270941008	06110903B	TRF242417.01.vars.final.vr1.xml	short-variant	FAT3	unknown	R2044H	6131G>A	chr11:92532310	966	51.35	-	-	-	-	-	-	-	-	-	-	-
+TRF242417	270941008	06110903B	TRF242417.01.vars.final.vr1.xml	short-variant	SNCAIP	unknown	A607T	1819G>A	chr5:121786361	1072	38.81	-	-	-	-	-	-	-	-	-	-	-
+TRF242417	270941008	06110903B	TRF242417.01.vars.final.vr1.xml	short-variant	KRAS	known	G12C	34G>T	chr12:25398285	969	34.37	-	-	-	-	-	-	-	-	-	-	-
+TRF242417	270941008	06110903B	TRF242417.01.vars.final.vr1.xml	short-variant	SMAD4	known	R361H	1082G>A	chr18:48591919	973	22.61	-	-	-	-	-	-	-	-	-	-	-
+TRF242417	270941008	06110903B	TRF242417.01.vars.final.vr1.xml	short-variant	PRKDC	unknown	N233S	698A>G	chr8:48866203	705	50.21	-	-	-	-	-	-	-	-	-	-	-
+TRF242417	270941008	06110903B	TRF242417.01.vars.final.vr1.xml	short-variant	FANCF	unknown	A186V	557C>T	chr11:22646800	1009	50.84	-	-	-	-	-	-	-	-	-	-	-
+TRF242417	270941008	06110903B	TRF242417.01.vars.final.vr1.xml	short-variant	LRP1B	unknown	L826W	2477T>G	chr2:141762930	1209	32.42	-	-	-	-	-	-	-	-	-	-	-
+TRF242417	270941008	06110903B	TRF242417.01.vars.final.vr1.xml	short-variant	TSC2	unknown	D1406N	4216G>A	chr16:2134439	995	20.2	-	-	-	-	-	-	-	-	-	-	-
+TRF242417	270941008	06110903B	TRF242417.01.vars.final.vr1.xml	short-variant	FBXW7	known	R393*	1177C>T	chr4:153250883	859	18.98	-	-	-	-	-	-	-	-	-	-	-
+TRF242417	270941008	06110903B	TRF242417.01.vars.final.vr1.xml	short-variant	APC	likely	L1382fs*3	4143_4144delAC	chr5:112175433	791	21.62	-	-	-	-	-	-	-	-	-	-	-
+TRF242417	270941008	06110903B	TRF242417.01.vars.final.vr1.xml	short-variant	STAT4	unknown	S130A	388T>G	chr2:191937901	1029	30.13	-	-	-	-	-	-	-	-	-	-	-
+TRF242417	270941008	06110903B	TRF242417.01.vars.final.vr1.xml	short-variant	TP53BP1	unknown	V981M	2941G>A	chr15:43738669	1004	17.53	-	-	-	-	-	-	-	-	-	-	-
+TRF242417	270941008	06110903B	TRF242417.01.vars.final.vr1.xml	short-variant	NTRK2	unknown	S167Y	500C>A	chr9:87325623	806	49.38	-	-	-	-	-	-	-	-	-	-	-
+TRF242417	270941008	06110903B	TRF242417.01.vars.final.vr1.xml	short-variant	TP53BP1	unknown	S566N	1697G>A	chr15:43749094	1292	50.85	-	-	-	-	-	-	-	-	-	-	-
+TRF242417	270941008	06110903B	TRF242417.01.vars.final.vr1.xml	short-variant	MPL	unknown	T369N	1106C>A	chr1:43812241	972	18.21	-	-	-	-	-	-	-	-	-	-	-
+TRF242417	270941008	06110903B	TRF242417.01.vars.final.vr1.xml	short-variant	MRE11A	unknown	N556S	1667A>G	chr11:94180501	1085	49.68	-	-	-	-	-	-	-	-	-	-	-
+TRF242417	270941008	06110903B	TRF242417.01.vars.final.vr1.xml	short-variant	TP53	known	R248Q	743G>A	chr17:7577538	802	28.18	-	-	-	-	-	-	-	-	-	-	-
+TRF242417	270941008	06110903B	TRF242417.01.vars.final.vr1.xml	short-variant	MAP3K1	unknown	S939C	2816C>G	chr5:56177843	574	52.26	-	-	-	-	-	-	-	-	-	-	-
+TRF242417	270941008	06110903B	TRF242417.01.vars.final.vr1.xml	short-variant	KDR	known	P1243L	3728C>T	chr4:55948737	1079	50.6	-	-	-	-	-	-	-	-	-	-	-
+TRF242418	273839008	06110904B	TRF242418.01.vars.final.vr1.xml	short-variant	TP53	known	R175H	524G>A	chr17:7578406	1040	44.71	-	-	-	-	-	-	-	-	-	-	-
+TRF242418	273839008	06110904B	TRF242418.01.vars.final.vr1.xml	short-variant	PTCH2	unknown	I992M	2976A>G	chr1:45292160	934	53.96	-	-	-	-	-	-	-	-	-	-	-
+TRF242418	273839008	06110904B	TRF242418.01.vars.final.vr1.xml	short-variant	MED12	unknown	Q2119_Q2120insHQQQ	6359_6360insCCAGCAGCAACA	chrX:70361171	1137	32.1	-	-	-	-	-	-	-	-	-	-	-
+TRF242418	273839008	06110904B	TRF242418.01.vars.final.vr1.xml	short-variant	NBN	unknown	Y429S	1286A>C	chr8:90967622	1100	49.91	-	-	-	-	-	-	-	-	-	-	-
+TRF242418	273839008	06110904B	TRF242418.01.vars.final.vr1.xml	short-variant	DOT1L	unknown	D369N	1105G>A	chr19:2210498	717	11.02	-	-	-	-	-	-	-	-	-	-	-
+TRF242418	273839008	06110904B	TRF242418.01.vars.final.vr1.xml	short-variant	AR	unknown	P392S	1174C>T	chrX:66766162	1110	45.41	-	-	-	-	-	-	-	-	-	-	-
+TRF242418	273839008	06110904B	TRF242418.01.vars.final.vr1.xml	short-variant	CDK4	unknown	R209C	625C>T	chr12:58144446	635	46.46	-	-	-	-	-	-	-	-	-	-	-
+TRF242418	273839008	06110904B	TRF242418.01.vars.final.vr1.xml	short-variant	APC	known	A1492fs*22	4473_4474insT	chr5:112175764	1241	25.46	-	-	-	-	-	-	-	-	-	-	-
+TRF242418	273839008	06110904B	TRF242418.01.vars.final.vr1.xml	short-variant	APC	known	R876*	2626C>T	chr5:112173917	1169	14.88	-	-	-	-	-	-	-	-	-	-	-
+TRF242418	273839008	06110904B	TRF242418.01.vars.final.vr1.xml	short-variant	NOTCH1	unknown	G2245R	6733G>A	chr9:139391458	748	51.34	-	-	-	-	-	-	-	-	-	-	-
+TRF242418	273839008	06110904B	TRF242418.01.vars.final.vr1.xml	copy-number-alteration	ERBB2	known	-	-	-	-	-	183	27 of 27	24.25	amplification	-	-	-	-	-	-	-
+TRF242418	273839008	06110904B	TRF242418.01.vars.final.vr1.xml	copy-number-alteration	RNF43	unknown	-	-	-	-	-	7	9 of 9	1.42	amplification	-	-	-	-	-	-	-
+TRF242418	273839008	06110904B	TRF242418.01.vars.final.vr1.xml	rearrangement	ATR	likely	-	-	-	-	-	-	-	-	-	ATR	N/A	truncation	unknown	chr3:142210447-142210678	chr17:38164479-38164962	3797
+TRF242419	275365003	06110905C	TRF242419.01.vars.final.vr1.xml	short-variant	PIK3CA	known	Q546P	1637A>C	chr3:178936095	1014	1.58	-	-	-	-	-	-	-	-	-	-	-
+TRF242419	275365003	06110905C	TRF242419.01.vars.final.vr1.xml	short-variant	MLL	unknown	A53V	158C>T	chr11:118307385	361	56.23	-	-	-	-	-	-	-	-	-	-	-
+TRF242419	275365003	06110905C	TRF242419.01.vars.final.vr1.xml	short-variant	MKNK1	unknown	R455H	1364G>A	chr1:47024281	743	46.57	-	-	-	-	-	-	-	-	-	-	-
+TRF242419	275365003	06110905C	TRF242419.01.vars.final.vr1.xml	short-variant	MLL3	unknown	L3311F	9931C>T	chr7:151860731	1369	49.82	-	-	-	-	-	-	-	-	-	-	-
+TRF242419	275365003	06110905C	TRF242419.01.vars.final.vr1.xml	short-variant	FBXW7	known	R505G	1513C>G	chr4:153247289	1226	1.14	-	-	-	-	-	-	-	-	-	-	-
+TRF242419	275365003	06110905C	TRF242419.01.vars.final.vr1.xml	short-variant	KRAS	known	G12D	35G>A	chr12:25398284	1019	2.85	-	-	-	-	-	-	-	-	-	-	-
+TRF242419	275365003	06110905C	TRF242419.01.vars.final.vr1.xml	short-variant	EGFR	unknown	P1090S	3268C>T	chr7:55270315	1276	47.34	-	-	-	-	-	-	-	-	-	-	-
+TRF242419	275365003	06110905C	TRF242419.01.vars.final.vr1.xml	short-variant	TP53	known	N131S	392A>G	chr17:7578538	1037	1.16	-	-	-	-	-	-	-	-	-	-	-
+TRF242419	275365003	06110905C	TRF242419.01.vars.final.vr1.xml	short-variant	APC	known	Q1378*	4132C>T	chr5:112175423	973	2.88	-	-	-	-	-	-	-	-	-	-	-
+TRF242419	275365003	06110905C	TRF242419.01.vars.final.vr1.xml	short-variant	TP53BP1	unknown	I1093_S1094insM	3280_3281insTGA	chr15:43724771	1061	44.96	-	-	-	-	-	-	-	-	-	-	-
+TRF242419	275365003	06110905C	TRF242419.01.vars.final.vr1.xml	short-variant	EPHA3	unknown	V87L	259G>C	chr3:89259115	1337	50.41	-	-	-	-	-	-	-	-	-	-	-
+TRF242419	275365003	06110905C	TRF242419.01.vars.final.vr1.xml	short-variant	GREM1	unknown	P35A	103C>G	chr15:33022994	1311	51.18	-	-	-	-	-	-	-	-	-	-	-
+TRF242419	275365003	06110905C	TRF242419.01.vars.final.vr1.xml	short-variant	FBXW7	unknown	H104P	311A>C	chr4:153332645	1282	50	-	-	-	-	-	-	-	-	-	-	-
+TRF242420	273839009	06110906C	TRF242420.01.vars.final.vr1.xml	short-variant	PIK3C2B	unknown	D572Y	1714G>T	chr1:204426198	921	12.38	-	-	-	-	-	-	-	-	-	-	-
+TRF242420	273839009	06110906C	TRF242420.01.vars.final.vr1.xml	short-variant	NCOR1	likely	E894*	2680G>T	chr17:16004574	797	37.14	-	-	-	-	-	-	-	-	-	-	-
+TRF242420	273839009	06110906C	TRF242420.01.vars.final.vr1.xml	short-variant	MED12	unknown	K1695_P1696insLK	5085_5086insTTGAAG	chrX:70356190	1036	31.66	-	-	-	-	-	-	-	-	-	-	-
+TRF242420	273839009	06110906C	TRF242420.01.vars.final.vr1.xml	short-variant	SMAD2	unknown	S467L	1400C>T	chr18:45368202	602	28.9	-	-	-	-	-	-	-	-	-	-	-
+TRF242420	273839009	06110906C	TRF242420.01.vars.final.vr1.xml	short-variant	FLT1	unknown	S733del	2178_2180delATC	chr13:28942736	655	28.4	-	-	-	-	-	-	-	-	-	-	-
+TRF242420	273839009	06110906C	TRF242420.01.vars.final.vr1.xml	short-variant	APC	known	R1450*	4348C>T	chr5:112175639	1246	18.86	-	-	-	-	-	-	-	-	-	-	-
+TRF242420	273839009	06110906C	TRF242420.01.vars.final.vr1.xml	short-variant	RAD51	unknown	R79C	235C>T	chr15:40994013	151	28.48	-	-	-	-	-	-	-	-	-	-	-
+TRF242420	273839009	06110906C	TRF242420.01.vars.final.vr1.xml	short-variant	FRS2	unknown	R52H	155G>A	chr12:69964199	1099	12.83	-	-	-	-	-	-	-	-	-	-	-
+TRF242420	273839009	06110906C	TRF242420.01.vars.final.vr1.xml	short-variant	KRAS	known	G13D	38G>A	chr12:25398281	761	25.76	-	-	-	-	-	-	-	-	-	-	-
+TRF242420	273839009	06110906C	TRF242420.01.vars.final.vr1.xml	short-variant	LRP6	unknown	D1044N	3130G>A	chr12:12301952	1071	43.7	-	-	-	-	-	-	-	-	-	-	-
+TRF242420	273839009	06110906C	TRF242420.01.vars.final.vr1.xml	short-variant	TP53	known	Q167*	499C>T	chr17:7578431	1277	37.59	-	-	-	-	-	-	-	-	-	-	-
+TRF242420	273839009	06110906C	TRF242420.01.vars.final.vr1.xml	short-variant	APC	known	R876*	2626C>T	chr5:112173917	1146	21.99	-	-	-	-	-	-	-	-	-	-	-
+TRF242420	273839009	06110906C	TRF242420.01.vars.final.vr1.xml	short-variant	BRCA2	unknown	T3013I	9038C>T	chr13:32953971	841	46.97	-	-	-	-	-	-	-	-	-	-	-
+TRF242421	273319004	06110907C	TRF242421.01.vars.final.vr1.xml	short-variant	MYC	unknown	S362F	1085C>T	chr8:128752924	1454	42.43	-	-	-	-	-	-	-	-	-	-	-
+TRF242421	273319004	06110907C	TRF242421.01.vars.final.vr1.xml	short-variant	PRKDC	unknown	P4040L	12119C>T	chr8:48689468	724	13.26	-	-	-	-	-	-	-	-	-	-	-
+TRF242421	273319004	06110907C	TRF242421.01.vars.final.vr1.xml	short-variant	APC	known	N1473fs*34	4418delA	chr5:112175708	917	22.25	-	-	-	-	-	-	-	-	-	-	-
+TRF242421	273319004	06110907C	TRF242421.01.vars.final.vr1.xml	short-variant	ATM	likely	splice site 6807+2T>C	6807+2T>C	chr11:108196273	628	6.53	-	-	-	-	-	-	-	-	-	-	-
+TRF242421	273319004	06110907C	TRF242421.01.vars.final.vr1.xml	short-variant	ARID1B	unknown	G319del	954_956delAGG	chr6:157100016	645	38.45	-	-	-	-	-	-	-	-	-	-	-
+TRF242421	273319004	06110907C	TRF242421.01.vars.final.vr1.xml	short-variant	APC	unknown	V1472I	4414G>A	chr5:112175705	707	1.98	-	-	-	-	-	-	-	-	-	-	-
+TRF242421	273319004	06110907C	TRF242421.01.vars.final.vr1.xml	short-variant	CBL	unknown	A519fs*96	1555delG	chr11:119155801	884	11.43	-	-	-	-	-	-	-	-	-	-	-
+TRF242421	273319004	06110907C	TRF242421.01.vars.final.vr1.xml	short-variant	TP53	known	C229fs*10	686_687delGT	chr17:7577593	580	21.03	-	-	-	-	-	-	-	-	-	-	-
+TRF242421	273319004	06110907C	TRF242421.01.vars.final.vr1.xml	short-variant	PREX2	unknown	R1215Q	3644G>A	chr8:69033204	750	42.93	-	-	-	-	-	-	-	-	-	-	-
+TRF242421	273319004	06110907C	TRF242421.01.vars.final.vr1.xml	short-variant	EPHA6	unknown	R306H	917G>A	chr3:96706640	1176	18.79	-	-	-	-	-	-	-	-	-	-	-
+TRF242421	273319004	06110907C	TRF242421.01.vars.final.vr1.xml	short-variant	DDR2	unknown	Y122C	365A>G	chr1:162724593	849	8.36	-	-	-	-	-	-	-	-	-	-	-
+TRF242422	273321001	06110911C	TRF242422.01.vars.final.vr1.xml	short-variant	TNFAIP3	unknown	D566V	1697A>T	chr6:138200279	811	28.36	-	-	-	-	-	-	-	-	-	-	-
+TRF242422	273321001	06110911C	TRF242422.01.vars.final.vr1.xml	short-variant	MAP3K1	unknown	S939C	2816C>G	chr5:56177843	357	28.29	-	-	-	-	-	-	-	-	-	-	-
+TRF242422	273321001	06110911C	TRF242422.01.vars.final.vr1.xml	short-variant	TP53BP1	unknown	I450_P451del	1347_1352delTATCCC	chr15:43762077	664	21.84	-	-	-	-	-	-	-	-	-	-	-
+TRF242422	273321001	06110911C	TRF242422.01.vars.final.vr1.xml	short-variant	IL7R	unknown	S366P	1096T>C	chr5:35876304	675	57.19	-	-	-	-	-	-	-	-	-	-	-
+TRF242422	273321001	06110911C	TRF242422.01.vars.final.vr1.xml	short-variant	APC	known	splice site 835-8A>G	835-8A>G	chr5:112151184	488	39.96	-	-	-	-	-	-	-	-	-	-	-
+TRF242422	273321001	06110911C	TRF242422.01.vars.final.vr1.xml	short-variant	CDKN2C	unknown	R133W	397C>T	chr1:51439832	936	12.18	-	-	-	-	-	-	-	-	-	-	-
+TRF242422	273321001	06110911C	TRF242422.01.vars.final.vr1.xml	short-variant	EPHA7	unknown	Q675P	2024A>C	chr6:93967903	1079	29.56	-	-	-	-	-	-	-	-	-	-	-
+TRF242422	273321001	06110911C	TRF242422.01.vars.final.vr1.xml	short-variant	NCOR1	unknown	A1972S	5914G>T	chr17:15961881	688	65.55	-	-	-	-	-	-	-	-	-	-	-
+TRF242422	273321001	06110911C	TRF242422.01.vars.final.vr1.xml	short-variant	FAT1	unknown	S79N	236G>A	chr4:187630746	1141	38.56	-	-	-	-	-	-	-	-	-	-	-
+TRF242422	273321001	06110911C	TRF242422.01.vars.final.vr1.xml	short-variant	TP53	known	R175H	524G>A	chr17:7578406	442	42.53	-	-	-	-	-	-	-	-	-	-	-
+TRF242422	273321001	06110911C	TRF242422.01.vars.final.vr1.xml	short-variant	TRRAP	unknown	P3763S	11287C>T	chr7:98609772	606	48.84	-	-	-	-	-	-	-	-	-	-	-
+TRF242422	273321001	06110911C	TRF242422.01.vars.final.vr1.xml	copy-number-alteration	CDK8	known	-	-	-	-	-	10	13 of 13	2.55	amplification	-	-	-	-	-	-	-
+TRF242422	273321001	06110911C	TRF242422.01.vars.final.vr1.xml	copy-number-alteration	PARP4	unknown	-	-	-	-	-	10	27 of 33	2.19	amplification	-	-	-	-	-	-	-
+TRF242422	273321001	06110911C	TRF242422.01.vars.final.vr1.xml	copy-number-alteration	FLT1	unknown	-	-	-	-	-	10	31 of 31	2.22	amplification	-	-	-	-	-	-	-
+TRF242422	273321001	06110911C	TRF242422.01.vars.final.vr1.xml	copy-number-alteration	FLT3	known	-	-	-	-	-	10	24 of 24	2.33	amplification	-	-	-	-	-	-	-
+TRF242423	273839010	06110912C	TRF242423.01.vars.final.vr1.xml	short-variant	RPA1	unknown	I378V	1132A>G	chr17:1783876	546	47.07	-	-	-	-	-	-	-	-	-	-	-
+TRF242423	273839010	06110912C	TRF242423.01.vars.final.vr1.xml	short-variant	NOTCH3	likely	R883*	2647C>T	chr19:15292532	629	19.4	-	-	-	-	-	-	-	-	-	-	-
+TRF242423	273839010	06110912C	TRF242423.01.vars.final.vr1.xml	short-variant	CARD11	unknown	R688*	2062C>T	chr7:2962846	654	15.9	-	-	-	-	-	-	-	-	-	-	-
+TRF242423	273839010	06110912C	TRF242423.01.vars.final.vr1.xml	short-variant	MTOR	unknown	R1391*	4171C>T	chr1:11259397	743	47.51	-	-	-	-	-	-	-	-	-	-	-
+TRF242423	273839010	06110912C	TRF242423.01.vars.final.vr1.xml	short-variant	SMO	unknown	S33R	99C>A	chr7:128829091	156	56.41	-	-	-	-	-	-	-	-	-	-	-
+TRF242423	273839010	06110912C	TRF242423.01.vars.final.vr1.xml	short-variant	KRAS	known	G12D	35G>A	chr12:25398284	865	29.83	-	-	-	-	-	-	-	-	-	-	-
+TRF242423	273839010	06110912C	TRF242423.01.vars.final.vr1.xml	short-variant	MYCL1	unknown	A9_A10>VS	26_28CTG>TTT	chr1:40367533	69	71.01	-	-	-	-	-	-	-	-	-	-	-
+TRF242423	273839010	06110912C	TRF242423.01.vars.final.vr1.xml	short-variant	SMAD4	unknown	C363F	1088G>T	chr18:48591925	677	23.49	-	-	-	-	-	-	-	-	-	-	-
+TRF242423	273839010	06110912C	TRF242423.01.vars.final.vr1.xml	short-variant	EPHB4	unknown	D900H	2698G>C	chr7:100402924	748	58.02	-	-	-	-	-	-	-	-	-	-	-
+TRF242423	273839010	06110912C	TRF242423.01.vars.final.vr1.xml	short-variant	IGF2R	unknown	E533K	1597G>A	chr6:160464296	744	48.12	-	-	-	-	-	-	-	-	-	-	-
+TRF242423	273839010	06110912C	TRF242423.01.vars.final.vr1.xml	short-variant	WT1	known	C350R	1048T>C	chr11:32421544	533	48.03	-	-	-	-	-	-	-	-	-	-	-
+TRF242423	273839010	06110912C	TRF242423.01.vars.final.vr1.xml	short-variant	APC	known	E1464fs*8	4391_4394delAGAG	chr5:112175681	1042	17.56	-	-	-	-	-	-	-	-	-	-	-
+TRF242423	273839010	06110912C	TRF242423.01.vars.final.vr1.xml	short-variant	RAD50	unknown	R87H	260G>A	chr5:131911515	581	17.38	-	-	-	-	-	-	-	-	-	-	-
+TRF242423	273839010	06110912C	TRF242423.01.vars.final.vr1.xml	short-variant	POLE	unknown	G6R	16G>C	chr12:133263886	246	36.99	-	-	-	-	-	-	-	-	-	-	-
+TRF242423	273839010	06110912C	TRF242423.01.vars.final.vr1.xml	short-variant	LRP1B	unknown	D3708Y	11122G>T	chr2:141122239	618	23.62	-	-	-	-	-	-	-	-	-	-	-
+TRF242423	273839010	06110912C	TRF242423.01.vars.final.vr1.xml	short-variant	SOX9	likely	G276fs*17	825_832delCGGCGAGC	chr17:70119822	943	17.6	-	-	-	-	-	-	-	-	-	-	-
+TRF242423	273839010	06110912C	TRF242423.01.vars.final.vr1.xml	short-variant	APC	known	R876*	2626C>T	chr5:112173917	1014	18.44	-	-	-	-	-	-	-	-	-	-	-
+TRF242423	273839010	06110912C	TRF242423.01.vars.final.vr1.xml	short-variant	ZNF217	unknown	M410V	1228A>G	chr20:52198138	1089	50.23	-	-	-	-	-	-	-	-	-	-	-
+TRF242424	273327003	06110913B	TRF242424.01.vars.final.vr1.xml	short-variant	KRAS	known	G12D	35G>A	chr12:25398284	884	14.37	-	-	-	-	-	-	-	-	-	-	-
+TRF242424	273327003	06110913B	TRF242424.01.vars.final.vr1.xml	short-variant	FAT3	unknown	R2519Q	7556G>A	chr11:92533735	1154	50	-	-	-	-	-	-	-	-	-	-	-
+TRF242424	273327003	06110913B	TRF242424.01.vars.final.vr1.xml	short-variant	CCND1	unknown	P241L	722C>T	chr11:69462909	763	15.47	-	-	-	-	-	-	-	-	-	-	-
+TRF242424	273327003	06110913B	TRF242424.01.vars.final.vr1.xml	short-variant	CDH2	unknown	T207A	619A>G	chr18:25589764	730	59.73	-	-	-	-	-	-	-	-	-	-	-
+TRF242424	273327003	06110913B	TRF242424.01.vars.final.vr1.xml	short-variant	BRCA2	unknown	N1228D	3682A>G	chr13:32912174	1287	46.46	-	-	-	-	-	-	-	-	-	-	-
+TRF242424	273327003	06110913B	TRF242424.01.vars.final.vr1.xml	short-variant	FAM123B	known	R497*	1489C>T	chrX:63411678	1223	15.04	-	-	-	-	-	-	-	-	-	-	-
+TRF242424	273327003	06110913B	TRF242424.01.vars.final.vr1.xml	short-variant	APC	known	T1556fs*3	4666_4667insA	chr5:112175957	1083	10.8	-	-	-	-	-	-	-	-	-	-	-
+TRF242424	273327003	06110913B	TRF242424.01.vars.final.vr1.xml	short-variant	ATM	unknown	N1005S	3014A>G	chr11:108142070	853	41.03	-	-	-	-	-	-	-	-	-	-	-
+TRF242424	273327003	06110913B	TRF242424.01.vars.final.vr1.xml	short-variant	APC	known	Y935*	2805C>A	chr5:112174096	1115	13.63	-	-	-	-	-	-	-	-	-	-	-
+TRF242424	273327003	06110913B	TRF242424.01.vars.final.vr1.xml	short-variant	TNKS2	unknown	R1012Q	3035G>A	chr10:93617228	675	41.48	-	-	-	-	-	-	-	-	-	-	-
+TRF242424	273327003	06110913B	TRF242424.01.vars.final.vr1.xml	short-variant	SMAD2	likely	R182*	544C>T	chr18:45394805	702	16.38	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	short-variant	MLH1	unknown	I500M	1500C>G	chr3:37070365	429	28.44	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	short-variant	APC	known	E1309fs*4	3927_3931delAAAGA	chr5:112175217	368	21.47	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	short-variant	TP53	likely	splice site 673-11_673TTATCTCCTAGG>C	673-11_673TTATCTCCTAGG>C	chr17:7577608	315	28.57	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	short-variant	ATM	unknown	T2333I	6998C>T	chr11:108198394	404	47.52	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	short-variant	NOTCH3	unknown	A1917V	5750C>T	chr19:15276244	384	51.3	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	short-variant	EPHB4	unknown	R656Q	1967G>A	chr7:100410520	673	17.38	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	short-variant	FAT3	unknown	S56*	167C>G	chr11:92085445	358	19.27	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	short-variant	SPTA1	unknown	S1314P	3940T>C	chr1:158615341	447	38.48	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	short-variant	TSC1	unknown	Q833L	2498A>T	chr9:135776980	458	66.59	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	short-variant	MLL2	unknown	P2210L	6629C>T	chr12:49434924	437	72.31	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	short-variant	GRIN2A	unknown	S1232_P1233del	3695_3700delCCCCCT	chr16:9857700	454	25.99	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	short-variant	SDHB	unknown	M103V	307A>G	chr1:17355211	447	74.05	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	short-variant	LRP1B	unknown	S3078N	9233G>A	chr2:141245196	497	58.35	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	short-variant	CASP8	unknown	E352V	1055A>T	chr2:202149740	515	20.19	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	short-variant	FGF14	unknown	S231G	691A>G	chr13:102375249	772	7.38	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	short-variant	PLCG2	unknown	R564W	1690C>T	chr16:81942153	361	19.39	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	short-variant	SPTA1	unknown	R448L	1343G>T	chr1:158644126	411	6.57	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	short-variant	AKT2	unknown	S128N	383G>A	chr19:40748499	396	5.05	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	short-variant	TOP2A	unknown	E1494V	4481A>T	chr17:38545886	556	27.7	-	-	-	-	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	copy-number-alteration	FGF14	ambiguous	-	-	-	-	-	8	6 of 6	1.83	amplification	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	copy-number-alteration	PARP4	unknown	-	-	-	-	-	8	33 of 33	1.93	amplification	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	copy-number-alteration	CUL4A	unknown	-	-	-	-	-	8	20 of 20	2.23	amplification	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	copy-number-alteration	RB1	unknown	-	-	-	-	-	8	27 of 27	2.07	amplification	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	copy-number-alteration	RAC1	unknown	-	-	-	-	-	8	7 of 7	2.11	amplification	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	copy-number-alteration	BRCA2	unknown	-	-	-	-	-	8	26 of 26	1.74	amplification	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	copy-number-alteration	FLT3	ambiguous	-	-	-	-	-	8	24 of 24	2.1	amplification	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	copy-number-alteration	FLT1	unknown	-	-	-	-	-	8	31 of 31	1.96	amplification	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	copy-number-alteration	FANCG	unknown	-	-	-	-	-	7	14 of 14	1.77	amplification	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	copy-number-alteration	IRS2	ambiguous	-	-	-	-	-	8	5 of 5	2.17	amplification	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	copy-number-alteration	CDK8	ambiguous	-	-	-	-	-	8	13 of 13	2.19	amplification	-	-	-	-	-	-	-
+TRF242425	270984016	06110915C	TRF242425.01.vars.final.vr1.xml	copy-number-alteration	DIS3	unknown	-	-	-	-	-	8	22 of 22	2.25	amplification	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	HNF1A	known	P291fs*51	872delC	chr12:121432124	820	17.56	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	EPHA7	unknown	R426Q	1277G>A	chr6:94066482	883	45.64	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	RET	unknown	R844W	2530C>T	chr10:43615116	872	19.38	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	GNAS	known	R201H	602G>A	chr20:57484421	1026	6.92	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	TRRAP	unknown	E3108A	9323A>C	chr7:98586396	566	5.48	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	FAM123B	known	Q189*	565C>T	chrX:63412602	483	38.51	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	MSH2	likely	V470fs*1	1405delC	chr2:47690187	734	17.71	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	TRRAP	unknown	L716P	2147T>C	chr7:98509784	1007	8.64	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	APC	likely	K580*	1738A>T	chr5:112164664	644	18.48	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	NTRK2	unknown	A678V	2033C>T	chr9:87570293	988	19.43	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	CDH5	unknown	A695T	2083G>A	chr16:66436800	872	18.92	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	NOTCH3	likely	G2035fs*50	6102delC	chr19:15272336	560	12.5	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	NUDT1	unknown	R54Q	161G>A	chr7:2284301	1008	18.95	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	PRKDC	unknown	R3269G	9805A>G	chr8:48715984	925	6.7	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	INSR	unknown	R1270C	3808C>T	chr19:7117408	951	19.87	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	ARID1B	unknown	M523T	1568T>C	chr6:157150386	969	20.23	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	NF1	unknown	S2186P	6556T>C	chr17:29664514	1098	18.94	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	TP53BP1	unknown	I450_P451del	1347_1352delTATCCC	chr15:43762077	837	49.1	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	SOX9	likely	K55fs*197	162_163insC	chr17:70117694	1136	19.45	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	ZNRF3	unknown	R332C	994C>T	chr22:29445463	1050	8.38	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	CDKN2B	unknown	R109C	325C>T	chr9:22006078	756	19.05	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	FGFR2	unknown	N184fs*9	549delG	chr10:123310878	869	18.07	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	APC	known	E1464fs*8	4391_4394delAGAG	chr5:112175681	1126	15.45	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	GNAS	known	R201C	601C>T	chr20:57484420	1033	5.61	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	MUTYH	unknown	L425I	1273C>A	chr1:45797100	778	17.99	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	FBXW7	known	R465C	1393C>T	chr4:153249385	923	4.88	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	MTOR	unknown	E2419D	7257A>C	chr1:11174418	675	21.48	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	GABRA6	unknown	I381V	1141A>G	chr5:161128558	893	48.94	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	NOTCH3	unknown	V2021M	6061G>A	chr19:15272378	689	46.3	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	CD79A	unknown	P55L	164C>T	chr19:42383144	791	17.7	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	IRS2	unknown	N28_H29insN	84_85insAAC	chr13:110438316	318	30.5	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	EGFR	unknown	G1185D	3554G>A	chr7:55273231	1182	11.51	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	WT1	unknown	A46T	136G>A	chr11:32456756	346	6.36	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	KRAS	known	G12D	35G>A	chr12:25398284	872	17.2	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	FAT3	unknown	D2820G	8459A>G	chr11:92534638	986	52.23	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	SDHA	known	R75*	223C>T	chr5:224547	745	20.67	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	INSR	unknown	R1027Q	3080G>A	chr19:7125472	983	51.88	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	RAD54L	known	R52Q	155G>A	chr1:46715736	938	6.4	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	LRP1B	unknown	R938C	2812C>T	chr2:141739804	944	6.67	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	CREBBP	unknown	S1601G	4801A>G	chr16:3781866	864	7.99	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	MLL	unknown	C3959Y	11876G>A	chr11:118392853	850	18.71	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	LRP6	unknown	A10D	29C>A	chr12:12419641	646	19.5	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	ERBB2	unknown	R683Q	2048G>A	chr17:37879673	1462	21.48	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	SOX9	unknown	T399M	1196C>T	chr17:70120194	899	6.34	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	CASP8	likely	F373fs*26	1119delT	chr2:202149803	1155	16.71	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	PAX5	likely	A322fs*11	963delC	chr9:36882049	704	16.48	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	MSH2	unknown	G426R	1276G>A	chr2:47657080	852	48.94	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	MDM4	unknown	A398T	1192G>A	chr1:204518529	1395	12.54	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	HSP90AA1	unknown	D408N	1222G>A	chr14:102551143	1022	6.56	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	ASXL1	likely	G645fs*58	1934delG	chr20:31022448	1040	27.12	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	DOT1L	unknown	G594S	1780G>A	chr19:2213968	565	15.4	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	SPTA1	unknown	E110V	329A>T	chr1:158653222	781	49.42	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	PARP1	unknown	S507fs*14	1519_1520insA	chr1:226567646	799	17.77	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	SLIT2	likely	G1301*	3901G>T	chr4:20618586	793	17.02	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	SETD2	unknown	D1537G	4610A>G	chr3:47155471	1008	18.15	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	SMO	known	A601V	1802C>T	chr7:128851477	776	3.74	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	MAP3K1	unknown	S612R	1834A>C	chr5:56171006	1219	5.25	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	MAGI2	unknown	G873R	2617G>A	chr7:77789570	963	50.26	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	TSC2	unknown	S1277P	3829T>C	chr16:2132451	593	12.98	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	IKBKE	unknown	R191Q	572G>A	chr1:206650052	828	18.12	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	CHD4	unknown	R1389H	4166G>A	chr12:6692084	1167	7.2	-	-	-	-	-	-	-	-	-	-	-
+TRF242427	273326003	06110917B	TRF242427.01.vars.final.vr1.xml	short-variant	MLL2	unknown	G1255D	3764G>A	chr12:49443607	880	6.48	-	-	-	-	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	short-variant	MAP3K1	unknown	Q700K	2098C>A	chr5:56176548	1085	16.77	-	-	-	-	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	short-variant	AKT1	unknown	H13Y	37C>T	chr14:105258944	718	16.3	-	-	-	-	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	short-variant	BRAF	known	V600E	1799T>A	chr7:140453136	770	32.08	-	-	-	-	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	short-variant	MTOR	unknown	R2430M	7289G>T	chr1:11174386	564	19.5	-	-	-	-	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	short-variant	PARP4	known	V667L	1999G>T	chr13:25044079	419	27.21	-	-	-	-	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	short-variant	TRRAP	unknown	V1203I	3607G>A	chr7:98529043	706	17.28	-	-	-	-	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	short-variant	RET	unknown	M700T	2099T>C	chr10:43610147	895	10.95	-	-	-	-	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	short-variant	MLL3	unknown	L4219V	12655C>G	chr7:151848538	1040	58.75	-	-	-	-	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	short-variant	IRS2	unknown	M433_A442del	1298_1327del30	chr13:110437073	322	33.54	-	-	-	-	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	short-variant	CARD11	unknown	E345Q	1033G>C	chr7:2977651	746	18.9	-	-	-	-	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	short-variant	SMAD4	likely	W398*	1194G>A	chr18:48593443	758	24.01	-	-	-	-	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	short-variant	TYRO3	unknown	A569V	1706C>T	chr15:41863838	1052	14.07	-	-	-	-	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	short-variant	TYRO3	unknown	R481P	1442G>C	chr15:41862497	942	5.84	-	-	-	-	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	short-variant	TNKS	unknown	R5P	14G>C	chr8:9413463	497	38.63	-	-	-	-	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	short-variant	FGF6	unknown	T21M	62C>T	chr12:4554675	2948	85.07	-	-	-	-	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	short-variant	WT1	unknown	G60R	178G>A	chr11:32456714	194	52.06	-	-	-	-	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	short-variant	TP53	known	C275R	823T>C	chr17:7577115	1204	38.87	-	-	-	-	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	short-variant	PAK7	unknown	I62M	186C>G	chr20:9624791	625	16.32	-	-	-	-	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	copy-number-alteration	RAD52	unknown	-	-	-	-	-	20	11 of 11	4.2	amplification	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	copy-number-alteration	KDM5A	known	-	-	-	-	-	22	28 of 28	4.29	amplification	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	copy-number-alteration	FGF6	known	-	-	-	-	-	30	3 of 3	5.74	amplification	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	copy-number-alteration	MYC	known	-	-	-	-	-	9	5 of 5	1.8	amplification	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	copy-number-alteration	GATA6	known	-	-	-	-	-	6	6 of 6	2.39	amplification	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	copy-number-alteration	CCND2	known	-	-	-	-	-	31	5 of 5	5.94	amplification	-	-	-	-	-	-	-
+TRF242428	275365004	06110918C	TRF242428.01.vars.final.vr1.xml	copy-number-alteration	FGF23	known	-	-	-	-	-	25	3 of 3	4.96	amplification	-	-	-	-	-	-	-
+TRF242429	274640026	06110919B	TRF242429.01.vars.final.vr1.xml	short-variant	SMO	unknown	R726Q	2177G>A	chr7:128852105	1043	50.91	-	-	-	-	-	-	-	-	-	-	-
+TRF242429	274640026	06110919B	TRF242429.01.vars.final.vr1.xml	short-variant	MAP2K2	unknown	H104D	310C>G	chr19:4110647	1017	14.06	-	-	-	-	-	-	-	-	-	-	-
+TRF242429	274640026	06110919B	TRF242429.01.vars.final.vr1.xml	short-variant	LTK	unknown	P465fs*1	1393_1394delCC	chr15:41799439	793	39.09	-	-	-	-	-	-	-	-	-	-	-
+TRF242429	274640026	06110919B	TRF242429.01.vars.final.vr1.xml	short-variant	APC	likely	F1354fs*15	4056_4072delTGAATTTTCTTCAGGAG	chr5:112175346	968	16.12	-	-	-	-	-	-	-	-	-	-	-
+TRF242429	274640026	06110919B	TRF242429.01.vars.final.vr1.xml	short-variant	EPHA3	unknown	Q722R	2165A>G	chr3:89480328	943	38.28	-	-	-	-	-	-	-	-	-	-	-
+TRF242429	274640026	06110919B	TRF242429.01.vars.final.vr1.xml	short-variant	ARID1B	unknown	G328_A329insG	985_986insGAG	chr6:157100048	691	20.69	-	-	-	-	-	-	-	-	-	-	-
+TRF242429	274640026	06110919B	TRF242429.01.vars.final.vr1.xml	short-variant	TP53	known	R273H	818G>A	chr17:7577120	1241	24.98	-	-	-	-	-	-	-	-	-	-	-
+TRF242429	274640026	06110919B	TRF242429.01.vars.final.vr1.xml	short-variant	MYST3	unknown	E112D	336G>C	chr8:41906160	1519	27.91	-	-	-	-	-	-	-	-	-	-	-
+TRF242429	274640026	06110919B	TRF242429.01.vars.final.vr1.xml	short-variant	SMAD4	known	Q245*	733C>T	chr18:48584560	897	15.5	-	-	-	-	-	-	-	-	-	-	-
+TRF242429	274640026	06110919B	TRF242429.01.vars.final.vr1.xml	short-variant	SPTA1	unknown	T1522A	4564A>G	chr1:158612645	929	53.18	-	-	-	-	-	-	-	-	-	-	-
+TRF242429	274640026	06110919B	TRF242429.01.vars.final.vr1.xml	short-variant	KRAS	known	G12S	34G>A	chr12:25398285	1021	23.11	-	-	-	-	-	-	-	-	-	-	-
+TRF242429	274640026	06110919B	TRF242429.01.vars.final.vr1.xml	copy-number-alteration	AURKA	ambiguous	-	-	-	-	-	6	8 of 8	1.43	amplification	-	-	-	-	-	-	-
+TRF242429	274640026	06110919B	TRF242429.01.vars.final.vr1.xml	copy-number-alteration	BCL2L1	ambiguous	-	-	-	-	-	6	4 of 4	1.45	amplification	-	-	-	-	-	-	-
+TRF242429	274640026	06110919B	TRF242429.01.vars.final.vr1.xml	copy-number-alteration	ASXL1	unknown	-	-	-	-	-	6	12 of 13	1.4	amplification	-	-	-	-	-	-	-
+TRF242429	274640026	06110919B	TRF242429.01.vars.final.vr1.xml	copy-number-alteration	ARFRP1	ambiguous	-	-	-	-	-	6	6 of 6	1.34	amplification	-	-	-	-	-	-	-
+TRF242429	274640026	06110919B	TRF242429.01.vars.final.vr1.xml	copy-number-alteration	SRC	ambiguous	-	-	-	-	-	6	11 of 11	1.43	amplification	-	-	-	-	-	-	-
+TRF242429	274640026	06110919B	TRF242429.01.vars.final.vr1.xml	copy-number-alteration	TOP1	ambiguous	-	-	-	-	-	6	21 of 21	1.49	amplification	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	TRRAP	unknown	Q2644L	7931A>T	chr7:98574152	751	30.23	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	JAK3	unknown	I303S	908T>G	chr19:17952525	679	41.38	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	CTNNB1	unknown	R151C	451C>T	chr3:41266654	1135	37	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	GATA1	unknown	L386P	1157T>C	chrX:48652486	1011	61.33	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	CASP8	unknown	P56T	166C>A	chr2:202131198	859	50.52	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	MLL3	likely	F2085fs*21	6253_6254TT>C	chr7:151878691	1011	35.31	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	ABL2	unknown	G672S	2014G>A	chr1:179078343	1216	59.95	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	POLE	unknown	R1436Q	4307G>A	chr12:133220130	1085	48.76	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	CREBBP	unknown	S128C	383C>G	chr16:3900713	1268	53.47	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	TP53	known	P152L	455C>T	chr17:7578475	851	49.24	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	PHLPP2	unknown	M621V	1861A>G	chr16:71697926	1014	49.8	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	APC	likely	F1354fs*1	4061_4074delTTTCTTCAGGAGCG	chr5:112175351	1020	29.31	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	LRP1B	unknown	I3600V	10798A>G	chr2:141128825	758	47.76	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	ZNRF3	unknown	Q812K	2434C>A	chr22:29446903	653	52.68	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	MTOR	unknown	R731H	2192G>A	chr1:11297916	614	39.58	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	TSC2	unknown	F1510del	4527_4529delCTT	chr16:2134984	989	47.42	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	ARID1B	unknown	A865T	2593G>A	chr6:157469838	1225	34.29	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	PIK3CB	unknown	S521N	1562G>A	chr3:138423304	690	49.42	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	FLCN	likely	H429fs*27	1285_1286insC	chr17:17119708	437	45.54	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	PIK3CA	known	E453K	1357G>A	chr3:178928079	854	29.63	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	NRAS	known	Q61L	182A>T	chr1:115256529	702	39.74	-	-	-	-	-	-	-	-	-	-	-
+TRF242430	289177002	06110921B	TRF242430.01.vars.final.vr1.xml	short-variant	FBXW7	known	R465C	1393C>T	chr4:153249385	854	26.7	-	-	-	-	-	-	-	-	-	-	-
